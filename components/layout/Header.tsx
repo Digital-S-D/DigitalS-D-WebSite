@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import Link from "next/link";
+>>>>>>> master
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -38,7 +42,11 @@ export function Header() {
                 Arquivo: /public/images/logo-texto.png  (desktop)
                 Arquivo: /public/images/logo-icone.png  (mobile)
             ──────────────────────────────────────────────────────────── */}
+<<<<<<< HEAD
             <a href="/#hero" onClick={closeMenu} className="flex items-center gap-2">
+=======
+            <Link href="/#hero" onClick={closeMenu} className="flex items-center gap-2">
+>>>>>>> master
               {/* Ícone mobile */}
               <div className="w-9 h-9 md:hidden bg-brand-blue/20 border border-brand-blue/40
                               rounded-lg flex items-center justify-center text-brand-blue
@@ -53,28 +61,46 @@ export function Header() {
                 </span>
                 <span className="font-sora font-bold text-lg text-brand-blue">S&D</span>
               </div>
+<<<<<<< HEAD
             </a>
+=======
+            </Link>
+>>>>>>> master
 
             {/* Links desktop — lidos de lib/constants.ts */}
             <ul className="hidden md:flex items-center gap-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
+<<<<<<< HEAD
                   <a
+=======
+                  <Link
+>>>>>>> master
                     href={link.href}
                     className={`px-4 py-2 font-outfit text-sm font-medium rounded-lg transition-all duration-200
                                hover:text-white hover:bg-white/10
                                ${scrolled ? "text-gray-100" : "text-gray-300"}`}
                   >
                     {link.label}
+<<<<<<< HEAD
                   </a>
+=======
+                  </Link>
+>>>>>>> master
                 </li>
               ))}
             </ul>
 
             {/* CTA desktop — SUBSTITUA href pelo seu WhatsApp */}
+<<<<<<< HEAD
             <a href="/#contato" className="hidden md:inline-flex btn-primary text-sm">
               Solicitar Orçamento
             </a>
+=======
+            <Link href="/#contato" className="hidden md:inline-flex btn-primary text-sm">
+              Solicitar Orçamento
+            </Link>
+>>>>>>> master
 
             {/* Botão hambúrguer mobile */}
             <button
@@ -113,18 +139,32 @@ export function Header() {
           </div>
           <nav className="flex-1 px-4 py-6 flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
+<<<<<<< HEAD
               <a key={link.href} href={link.href} onClick={closeMenu}
                 className="px-4 py-3 font-outfit text-base font-medium text-gray-200
                            hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200">
                 {link.label}
               </a>
+=======
+              <Link key={link.href} href={link.href} onClick={closeMenu}
+                className="px-4 py-3 font-outfit text-base font-medium text-gray-200
+                           hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200">
+                {link.label}
+              </Link>
+>>>>>>> master
             ))}
           </nav>
           <div className="px-6 pb-8 pt-4 border-t border-white/10">
             {/* SUBSTITUA href pelo seu WhatsApp */}
+<<<<<<< HEAD
             <a href="/#contato" onClick={closeMenu} className="btn-primary w-full justify-center text-sm">
               Solicitar Orçamento
             </a>
+=======
+            <Link href="/#contato" onClick={closeMenu} className="btn-primary w-full justify-center text-sm">
+              Solicitar Orçamento
+            </Link>
+>>>>>>> master
             <p className="text-center text-gray-500 text-xs font-outfit mt-3">Resposta em até 24h úteis</p>
           </div>
         </div>

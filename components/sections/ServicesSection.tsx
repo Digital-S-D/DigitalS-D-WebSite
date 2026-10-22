@@ -5,6 +5,10 @@ import {
   Search,
   Smartphone,
   BarChart3,
+<<<<<<< HEAD
+=======
+  Briefcase,
+>>>>>>> master
   ArrowRight,
 } from "lucide-react";
 
@@ -159,6 +163,38 @@ export function ServicesSection() {
           ))}
         </div>
 
+<<<<<<< HEAD
+=======
+        {/* ─── BLOCO: SITES PARA AUTÔNOMOS ──────────────────────────────
+            SUBSTITUA: Ajuste título e texto conforme seu público-alvo real.
+            Fica fora da grade de cards para não deixar um 7º card sozinho
+            na última linha.
+        ──────────────────────────────────────────────────────────── */}
+        <div className="mt-8 md:mt-10 rounded-2xl border border-brand-blue/20 bg-brand-blue/5
+                        p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+          <div className="w-12 h-12 rounded-xl border bg-brand-blue/20 border-brand-blue/40 text-brand-blue
+                          flex items-center justify-center shrink-0">
+            <Briefcase size={22} />
+          </div>
+
+          <div className="flex-1">
+            <h3 className="font-sora font-semibold text-white text-lg md:text-xl mb-2">
+              Trabalha por conta própria?
+            </h3>
+            <p className="font-outfit text-gray-400 text-sm md:text-base leading-relaxed">
+              Também criamos sites para profissionais autônomos e liberais: uma
+              presença própria na internet para ser encontrado, passar confiança
+              e receber novos clientes sem depender só de indicação.
+            </p>
+          </div>
+
+          <a href="#contato" className="btn-primary text-sm whitespace-nowrap shrink-0 justify-center">
+            Quero meu site
+            <ArrowRight size={16} />
+          </a>
+        </div>
+
+>>>>>>> master
         {/* ─── CTA SEÇÃO ────────────────────────────────────────────── */}
         <div className="mt-14 text-center">
           <p className="font-outfit text-gray-500 text-sm mb-2">

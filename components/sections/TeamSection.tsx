@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { User } from "lucide-react";
 import { TEAM_MEMBERS } from "@/lib/constants";
+=======
+import Image from "next/image";
+import { User } from "lucide-react";
+import { BASE_PATH, TEAM_MEMBERS } from "@/lib/constants";
+>>>>>>> master
 
 // ─── QUEM FAZ ACONTECER ─────────────────────────────────────────────────
 // Dados em lib/constants.ts (TEAM_MEMBERS) — funciona bem com 1, 2 ou mais membros.
@@ -35,15 +41,33 @@ export function TeamSection() {
               key={member.name}
               className="card-base w-full max-w-[280px] text-center p-8"
             >
+<<<<<<< HEAD
               {/* ─── FOTO (placeholder) ────────────────────────────────
                   SUBSTITUA: Quando tiver a foto real, troque por:
                   <Image src={`/images/team/${member.photoSrc}`} alt={member.name}
                          width={112} height={112} className="rounded-full object-cover" />
+=======
+              {/* ─── FOTO ──────────────────────────────────────────────
+                  O arquivo fica em /public/images/team/ (nome definido em
+                  photoSrc, em lib/constants.ts). Sem photoSrc, aparece o
+                  ícone placeholder. O src leva o BASE_PATH manualmente porque,
+                  com output: "export", o <Image> não prefixa o basePath sozinho.
+>>>>>>> master
               ──────────────────────────────────────────────────────── */}
               <div className="w-28 h-28 mx-auto mb-5 rounded-full bg-brand-navy border border-brand-blue/20
                               flex items-center justify-center overflow-hidden">
                 {member.photoSrc ? (
+<<<<<<< HEAD
                   <div />
+=======
+                  <Image
+                    src={`${BASE_PATH}/images/team/${member.photoSrc}`}
+                    alt={member.name}
+                    width={320}
+                    height={320}
+                    className="w-full h-full object-cover"
+                  />
+>>>>>>> master
                 ) : (
                   <User size={40} className="text-brand-blue/30" />
                 )}

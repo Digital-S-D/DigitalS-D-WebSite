@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+<<<<<<< HEAD
 import { ArrowRight, CheckCircle } from "lucide-react";
+=======
+import Image from "next/image";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import { BASE_PATH } from "@/lib/constants";
+>>>>>>> master
 
 // ─── CONTEÚDO DO HERO ─────────────────────────────────────────────────
 // SUBSTITUA: Ajuste todos os textos, números e links de CTA
@@ -57,9 +63,18 @@ export function HeroSection() {
           {/* Logo —S & D— acima do título principal */}
           <div className="flex justify-center mb-3
                           animate-fadeInUp opacity-0" style={{ animationFillMode: "both" }}>
+<<<<<<< HEAD
             <img
               src="/images/logo-sd.png"
               alt="S & D"
+=======
+            <Image
+              src={`${BASE_PATH}/images/logo-sd.png`}
+              alt="S & D"
+              width={2000}
+              height={2000}
+              priority
+>>>>>>> master
               className="w-64 sm:w-80 md:w-[420px] lg:w-[500px] max-w-[85%] h-auto object-contain"
             />
           </div>
@@ -92,8 +107,13 @@ export function HeroSection() {
             style={{ animationFillMode: "both" }}
           >
             Desenvolvemos sites modernos, ultrarrápidos e focados em conversão
+<<<<<<< HEAD
             para pequenas e médias empresas que querem atrair mais clientes e
             faturar mais com sua presença digital.
+=======
+            para pequenas e médias empresas e profissionais autônomos que querem
+            atrair mais clientes e faturar mais com sua presença digital.
+>>>>>>> master
           </p>
 
           {/* ─── LISTA DE BENEFÍCIOS RÁPIDOS ─────────────────────────── */}
@@ -230,6 +250,7 @@ export function HeroSection() {
         </div>
       </div>
 
+<<<<<<< HEAD
       {/* Indicador de scroll */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2
                       animate-bounce">
@@ -237,6 +258,8 @@ export function HeroSection() {
           <div className="w-1 h-2 bg-white/40 rounded-full" />
         </div>
       </div>
+=======
+>>>>>>> master
     </section>
   );
 }

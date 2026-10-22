@@ -43,6 +43,10 @@ const contactInfo = [
 const serviceOptions = [
   "Selecione o serviço...",
   "Site Institucional",
+<<<<<<< HEAD
+=======
+  "Site para Autônomo",
+>>>>>>> master
   "Landing Page",
   "E-commerce",
   "SEO & Performance",
@@ -112,12 +116,30 @@ export function ContactSection() {
   };
 
   // ─── SUBMIT DO FORMULÁRIO ────────────────────────────────────────────
+<<<<<<< HEAD
   // SUBSTITUA: Implemente a lógica real de envio aqui.
   // Opções recomendadas:
   //   1. Formspree:   https://formspree.io (mais simples, basta mudar a URL)
   //   2. EmailJS:     envio direto pelo frontend sem backend
   //   3. API Route:   crie /app/api/contact/route.ts para envio pelo servidor
   //   4. Resend.com:  API de email profissional com excelente entregabilidade
+=======
+  // Envio real via Formspree. O endpoint vem de uma variável de ambiente
+  // (NEXT_PUBLIC_FORMSPREE_ENDPOINT) em vez de ficar hardcoded no código —
+  // assim você troca de formulário sem precisar editar/re-buildar o código.
+  //
+  // Como configurar (veja também o arquivo .env.local.example):
+  //   1. Crie uma conta grátis em https://formspree.io
+  //   2. Crie um novo formulário e configure o e-mail de destino como
+  //      digitalsd.contato@gmail.com
+  //   3. Copie a URL do endpoint (algo como https://formspree.io/f/xxxxxxx)
+  //   4. Local: crie um arquivo .env.local na raiz do projeto com:
+  //        NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxxx
+  //   5. No GitHub: Settings → Secrets and variables → Actions → New repository
+  //      secret, nome FORMSPREE_ENDPOINT, valor = a mesma URL. O workflow
+  //      (.github/workflows/deploy.yml) já está configurado para injetá-la
+  //      no build automaticamente.
+>>>>>>> master
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,10 +151,25 @@ export function ContactSection() {
       return;
     }
 
+<<<<<<< HEAD
+=======
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+
+    // Se o endpoint ainda não foi configurado, avisa claramente em vez de
+    // fingir que enviou (evita o formulário "funcionar" silenciosamente errado).
+    if (!endpoint) {
+      setError(
+        "Formulário ainda não configurado. Defina NEXT_PUBLIC_FORMSPREE_ENDPOINT (veja .env.local.example)."
+      );
+      return;
+    }
+
+>>>>>>> master
     setIsSubmitting(true);
     setError(null);
 
     try {
+<<<<<<< HEAD
       // ── EXEMPLO COM FORMSPREE ──────────────────────────────────────
       // SUBSTITUA: Troque a URL pelo seu endpoint do Formspree
       // const response = await fetch("https://formspree.io/f/SEU_ID_AQUI", {
@@ -144,6 +181,18 @@ export function ContactSection() {
 
       // ── SIMULAÇÃO (remova e descomente o bloco acima) ──────────────
       await new Promise((res) => setTimeout(res, 1500));
+=======
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Falha no envio");
+>>>>>>> master
 
       setIsSubmitted(true);
       setFormData(initialForm);

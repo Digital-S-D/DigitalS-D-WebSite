@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import Link from "next/link";
+>>>>>>> master
 import { ArrowRight } from "lucide-react";
 
 // ─── CALL TO ACTION FINAL ───────────────────────────────────────────────
@@ -24,10 +28,17 @@ export function AboutCtaSection() {
               transformar sua presença digital em resultado real.
             </p>
             {/* Link para o formulário de contato, que vive na Home */}
+<<<<<<< HEAD
             <a href="/#contato" className="btn-primary text-base px-8 py-4">
               Iniciar meu projeto
               <ArrowRight size={18} />
             </a>
+=======
+            <Link href="/#contato" className="btn-primary text-base px-8 py-4">
+              Iniciar meu projeto
+              <ArrowRight size={18} />
+            </Link>
+>>>>>>> master
           </div>
         </div>
       </div>

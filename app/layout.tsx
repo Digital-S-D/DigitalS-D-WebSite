@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+<<<<<<< HEAD
+=======
+import { BASE_PATH } from "@/lib/constants";
+>>>>>>> master
 
 // ─── METADADOS DO SITE ─────────────────────────────────────────────────
 // SUBSTITUA: Atualize título, descrição, URL e imagem OG com seus dados reais
@@ -27,7 +31,11 @@ export const metadata: Metadata = {
     siteName: "Digital S&D",
     type: "website",
     // SUBSTITUA: Adicione caminho para imagem OG em /public/og-image.jpg (1200x630px)
+<<<<<<< HEAD
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+=======
+    images: [{ url: `${BASE_PATH}/og-image.jpg`, width: 1200, height: 630 }],
+>>>>>>> master
   },
   twitter: {
     card: "summary_large_image",
@@ -37,9 +45,15 @@ export const metadata: Metadata = {
   },
   icons: {
     // Favicon: logo ícone da Digital S&D
+<<<<<<< HEAD
     icon: "/images/logo-icone.png",
     shortcut: "/images/logo-icone.png",
     apple: "/images/logo-icone.png",
+=======
+    icon: `${BASE_PATH}/images/logo-icone.png`,
+    shortcut: `${BASE_PATH}/images/logo-icone.png`,
+    apple: `${BASE_PATH}/images/logo-icone.png`,
+>>>>>>> master
   },
 };
 

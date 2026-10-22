@@ -50,9 +50,15 @@ export function AboutHeroSection() {
                        animate-fadeInUp opacity-0 animation-delay-200"
             style={{ animationFillMode: "both" }}
           >
+<<<<<<< HEAD
             Acreditamos que toda pequena e média empresa merece uma presença
             digital tão boa quanto a de qualquer grande marca — sem precisar
             de um orçamento de grande marca para isso.
+=======
+            Acreditamos que pequenas empresas e profissionais autônomos merecem
+            uma presença digital tão boa quanto a de qualquer grande marca — sem
+            precisar de um orçamento de grande marca para isso.
+>>>>>>> master
           </p>
         </div>
       </div>

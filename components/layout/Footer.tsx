@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import Link from "next/link";
+>>>>>>> master
 import { Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { COMPANY, LINKS } from "@/lib/constants";
 
@@ -75,14 +79,22 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.servicos.map((link) => (
                 <li key={link.label}>
+<<<<<<< HEAD
                   <a
+=======
+                  <Link
+>>>>>>> master
                     href={link.href}
                     className="font-outfit text-sm text-gray-400 hover:text-white
                                transition-colors duration-200 flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-brand-blue/50 group-hover:bg-brand-blue transition-colors" />
                     {link.label}
+<<<<<<< HEAD
                   </a>
+=======
+                  </Link>
+>>>>>>> master
                 </li>
               ))}
             </ul>
@@ -96,14 +108,22 @@ export function Footer() {
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
                 <li key={link.label}>
+<<<<<<< HEAD
                   <a
+=======
+                  <Link
+>>>>>>> master
                     href={link.href}
                     className="font-outfit text-sm text-gray-400 hover:text-white
                                transition-colors duration-200 flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-brand-blue/50 group-hover:bg-brand-blue transition-colors" />
                     {link.label}
+<<<<<<< HEAD
                   </a>
+=======
+                  </Link>
+>>>>>>> master
                 </li>
               ))}
             </ul>
@@ -148,8 +168,13 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600 font-outfit">
             <p>© {COMPANY.year} {COMPANY.name}. Todos os direitos reservados.</p>
             <div className="flex items-center gap-4">
+<<<<<<< HEAD
               <a href="/privacidade" className="hover:text-gray-400 transition-colors">Privacidade</a>
               <a href="/termos"      className="hover:text-gray-400 transition-colors">Termos de Uso</a>
+=======
+              <Link href="/privacidade" className="hover:text-gray-400 transition-colors">Privacidade</Link>
+              <Link href="/termos"      className="hover:text-gray-400 transition-colors">Termos de Uso</Link>
+>>>>>>> master
             </div>
           </div>
         </div>

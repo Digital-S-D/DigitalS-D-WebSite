@@ -12,23 +12,38 @@ export function MissionSection() {
           {/* SUBSTITUA: Título da missão */}
           <h2 className="font-sora font-bold text-3xl md:text-4xl text-white mb-6 leading-tight">
             Democratizar tecnologia de ponta{" "}
+<<<<<<< HEAD
             <span className="text-gradient">para PMEs</span>
+=======
+            <span className="text-gradient">para PMEs e autônomos</span>
+>>>>>>> master
           </h2>
 
           {/* SUBSTITUA: Parágrafo sobre a origem/história da agência */}
           <p className="font-outfit text-gray-400 text-base md:text-lg leading-relaxed mb-4">
             A Digital S&D nasceu de uma constatação simples: pequenas e
+<<<<<<< HEAD
             médias empresas raramente têm acesso ao mesmo nível de qualidade
             digital que as grandes marcas — não por falta de talento
             disponível, mas por preço, prazo e complexidade.
+=======
+            médias empresas e profissionais autônomos raramente têm acesso ao
+            mesmo nível de qualidade digital que as grandes marcas — não por
+            falta de talento disponível, mas por preço, prazo e complexidade.
+>>>>>>> master
           </p>
 
           {/* SUBSTITUA: Parágrafo sobre a visão de futuro */}
           <p className="font-outfit text-gray-400 text-base md:text-lg leading-relaxed">
             Por isso existimos: para entregar sites rápidos, bonitos e
             focados em resultado, no mesmo padrão técnico das grandes
+<<<<<<< HEAD
             agências, mas com a agilidade e o preço que uma PME real
             consegue pagar.
+=======
+            agências, mas com a agilidade e o preço que uma PME ou um
+            profissional autônomo real consegue pagar.
+>>>>>>> master
           </p>
         </div>
       </div>

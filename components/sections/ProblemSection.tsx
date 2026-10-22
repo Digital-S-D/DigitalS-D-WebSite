@@ -74,7 +74,11 @@ export function ProblemSection() {
           {/* SUBSTITUA: Tag acima do título */}
           <span className="badge mb-4">
             <AlertTriangle size={12} />
+<<<<<<< HEAD
             A realidade das PMEs
+=======
+            A realidade das PMEs e autônomos
+>>>>>>> master
           </span>
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
             Problemas que custam{" "}
@@ -82,8 +86,13 @@ export function ProblemSection() {
           </h2>
           {/* SUBSTITUA: Subtítulo da seção */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
+<<<<<<< HEAD
             A maioria das PMEs perde vendas todo dia por causa de problemas digitais
             que têm solução simples e acessível.
+=======
+            A maioria das PMEs e dos profissionais autônomos perde clientes todo dia
+            por causa de problemas digitais que têm solução simples e acessível.
+>>>>>>> master
           </p>
         </div>
 

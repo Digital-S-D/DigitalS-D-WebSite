@@ -5,6 +5,18 @@
 // Para editar o conteúdo do site, você só precisa mexer neste arquivo.
 // ═══════════════════════════════════════════════════════════════════════
 
+<<<<<<< HEAD
+=======
+// ─── basePath do GitHub Pages ────────────────────────────────────────────
+// O valor vem de next.config.js (NEXT_PUBLIC_BASE_PATH), que é a única fonte
+// de verdade: "/DigitalS-D-WebSite" no build de produção e "" no `npm run dev`.
+// Com `output: "export"` a imagem roda em modo `unoptimized`, e nesse modo o
+// Next.js NÃO prefixa o `src` automaticamente (limitação conhecida do
+// framework). Por isso, caminhos de imagem usados fora de um <Link> precisam
+// ser prefixados manualmente com esta constante.
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+>>>>>>> master
 // ─── DADOS DA EMPRESA ─────────────────────────────────────────────────
 // SUBSTITUA: Preencha com os dados reais da sua agência
 export const COMPANY = {
@@ -159,6 +171,10 @@ export const BUDGET_OPTIONS = [
 export const SERVICE_OPTIONS = [
   "Selecione o serviço...",
   "Site Institucional",
+<<<<<<< HEAD
+=======
+  "Site para Autônomo",
+>>>>>>> master
   "Landing Page",
   "E-commerce",
   "SEO & Performance",
@@ -234,6 +250,7 @@ export const PROCESS_STEPS = [
 // Para foto real, coloque o arquivo em /public/images/team/ e preencha photoSrc.
 export const TEAM_MEMBERS = [
   {
+<<<<<<< HEAD
     name:      "Seu Nome Aqui",           // SUBSTITUA
     role:      "Fundador(a) & Desenvolvedor(a)", // SUBSTITUA
     bio:       "Um parágrafo curto contando sua trajetória, o que te motiva a construir sites e por que PMEs podem confiar no seu trabalho.", // SUBSTITUA
@@ -244,5 +261,17 @@ export const TEAM_MEMBERS = [
     role:      "Cargo / Função na Agência",   // SUBSTITUA
     bio:       "Um parágrafo curto contando a trajetória dessa pessoa, sua especialidade e como ela contribui em cada projeto entregue.", // SUBSTITUA
     photoSrc:  null as string | null,          // SUBSTITUA: "segundo-nome.jpg"
+=======
+    name:      "Alvaro Marinho",
+    role:      "Fundador",
+    bio:       "Um parágrafo curto contando sua trajetória, o que te motiva a construir sites e por que PMEs podem confiar no seu trabalho.", // SUBSTITUA
+    photoSrc:  "alvaro-marinho.jpg" as string | null,
+  },
+  {
+    name:      "Arthur Leite",
+    role:      "Fundador",
+    bio:       "Um parágrafo curto contando a trajetória dessa pessoa, sua especialidade e como ela contribui em cada projeto entregue.", // SUBSTITUA
+    photoSrc:  "arthur-leite.jpg" as string | null,
+>>>>>>> master
   },
 ];

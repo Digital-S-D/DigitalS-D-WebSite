@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+        env:
+          # Diz ao next.config.js que este build é para o GitHub Pages (usa o
+          # prefixo /DigitalS-D-WebSite). Em outros destinos, o prefixo é vazio.
+          DEPLOY_TARGET: github-pages
+          # Injeta o segredo do repositório como variável NEXT_PUBLIC_ durante
+          # o build (necessário: variáveis NEXT_PUBLIC_ são "gravadas" no
+          # JS estático no momento do build, não podem ser lidas em runtime
+          # já que o site é 100% estático, sem servidor).
+          # Configure em: Settings → Secrets and variables → Actions →
+          # New repository secret → nome FORMSPREE_ENDPOINT
+          NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

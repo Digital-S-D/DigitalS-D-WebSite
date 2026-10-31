@@ -1,0 +1,8 @@
+# ─── Deploy no Netlify (site 100% estático) ───────────────────────────────
+# O Next.js exporta o site para a pasta "out" (output: "export" em next.config.js).
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"

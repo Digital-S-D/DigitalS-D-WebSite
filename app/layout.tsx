@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Criamos sites modernos, rápidos e focados em vendas para pequenas e médias empresas.",
     // SUBSTITUA: Adicione a URL real do site
-    url: "https://www.digitalsed.com.br",
+    url: "https://digitalsd.com.br",
     siteName: "Digital S&D",
     type: "website",
     // SUBSTITUA: Adicione caminho para imagem OG em /public/og-image.jpg (1200x630px)

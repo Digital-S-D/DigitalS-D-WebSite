@@ -1,6 +1,6 @@
 # Digital S&D — Landing Page
 
-https://digital-s-d.github.io/DigitalS-D-WebSite/
+[https://digital-s-d.github.io/DigitalS-D-WebSite/](https://digitalsd.com.br/)
 
 ## 🚀 Como rodar o projeto
 

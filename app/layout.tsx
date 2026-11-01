@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Digital S&D" }],
   // SUBSTITUA: Adicione a URL real do seu domínio
-  metadataBase: new URL("https://www.digitalsed.com.br"),
+  metadataBase: new URL("https://digitalsd.com.br"),
   openGraph: {
     title: "Digital S&D | Desenvolvimento Web para PMEs",
     description:

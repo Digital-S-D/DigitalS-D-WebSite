@@ -1,6 +1,6 @@
 # Digital S&D — Landing Page
 
-[ttps://digitalsd.com.br/](https://digitalsd.com.br/)
+[https://digitalsd.com.br/](https://digitalsd.com.br/)
 
 ## 🚀 Como rodar o projeto
 

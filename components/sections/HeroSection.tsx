@@ -11,7 +11,7 @@ export function HeroSection() {
       <div aria-hidden="true" className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-brand-blue/10 blur-[120px] pointer-events-none" />
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <Image src={`${BASE_PATH}/images/brand-logo.png`} alt="Digital S&D" width={672} height={241} priority className="w-40 sm:w-48 md:w-56 h-auto mx-auto mb-6" />
+          <Image src={`${BASE_PATH}/images/brand-logo.png`} alt="Digital S&D" width={672} height={241} preload className="w-40 sm:w-48 md:w-56 h-auto mx-auto mb-6" />
           <h1 className="font-sora font-extrabold text-3xl sm:text-5xl md:text-6xl text-white leading-[1.15] tracking-tight mb-5">
             Sites e landing pages <span className="text-gradient">para aproximar clientes.</span>
           </h1>

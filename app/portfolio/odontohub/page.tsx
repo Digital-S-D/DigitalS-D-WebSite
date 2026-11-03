@@ -31,7 +31,7 @@ export default function OdontoHubPage() {
               <div className="flex flex-wrap gap-3"><a href="#telas" className="btn-primary">Explorar as telas <ArrowRight size={17} aria-hidden="true" /></a><Link href={quoteHref("Sistema Web personalizado")} className="btn-outline">Conversar sobre algo parecido</Link></div>
             </div>
             <figure className="mt-10 md:mt-12">
-              <Image src={`${BASE_PATH}${ODONTOHUB.cover}`} alt="Tela de visão geral do OdontoHub com agenda de pacientes fictícios, visão financeira e atalhos de navegação." width={1425} height={940} priority sizes="(min-width: 1280px) 1216px, 100vw" className="rounded-xl border border-white/20 w-full h-auto" />
+              <Image src={`${BASE_PATH}${ODONTOHUB.cover}`} alt="Tela de visão geral do OdontoHub com agenda de pacientes fictícios, visão financeira e atalhos de navegação." width={1425} height={940} preload sizes="(min-width: 1280px) 1216px, 100vw" className="rounded-xl border border-white/20 w-full h-auto" />
               <figcaption className="text-gray-400 text-sm mt-3">Visão geral da demonstração. Todos os pacientes, agendamentos e valores são fictícios.</figcaption>
             </figure>
           </div>

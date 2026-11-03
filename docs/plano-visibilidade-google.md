@@ -81,3 +81,7 @@ Sitemap, robots.txt, canonical e metadados por página e Organization foram impl
 ## Execução inicial do passo 3 — 03/11/2026
 
 Público confirmado: pequenas empresas e profissionais autônomos em geral. A Alvorada foi completada no portfólio local com três capturas reais. O inventário de provas e a rotina de oportunidades foram criados. Dez consultas independentes foram executadas no Modo IA: zero menções espontâneas nas sete perguntas sem marca; as três com marca identificaram o domínio. A resposta de atendimento ainda reproduziu o horário antigo, coerente com o HTML público consultado. As melhorias seguem locais e não há evidência de impacto comercial ou melhora de recomendação nesta rodada. Ver [passo-3-provas-e-medicao.md](passo-3-provas-e-medicao.md).
+
+## Fechamento da base técnica — 03/11/2026
+
+Publicação anterior confirmada no domínio. Next.js, React e ferramentas foram atualizados e validados, com zero vulnerabilidades reportadas na instalação limpa. O Search Console continua aguardando confirmação de domínio por TXT no DNS na conta empresarial. A coleta futura de evolução depende de tempo e dados reais. Ver [pendencias-base-tecnica.md](pendencias-base-tecnica.md).

@@ -16,3 +16,7 @@ Você pode executar a consulta na sua própria conta e compartilhar os resultado
 O procedimento detalhado está em [passo-2-indexacao.md](passo-2-indexacao.md). A medição comercial e as consultas de IA estão em [monitoramento/README.md](monitoramento/README.md).
 
 Fonte: [Google — Sobre o Search Console](https://support.google.com/webmasters/answer/9128668?hl=pt-BR).
+
+## Estado confirmado nesta revisão
+
+A conta empresarial já apresenta a propriedade de domínio digitalsd.com.br, mas a confirmação por TXT no DNS está pendente. O próximo passo é o administrador concluir essa verificação existente, ou usar a propriedade já verificada em outra conta. Não criar outra propriedade por tentativa e não publicar o valor de verificação em documentos do repositório. As páginas e o sitemap já estão públicos e responderam 200.

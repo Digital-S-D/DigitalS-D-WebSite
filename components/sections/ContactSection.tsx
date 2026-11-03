@@ -131,7 +131,7 @@ export function ContactSection() {
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} noValidate aria-label="Solicitar orçamento" aria-busy={isSubmitting} className="space-y-4">
                   <p className="text-sm text-gray-300">Campos com * são obrigatórios.</p>
-                  {!formAvailable && <p className="text-sm text-amber-200" role="status">O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.</p>}
+                  {!formAvailable && <p className="text-sm text-amber-200">O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.</p>}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-name" className={labelClass}>Nome *</label>
@@ -179,7 +179,7 @@ export function ContactSection() {
                   <button type="submit" disabled={isSubmitting || !formAvailable} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"><Send size={16} aria-hidden="true" />{isSubmitting ? "Enviando..." : "Solicitar orçamento grátis"}</button>
                 </form>
               )}
-              <p role="status" aria-live="polite" className="sr-only">{isSubmitting ? "Enviando sua mensagem. Aguarde a confirmação." : isSubmitted ? "Mensagem enviada com sucesso." : ""}</p>
+              <output aria-live="polite" className="sr-only">{isSubmitting ? "Enviando sua mensagem. Aguarde a confirmação." : isSubmitted ? "Mensagem enviada com sucesso." : ""}</output>
             </div>
           </div>
         </div>

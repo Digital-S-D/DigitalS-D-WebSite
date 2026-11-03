@@ -29,9 +29,18 @@ export function Header() {
     const dialog = dialogRef.current;
     if (!menuOpen) { dialog?.close(); return; }
     const previousOverflow = document.body.style.overflow;
+    // Only backdrop clicks close the native dialog; Escape and the close
+    // button remain the equivalent keyboard actions.
+    const onBackdropClick = (event: MouseEvent) => {
+      if (event.target === dialog) setMenuOpen(false);
+    };
+    dialog?.addEventListener("click", onBackdropClick);
     dialog?.showModal();
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
+    return () => {
+      dialog?.removeEventListener("click", onBackdropClick);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
@@ -70,7 +79,6 @@ export function Header() {
           closeMenu();
           if (window.matchMedia("(max-width: 1023px)").matches) triggerRef.current?.focus({ preventScroll: true });
         }}
-        onClick={(event) => { if (event.target === event.currentTarget) closeMenu(); }}
         className="fixed inset-y-0 left-auto right-0 m-0 h-dvh max-h-none w-80 max-w-[90vw] border-l border-white/10 bg-brand-navy text-white p-0 backdrop:bg-black/70 backdrop:backdrop-blur-sm">
         <div className="flex flex-col min-h-full">
           <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">

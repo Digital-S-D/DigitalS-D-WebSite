@@ -10,7 +10,7 @@ Desenvolvido com Next.js, React, TypeScript e Tailwind CSS, com exportação est
 
 ## 🚀 Como rodar o projeto
 
-Com Node.js e npm instalados:
+Com Node.js 24 LTS e npm instalados:
 
 ```bash
 npm ci
@@ -73,9 +73,9 @@ digital-sd/
 │
 ├── tests/                        # Testes de validação do formulário
 ├── netlify.toml                  # Build e diretório de publicação
-├── tailwind.config.js            # Cores, fontes e animações
-├── postcss.config.js             # Processamento do CSS
-├── next.config.js                # Exportação estática e caminhos de publicação
+├── tailwind.config.mjs            # Cores, fontes e animações
+├── postcss.config.mjs             # Processamento do CSS
+├── next.config.mjs                # Exportação estática e caminhos de publicação
 ├── tsconfig.json                 # Configuração do TypeScript
 └── package.json                  # Dependências e comandos do projeto
 ```
@@ -134,11 +134,13 @@ Os textos específicos de apresentação ficam nos componentes de `components/se
 ## ✅ Verificação e publicação
 
 ```bash
-node --test tests/contact.test.mts
-npm run build
+npm run check
+npm audit
 ```
 
-Os testes de contato requerem Node.js 22.18 ou superior. O build verifica os tipos e gera os arquivos estáticos em `out/`.
+O projeto usa Node.js 24. O lint usa Oxlint com regras de Next.js, React, TypeScript e acessibilidade; o runtime automático JSX dispensa importação global de React. O build verifica os tipos e gera os arquivos estáticos em `out/`. Execute os testes após o build, pois eles também conferem o HTML exportado. `npm run typecheck` permite repetir a verificação de tipos separadamente.
+
+Para conferir o export localmente, execute `npm start` depois do build e acesse `http://127.0.0.1:3000/`. Esse comando serve `out/` com sirv; `next start` não se aplica à exportação estática.
 
 O Netlify está configurado em `netlify.toml` para usar Node.js 24, executar `npm run build` e publicar `out/`. Configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` também no ambiente de build da hospedagem; mudar seu valor exige uma nova compilação.
 
@@ -161,3 +163,9 @@ A variável opcional `GOOGLE_SITE_VERIFICATION` recebe somente o token real do m
 O inventário em `docs/provas-do-trabalho.md` distingue demonstrações de resultados de clientes. A Alvorada usa capturas do HTML original no computador e celular; números e condições imobiliárias exibidos pertencem ao cenário fictício.
 
 O protocolo, as consultas do Modo IA e o acompanhamento manual de oportunidades estão em `docs/monitoramento/`. Não há analytics ou automação novos instalados por esse registro. A explicação para o administrador do Search Console está em `docs/explicacao-search-console.md`.
+
+## Manutenção da base técnica
+
+Next.js 16.4.5, React 19.3.1 e ícones/tipagens compatíveis. As configurações usam módulos ESM (`.mjs`) e o pacote declara `type: module`. Imagens antecipadas usam `preload`, conforme o Next.js 16.
+
+A revisão das pendências e seus estados atuais estão em `docs/pendencias-base-tecnica.md`. Os relatórios de etapas anteriores preservam o estado observado em cada rodada; não representam a lista atual de pendências.

@@ -1,5 +1,7 @@
 # Revisão de publicação — 03/11/2026
 
+**Atualização posterior:** a pendência de dependências abaixo foi resolvida pela migração para Next.js 16; a publicação anterior também foi confirmada. Ver o [estado atual das pendências](pendencias-base-tecnica.md). O restante deste documento preserva a revisão anterior ao envio dos commits.
+
 ## Base e destino
 
 Repositório público: `https://github.com/Digital-S-D/DigitalS-D-WebSite`. Branch de produção: `master`. Base remota consultada: `f6db6693043d241a835291b3959af054ccf14b15` (Atualização README), precedida por `d2cb63a` (site institucional, FAQ e OdontoHub). Após fetch, a base local e origin/master estavam alinhadas, sem commits adiantados ou atrasados.

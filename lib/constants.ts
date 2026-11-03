@@ -8,7 +8,7 @@ import { PRIMARY_SERVICES } from "./offers";
 // ═══════════════════════════════════════════════════════════════════════
 
 // ─── basePath do GitHub Pages ────────────────────────────────────────────
-// O valor vem de next.config.js (NEXT_PUBLIC_BASE_PATH), que é a única fonte
+// O valor vem de next.config.mjs (NEXT_PUBLIC_BASE_PATH), que é a única fonte
 // de verdade: "/DigitalS-D-WebSite" só no build do GitHub Pages e "" em todos
 // os outros casos (Netlify/domínio próprio, `npm run dev`).
 // Com `output: "export"` a imagem roda em modo `unoptimized`, e nesse modo o

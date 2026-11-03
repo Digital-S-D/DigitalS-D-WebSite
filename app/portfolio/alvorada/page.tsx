@@ -34,7 +34,7 @@ export default function AlvoradaPage() {
               </div>
               <figure>
                 <a href={`${BASE_PATH}${ALVORADA.cover}`} aria-label="Ampliar captura da abertura da Alvorada" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}${ALVORADA.cover}`} alt="Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada." width={1425} height={940} priority sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${BASE_PATH}${ALVORADA.cover}`} alt="Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada." width={1425} height={940} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Abertura da landing page em execução. Os números, prazos e condições exibidos pertencem ao cenário fictício da demonstração. Toque na imagem para ampliar.</figcaption>
               </figure>

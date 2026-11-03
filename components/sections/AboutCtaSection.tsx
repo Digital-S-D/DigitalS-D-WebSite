@@ -17,18 +17,19 @@ export function AboutCtaSection() {
           <div className="relative z-10">
             {/* SUBSTITUA: Título de encerramento, retomando a metáfora do Hero */}
             <h2 className="font-sora font-bold text-2xl md:text-4xl text-white mb-4">
-              Vamos construir essa ponte juntos?
+              Você explica seu negócio. A equipe orienta o próximo passo.
             </h2>
             {/* SUBSTITUA: Parágrafo de convite */}
             <p className="font-outfit text-gray-400 text-base md:text-lg mb-8 max-w-xl mx-auto">
-              Conte um pouco sobre o seu negócio e vamos conversar sobre como
-              transformar sua presença digital em resultado real.
+              Você pode começar sem entender de tecnologia. Explicamos as opções,
+              organizamos os materiais com você e combinamos as etapas do projeto.
             </p>
             {/* Link para o formulário de contato, que vive na Home */}
             <Link href="/#contato" className="btn-primary text-base px-8 py-4">
-              Iniciar meu projeto
+              Conversar sobre meu site
               <ArrowRight size={18} />
             </Link>
+            <p className="mt-5"><Link href="/atendimento" className="inline-flex py-3 text-blue-300 underline underline-offset-4">Entender o acompanhamento e as atualizações</Link></p>
           </div>
         </div>
       </div>

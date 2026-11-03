@@ -2,7 +2,7 @@
 // Reutiliza Header e Footer (idênticos à Home) para manter a identidade
 // visual e evitar duplicação de código.
 
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Header, Footer } from "@/components/layout";
 import {
   AboutHeroSection,
@@ -13,12 +13,11 @@ import {
   AboutCtaSection,
 } from "@/components/sections";
 
-// SUBSTITUA: Ajuste título e descrição para SEO desta página específica
-export const metadata: Metadata = {
-  title: "Sobre Nós | Digital S&D",
-  description:
-    "Conheça a história, a missão e o processo de trabalho por trás da Digital S&D — a agência que constrói pontes entre pequenas empresas e seus clientes.",
-};
+export const metadata = pageMetadata(
+  "/sobre/",
+  "Sobre a Digital S&D | Equipe e processo de trabalho",
+  "Conheça a Digital S&D, seus fundadores Alvaro Marinho e Arthur Leite e as etapas de criação de sites e landing pages para pequenas empresas e profissionais autônomos.",
+);
 
 export default function AboutPage() {
   return (

@@ -4,12 +4,13 @@ import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Send, CheckCircle, MessageCircle, Mail, Clock } from "lucide-react";
 import { BUDGET_OPTIONS, COMPANY, LINKS, SERVICE_OPTIONS } from "@/lib/constants";
 import { formatPhone, isFormEndpointConfigured, validateContact, type ContactData, type ContactErrors } from "@/lib/contact";
+import { CUSTOMER_CARE } from "@/lib/customer-care";
 import { ContactServiceIntent } from "./ContactServiceIntent";
 
 const contactInfo = [
   { icon: MessageCircle, title: "WhatsApp", value: COMPANY.phone, href: LINKS.whatsappOrcamento, label: "Converse sobre seu projeto" },
   { icon: Mail, title: "E-mail", value: COMPANY.email, href: `mailto:${COMPANY.email}`, label: "Envie suas dúvidas e ideias" },
-  { icon: Clock, title: "Horário de atendimento", value: "Seg–Sex: 9h às 18h", href: null, label: "Horário de Brasília" },
+  { icon: Clock, title: "Primeira resposta", value: CUSTOMER_CARE.firstReply, href: null, label: "WhatsApp e e-mail · sem horário fixo" },
 ];
 
 const initialForm: ContactData = { name: "", email: "", phone: "", company: "", service: "", budget: "", message: "" };
@@ -99,7 +100,7 @@ export function ContactSection() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="badge mb-4"><Send size={12} aria-hidden="true" />Fale conosco</span>
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">Pronto para <span className="text-gradient">começar seu projeto?</span></h2>
-          <p className="text-gray-300 text-base md:text-lg">Conte o que você precisa para conversarmos sobre um orçamento sem compromisso. Se preferir, fale pelo WhatsApp ou e-mail.</p>
+          <p className="text-gray-300 text-base md:text-lg">Pode começar contando sobre seu negócio, mesmo sem saber os termos técnicos. A equipe ajuda a organizar o pedido e responde pelo WhatsApp ou e-mail em até 1 dia útil.</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 max-w-5xl mx-auto">
           <div className="lg:col-span-2 space-y-5 min-w-0">
@@ -124,7 +125,7 @@ export function ContactSection() {
                 <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
                   <CheckCircle size={40} className="text-green-400" aria-hidden="true" />
                   <h3 ref={successRef} tabIndex={-1} className="font-sora font-bold text-white text-xl">Mensagem enviada!</h3>
-                  <p className="text-gray-300 text-sm">Obrigado pelo contato! Nossa equipe vai analisar sua mensagem e retornar pelo contato informado.</p>
+                  <p className="text-gray-300 text-sm">Obrigado pelo contato! Nossa equipe fará o retorno inicial em até 1 dia útil pelo contato informado.</p>
                   <button type="button" onClick={() => setIsSubmitted(false)} className="btn-outline text-sm mt-2">Enviar outra mensagem</button>
                 </div>
               ) : (

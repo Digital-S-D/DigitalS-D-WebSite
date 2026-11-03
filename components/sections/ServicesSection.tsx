@@ -34,7 +34,7 @@ export function ServicesSection() {
             );
           })}
         </div>
-        <p className="text-gray-400 text-sm mt-5 max-w-3xl">A proposta detalha páginas, seções, integrações, materiais, revisões e publicação. Domínio, hospedagem, ferramentas externas e manutenção têm suas condições informadas separadamente.</p>
+        <p className="text-gray-400 text-sm mt-5 max-w-3xl">A proposta detalha páginas, seções, integrações, materiais, revisões e publicação. Domínio, hospedagem, ferramentas externas e manutenção têm suas condições informadas separadamente. <Link href="/atendimento" className="text-blue-300 underline underline-offset-4">Veja como a equipe acompanha você.</Link></p>
         <div id="solucoes-complementares" className="scroll-mt-28 mt-12 pt-8 border-t border-white/10">
           <h3 className="font-sora font-semibold text-xl mb-5">Seu projeto precisa ir além?</h3>
           <div className="grid sm:grid-cols-3 gap-6 mb-5">

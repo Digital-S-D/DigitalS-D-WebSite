@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
@@ -8,15 +8,12 @@ import { ODONTOHUB } from "@/lib/portfolio";
 import { quoteHref } from "@/lib/offers";
 
 const description = "Conheça o OdontoHub, projeto demonstrativo da Digital S&D com agenda, prontuário, financeiro e personalização para a rotina odontológica.";
-export const metadata: Metadata = {
-  title: "OdontoHub — projeto demonstrativo | Digital S&D", description,
-  openGraph: {
-    title: "OdontoHub — projeto demonstrativo | Digital S&D", description,
-    url: "https://digitalsd.com.br/portfolio/odontohub/", type: "website",
-    images: [{ url: `${BASE_PATH}${ODONTOHUB.cover}`, width: 1425, height: 940, alt: "Interface real do projeto demonstrativo OdontoHub" }],
-  },
-  twitter: { card: "summary_large_image", title: "OdontoHub — projeto demonstrativo | Digital S&D", description, images: [`${BASE_PATH}${ODONTOHUB.cover}`] },
-};
+export const metadata = pageMetadata(
+  "/portfolio/odontohub/",
+  "OdontoHub — projeto demonstrativo | Digital S&D",
+  description,
+  { url: ODONTOHUB.cover, width: 1425, height: 940, alt: "Interface real do projeto demonstrativo OdontoHub" },
+);
 
 export default function OdontoHubPage() {
   return (

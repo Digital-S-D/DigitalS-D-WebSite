@@ -1,3 +1,11 @@
+export const ALVORADA = {
+  title: "Construtora Alvorada",
+  href: "/portfolio/alvorada",
+  category: "Projeto demonstrativo · Landing page",
+  description: "Uma apresentação imobiliária com identidade inspirada em arquitetura, comparação de apartamentos e um percurso até o contato.",
+  cover: "/images/portfolio/alvorada/visao-geral.webp",
+  illustration: "/images/portfolio/alvorada/fachada.svg",
+};
 export const ODONTOHUB = {
   title: "OdontoHub",
   href: "/portfolio/odontohub",

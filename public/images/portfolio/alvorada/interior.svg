@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="bg" viewBox="0 0 600 375" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="tourSky" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1E3640"/>
+              <stop offset="100%" stop-color="#0C1B20"/>
+            </linearGradient>
+          </defs>
+          <rect width="600" height="375" fill="url(#tourSky)"/>
+          <g stroke="rgba(251,250,247,0.14)" stroke-width="1">
+            <line x1="0" y1="90" x2="600" y2="90"/><line x1="0" y1="180" x2="600" y2="180"/><line x1="0" y1="270" x2="600" y2="270"/>
+            <line x1="150" y1="0" x2="150" y2="375"/><line x1="300" y1="0" x2="300" y2="375"/><line x1="450" y1="0" x2="450" y2="375"/>
+          </g>
+          <rect x="120" y="140" width="360" height="150" fill="none" stroke="#BA8938" stroke-width="1.5" stroke-dasharray="6 5"/>
+        </svg>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { BASE_PATH } from "@/lib/constants";
 
-const quickBenefits = ["Design para sua marca", "Foco em conversão", "Adaptado ao celular"];
+const quickBenefits = ["Orientação em cada etapa", "Design para sua marca", "Adaptado ao celular"];
 
 export function HeroSection() {
   return (
@@ -17,7 +17,7 @@ export function HeroSection() {
           </h1>
           <p className="font-outfit text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto mb-6">
             Desenvolvemos sites e landing pages para pequenas e médias empresas e profissionais autônomos.
-            Apresente seu negócio com clareza e facilite o próximo contato.
+            Você conta o que precisa; nossa equipe orienta as escolhas, os materiais e as aprovações.
           </p>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-6">
             <a href="#contato" className="btn-primary justify-center text-base px-6 py-3">Pedir orçamento <ArrowRight size={18} aria-hidden="true" /></a>

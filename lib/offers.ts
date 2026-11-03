@@ -1,3 +1,6 @@
+import { CUSTOMER_CARE } from "./customer-care";
+export { CARE_SUMMARY as PROJECT_AGREEMENTS } from "./customer-care";
+
 // Uma fonte de conteúdo para serviços, FAQ e caminhos de orçamento.
 export const PRIMARY_SERVICES = [
   {
@@ -38,24 +41,33 @@ export const COMPLEMENTARY_SERVICES = [
   { title: "Manutenção e evolução", description: "Atualizações, ajustes e novas funcionalidades com condições de atendimento combinadas." },
 ];
 
-export const PROJECT_AGREEMENTS = [
-  { title: "Antes de começar", description: "Conversamos sobre objetivo, público e materiais. A proposta registra páginas, funcionalidades, responsabilidades e o que fica fora do escopo." },
-  { title: "Prazo e investimento", description: "O orçamento considera o escopo, o conteúdo e as integrações. Cronograma, marcos de aprovação e pagamento são combinados por escrito." },
-  { title: "Depois da entrega", description: "Publicação, acessos, revisões e condições de suporte ficam descritos na proposta. Manutenção e evolução podem ser contratadas conforme a necessidade." },
-];
-
 export function quoteHref(interest: string): string {
   return `/?servico=${encodeURIComponent(interest)}#contato`;
 }
 
 export const FAQ_ITEMS = [
   {
+    id: "preciso-entender-tecnologia", category: "Atendimento e acompanhamento", home: true,
+    question: "Preciso entender de tecnologia para contratar um site?",
+    answer: "Não. Você explica seu negócio e o que precisa apresentar ou facilitar para o cliente. A equipe ajuda a organizar o pedido, orienta sobre os materiais e explica as escolhas em linguagem simples. Você acompanha as versões e aprova as etapas sem precisar programar ou escolher uma tecnologia por conta própria.",
+  },
+  {
+    id: "quem-me-acompanha", category: "Atendimento e acompanhamento", home: true,
+    question: "Quem me acompanha durante o projeto?",
+    answer: `${CUSTOMER_CARE.coordination} A equipe orienta a coleta de materiais, apresenta as etapas para revisão e combina os próximos passos com você. Escopo, revisões e responsabilidades ficam registrados na proposta para que você saiba o que acompanhar e aprovar.`,
+  },
+  {
+    id: "prazo-de-resposta", category: "Atendimento e acompanhamento", home: false,
+    question: "Por onde falo com vocês e em quanto tempo recebo resposta?",
+    answer: `${CUSTOMER_CARE.replyDescription} Você pode enviar sua mensagem a qualquer momento. ${CUSTOMER_CARE.responseAndDelivery}`,
+  },
+  {
     id: "site-ou-landing-page", category: "Escolha e orçamento", home: true,
     question: "Preciso de um site institucional ou de uma landing page?",
     answer: "O site institucional apresenta o negócio, os serviços e as informações que o cliente consulta antes de entrar em contato. A landing page concentra uma oferta e uma ação, como pedir orçamento ou se cadastrar em uma campanha. Se ainda estiver em dúvida, conte seu objetivo no contato e ajudamos a avaliar o formato.",
   },
   {
-    id: "orcamento", category: "Escolha e orçamento", home: true,
+    id: "orcamento", category: "Escolha e orçamento", home: false,
     question: "Como é calculado o orçamento?",
     answer: "O orçamento considera páginas ou seções, funcionalidades, conteúdo, integrações e complexidade do projeto. Conte o que precisa e quais materiais já tem. O valor e os entregáveis ficam registrados em uma proposta escrita; informar uma faixa no formulário ajuda a conversa e não representa um preço fechado.",
   },
@@ -65,7 +77,7 @@ export const FAQ_ITEMS = [
     answer: "As formas de pagamento, eventuais parcelas e marcos de cobrança são definidos na proposta de cada projeto, antes da contratação. O envio do formulário inicia uma conversa sobre o orçamento e não contrata automaticamente um serviço.",
   },
   {
-    id: "prazo", category: "Conteúdo e desenvolvimento", home: true,
+    id: "prazo", category: "Conteúdo e desenvolvimento", home: false,
     question: "Qual é o prazo e quando ele começa a contar?",
     answer: "O prazo depende do escopo, dos materiais disponíveis e das etapas de aprovação. O cronograma e as condições para início são definidos na proposta. Atrasos na entrega de conteúdo ou mudanças de escopo podem exigir uma revisão das datas, combinada entre as partes.",
   },
@@ -92,12 +104,12 @@ export const FAQ_ITEMS = [
   {
     id: "suporte", category: "Entrega e continuidade", home: true,
     question: "Como funciona o suporte depois da entrega?",
-    answer: "O período, o canal, o prazo de atendimento e o tipo de suporte são definidos na proposta. Correções, atualizações de conteúdo e novas funcionalidades têm escopos diferentes. Se você precisar de acompanhamento contínuo, podemos avaliar uma contratação de manutenção e evolução.",
+    answer: `Depois da entrega, você continua podendo falar com a equipe pelo WhatsApp ou e-mail. Informe o site e o que precisa de ajuda. ${CUSTOMER_CARE.replyDescription} Avaliamos se o pedido é uma dúvida, uma correção relacionada à entrega ou uma nova alteração. O período e o escopo do suporte seguem a proposta; prazo de execução e eventual custo de novos pedidos são combinados antes do trabalho.`,
   },
   {
-    id: "atualizacoes", category: "Entrega e continuidade", home: false,
+    id: "atualizacoes", category: "Entrega e continuidade", home: true,
     question: "Vou conseguir atualizar meu site depois?",
-    answer: "Sim, o projeto pode prever um painel para edição ou atualizações solicitadas à equipe. A opção depende do conteúdo e da frequência das mudanças. Painel, orientações de uso e manutenção precisam estar descritos na proposta; um editor de conteúdo não é presumido em todos os sites.",
+    answer: "Existem duas formas, definidas antes da contratação. Se o projeto incluir um painel, você recebe orientação para editar os conteúdos previstos nele. Se preferir delegar, pode solicitar alterações à equipe, com prazo e eventual custo combinados antes da execução. Por exemplo: trocar uma foto, atualizar um preço ou corrigir o horário do negócio. A escolha depende da frequência das mudanças e do serviço contratado.",
   },
   {
     id: "seo-integracoes", category: "Recursos e atendimento", home: false,

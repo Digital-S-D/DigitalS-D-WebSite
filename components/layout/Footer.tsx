@@ -13,6 +13,7 @@ const footerLinks = {
   empresa: [
     { label: "Sobre Nós",   href: LINKS.about }, // antes era "#sobre" (âncora inexistente); agora aponta para a página real
     { label: "Portfólio", href: "/#portfolio" },
+    { label: "Atendimento e acompanhamento", href: "/atendimento" },
     { label: "Perguntas frequentes", href: "/perguntas-frequentes" },
     { label: "Contato",     href: "/#contato" },
     { label: "Privacidade", href: "/privacidade" },

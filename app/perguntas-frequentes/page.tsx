@@ -1,17 +1,16 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
 import { FaqList } from "@/components/sections/FaqList";
-import { BASE_PATH } from "@/lib/constants";
 import { FAQ_ITEMS } from "@/lib/offers";
 
-const description = "Tire suas dúvidas sobre sites, landing pages, orçamento, conteúdo, prazo, hospedagem e suporte na Digital S&D.";
-export const metadata: Metadata = {
-  title: "Perguntas frequentes | Digital S&D", description,
-  openGraph: { title: "Perguntas frequentes | Digital S&D", description, url: "https://digitalsd.com.br/perguntas-frequentes/", images: [{ url: `${BASE_PATH}/og-image.jpg`, width: 1200, height: 630 }] },
-  twitter: { card: "summary_large_image", images: [`${BASE_PATH}/og-image.jpg`], title: "Perguntas frequentes | Digital S&D", description },
-};
+const description = "Saiba como a equipe Digital S&D acompanha seu projeto, qual o prazo de resposta e como atualizar seu site. Dúvidas sobre orçamento, conteúdo, entrega e suporte.";
+export const metadata = pageMetadata(
+  "/perguntas-frequentes/",
+  "Perguntas frequentes | Digital S&D",
+  description,
+);
 
 export default function FaqPage() {
   const categories = Array.from(new Set(FAQ_ITEMS.map((item) => item.category)));
@@ -25,6 +24,7 @@ export default function FaqPage() {
             <span className="badge mb-4">Clareza para contratar</span>
             <h1 className="font-sora font-bold text-4xl md:text-5xl mb-5">Perguntas <span className="text-gradient">frequentes</span></h1>
             <p className="text-gray-300 text-lg leading-relaxed">Da escolha do site ao que acontece depois da entrega. Encontre aqui o que vale conversar antes de começar.</p>
+            <p className="text-gray-300 mt-4"><Link href="/atendimento" className="text-blue-300 underline underline-offset-4">Veja como funciona o acompanhamento</Link>, da coleta de materiais às solicitações depois da entrega.</p>
             <p className="text-gray-400 text-sm mt-4">Valores, prazos e condições de cada projeto são formalizados em proposta escrita, conforme nossos <Link href="/termos" className="text-blue-300 underline">termos de uso</Link>.</p>
           </div>
           <nav aria-label="Assuntos das perguntas frequentes" className="flex flex-wrap gap-2 mb-12">

@@ -1,58 +1,140 @@
-# Digital S&D
+# Digital S&D — Site Institucional
 
-Site institucional em Next.js com exportação estática. Site público: [digitalsd.com.br](https://digitalsd.com.br/).
+Site da Digital S&D, voltado à apresentação de serviços de criação de sites e landing pages para pequenas e médias empresas e profissionais autônomos.
 
-## Desenvolvimento
+Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta o OdontoHub como um projeto demonstrativo com dados fictícios.
 
-```sh
+**Site:** [digitalsd.com.br](https://digitalsd.com.br/)
+
+Desenvolvido com Next.js, React, TypeScript e Tailwind CSS, com exportação estática para hospedagem no Netlify.
+
+## 🚀 Como rodar o projeto
+
+Com Node.js e npm instalados:
+
+```bash
 npm ci
 npm run dev
+# Acesse: http://localhost:3000
 ```
 
-Use Node.js 22.18 ou superior para executar também os testes de contato. A hospedagem atual usa Node.js 20 para o build.
+Para habilitar o formulário, copie `.env.local.example` para `.env.local` e configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` com o endpoint do Formspree. Sem essa configuração, o site oferece WhatsApp e e-mail como alternativas. O arquivo `.env.local` não deve ser versionado.
 
-## Formulário de contato
+---
 
-1. Copie `.env.local.example` para `.env.local` e informe o endpoint do formulário existente no Formspree.
-2. Confirme no Formspree que o destinatário é `digitalsd.contato@gmail.com`.
-3. Na hospedagem, configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` antes da compilação. A variável é pública e incorporada ao JavaScript: alterações exigem um novo build.
-4. Sem um endpoint válido, o formulário informa a indisponibilidade, desativa o envio e oferece WhatsApp e e-mail.
-5. Após publicar, envie um teste identificado, com autorização, e confirme a chegada à caixa esperada. Uma resposta de sucesso do serviço não comprova entrega na caixa de entrada.
+## 🗂️ Estrutura de Pastas
 
-O formulário exige nome, e-mail e telefone brasileiro com DDD. Aceita telefone fixo, celular e colagem com código +55. Campos opcionais são enviados vazios quando não preenchidos. Erros preservam os dados para nova tentativa; a confirmação só aparece após resposta de sucesso do Formspree.
+```text
+digital-sd/
+│
+├── app/                          # Páginas do Next.js (App Router)
+│   ├── globals.css               # Estilos globais e fontes
+│   ├── layout.tsx                # Layout raiz e metadados padrão
+│   ├── page.tsx                  # Página inicial
+│   ├── sobre/                    # Empresa, equipe e processo de trabalho
+│   ├── perguntas-frequentes/     # Dúvidas sobre serviços e contratação
+│   ├── portfolio/odontohub/      # Apresentação do projeto demonstrativo
+│   ├── privacidade/              # Política de Privacidade
+│   └── termos/                   # Termos de Uso
+│
+├── components/                   # Componentes visuais reutilizáveis
+│   ├── layout/
+│   │   ├── Header.tsx            # Cabeçalho fixo e menu mobile
+│   │   ├── Footer.tsx            # Rodapé com navegação e contatos
+│   │   └── index.ts              # Exportações dos componentes de layout
+│   │
+│   └── sections/                 # Seções e componentes de conteúdo
+│       ├── HeroSection.tsx       # Apresentação e chamadas para ação
+│       ├── PortfolioSection.tsx  # Projeto em destaque
+│       ├── ServicesSection.tsx   # Ofertas principais e complementares
+│       ├── ProjectPlanSection.tsx # Processo comercial e fundadores
+│       ├── FaqSection.tsx        # Resumo das perguntas frequentes
+│       ├── FaqList.tsx           # Perguntas e respostas expansíveis
+│       ├── ContactSection.tsx    # Formulário e canais de contato
+│       └── ...                   # Seções de Sobre e documentos institucionais
+│
+├── lib/                          # Conteúdo e lógica compartilhados
+│   ├── constants.ts              # Empresa, contatos, menu e opções do formulário
+│   ├── offers.ts                 # Serviços, processo comercial e FAQ
+│   ├── portfolio.ts              # Dados e galeria do OdontoHub
+│   ├── contact.ts                # Máscara e validação do formulário
+│   └── legal.ts                  # Textos de Privacidade e Termos
+│
+├── public/                       # Arquivos estáticos
+│   ├── og-image.jpg              # Imagem de compartilhamento do site
+│   └── images/
+│       ├── brand-logo.png        # Marca completa usada no site
+│       ├── brand-icon.png        # Ícone usado no cabeçalho mobile
+│       ├── logo-icone.png        # Favicon
+│       ├── team/                 # Fotos dos fundadores
+│       └── portfolio/odontohub/   # Capturas da interface demonstrativa em WebP
+│
+├── tests/                        # Testes de validação do formulário
+├── netlify.toml                  # Build e diretório de publicação
+├── tailwind.config.js            # Cores, fontes e animações
+├── postcss.config.js             # Processamento do CSS
+├── next.config.js                # Exportação estática e caminhos de publicação
+├── tsconfig.json                 # Configuração do TypeScript
+└── package.json                  # Dependências e comandos do projeto
+```
 
-## Verificação e build
+---
 
-```sh
+## ✏️ Como editar o conteúdo
+
+O conteúdo compartilhado está organizado por assunto:
+
+| Conteúdo | Arquivo |
+|----------|---------|
+| Empresa, contatos, menu, equipe e opções do formulário | `lib/constants.ts` |
+| Serviços, etapas comerciais e perguntas frequentes | `lib/offers.ts` |
+| Descrição, capa e galeria do OdontoHub | `lib/portfolio.ts` |
+| Política de Privacidade e Termos de Uso | `lib/legal.ts` |
+| Título, descrição e imagem de compartilhamento padrão | `app/layout.tsx` |
+
+Os textos específicos de apresentação ficam nos componentes de `components/sections/` e nas respectivas páginas de `app/`. A Home e a página de perguntas frequentes compartilham as respostas de `lib/offers.ts`.
+
+---
+
+## 🖼️ Como adicionar imagens
+
+1. Coloque o arquivo em `/public/images/`.
+2. Use o caminho público `/images/nome-do-arquivo.jpg`, com texto alternativo e dimensões adequadas. Siga o padrão de prefixo `BASE_PATH` dos componentes para compatibilidade com publicação em subdiretório.
+3. Para o OdontoHub, coloque as capturas em `/public/images/portfolio/odontohub/` e atualize a capa ou a galeria em `lib/portfolio.ts`.
+
+---
+
+## 📦 Dependências principais
+
+| Pacote | Para que serve |
+|--------|---------------|
+| `next` | Framework React (App Router) e exportação estática |
+| `react` / `react-dom` | Interface e interações |
+| `tailwindcss` | Estilização por classes utilitárias |
+| `lucide-react` | Ícones |
+| `typescript` | Tipagem estática |
+
+---
+
+## 🎨 Design System
+
+| Token | Valor | Uso |
+|-------|-------|-----|
+| `brand-blue` | `#2563EB` | CTAs, destaques, links |
+| `brand-navy` | `#0F172A` | Fundo principal |
+| `brand-black` | `#000000` | Seções alternadas, cards |
+| `font-sora` | Sora | Títulos (h1, h2, h3) |
+| `font-outfit` | Outfit | Textos, parágrafos, botões |
+
+---
+
+## ✅ Verificação e publicação
+
+```bash
 node --test tests/contact.test.mts
-npx tsc --noEmit
 npm run build
 ```
 
-O build exporta os arquivos para `out/`, conforme `next.config.js`. O Netlify usa essa pasta. A configuração `DEPLOY_TARGET=github-pages` preserva o prefixo `/DigitalS-D-WebSite` quando necessário.
+Os testes de contato requerem Node.js 22.18 ou superior. O build verifica os tipos e gera os arquivos estáticos em `out/`.
 
-## Onde editar
-
-- `lib/constants.ts`: dados da empresa, WhatsApp, navegação, opções do formulário e conteúdo de Sobre.
-- `lib/offers.ts`: serviços principais, serviços complementares, etapas comerciais e FAQ (a Home e a página completa usam as mesmas respostas).
-- `lib/portfolio.ts`: apresentação e galeria do OdontoHub.
-- `public/images/portfolio/odontohub/`: seis capturas reais do projeto demonstrativo, em WebP.
-- `lib/contact.ts`: máscara, validação dos contatos e verificação do endpoint.
-- `lib/legal.ts`: conteúdo de Privacidade e Termos.
-- `components/sections/`: textos e estrutura de cada seção.
-- `components/layout/`: cabeçalho, menu mobile e rodapé.
-- `app/layout.tsx`: metadados e acesso direto ao conteúdo pelo teclado.
-- `public/images/brand-logo.png` e `brand-icon.png`: versões recortadas da marca oficial; os originais foram preservados.
-- `public/og-image.jpg`: imagem de compartilhamento de 1200 × 630 px.
-
-## Etapas da auditoria
-
-Na etapa 1, redes sociais sem perfis oficiais, blog inexistente e projetos fictícios foram retirados; contato e acessibilidade foram corrigidos.
-
-Na etapa 2, a Home passa a priorizar sites e landing pages, apresenta o OdontoHub como projeto demonstrativo e inclui processo, equipe e cinco dúvidas essenciais. As páginas `/portfolio/odontohub/` e `/perguntas-frequentes/` completam a apresentação. Os botões das ofertas e do case preservam o serviço no formulário pelo parâmetro `servico`, validado contra as opções conhecidas.
-
-Valores, pagamento, prazos, revisões, titularidade e suporte são definidos por proposta, sem condições fixas inventadas. Medição e atualização de dependências continuam na etapa 3.
-
-Veja `docs/etapa-1.md` para o registro de validação, incluindo o teste de envio e o recebimento na caixa de entrada confirmado pelo usuário em 03/11/2026.
-
-Veja `docs/etapa-2.md` para escopo, origem das capturas e verificação das novas páginas.
+O Netlify está configurado em `netlify.toml` para usar Node.js 20, executar `npm run build` e publicar `out/`. Configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` também no ambiente de build da hospedagem; mudar seu valor exige uma nova compilação.

@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="relative overflow-hidden">
+    <>
       <Header />
-      <LegalDocumentSection doc={PRIVACY_POLICY} />
+      <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
+        <LegalDocumentSection doc={PRIVACY_POLICY} />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

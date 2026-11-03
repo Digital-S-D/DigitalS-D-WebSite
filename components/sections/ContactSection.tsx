@@ -1,450 +1,184 @@
 "use client";
 
-import { useState } from "react";
-import { Send, CheckCircle, MessageCircle, Mail, Phone, Clock } from "lucide-react";
-import { BUDGET_OPTIONS } from "@/lib/constants";
-
-// ─── INFORMAÇÕES DE CONTATO ──────────────────────────────────────────
-// SUBSTITUA: Todas as informações de contato abaixo com dados reais
-// NOTA: estes valores estão intencionalmente separados de lib/constants.ts
-// pois o e-mail e a opção "Manutenção/Suporte" aqui divergem dos valores
-// centrais — ver relatório de auditoria para detalhes antes de unificar.
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { Send, CheckCircle, MessageCircle, Mail, Clock } from "lucide-react";
+import { BUDGET_OPTIONS, COMPANY, LINKS, SERVICE_OPTIONS } from "@/lib/constants";
+import { formatPhone, isFormEndpointConfigured, validateContact, type ContactData, type ContactErrors } from "@/lib/contact";
+import { ContactServiceIntent } from "./ContactServiceIntent";
 
 const contactInfo = [
-  {
-    icon:    MessageCircle,
-    title:   "WhatsApp",
-    // SUBSTITUA: Número de WhatsApp
-    value:   "(31) 9 9299-8761",
-    // SUBSTITUA: Link do WhatsApp com mensagem
-    href:    "https://wa.me/5531992998761?text=Olá!+Quero+um+orçamento+para+meu+site",
-    label:   "Resposta em minutos",
-  },
-  {
-    icon:    Mail,
-    title:   "E-mail",
-    // SUBSTITUA: Email real da agência
-    value:   "digitalsd.contato@gmail.com",
-    href:    "mailto:digitalsd.contato@gmail.com",
-    label:   "Resposta em até 24h",
-  },
-  {
-    icon:    Clock,
-    title:   "Horário de atendimento",
-    // SUBSTITUA: Seu horário real de atendimento
-    value:   "Seg–Sex: 9h às 18h",
-    href:    null,
-    label:   "BH, Brasília (GMT-3)",
-  },
+  { icon: MessageCircle, title: "WhatsApp", value: COMPANY.phone, href: LINKS.whatsappOrcamento, label: "Converse sobre seu projeto" },
+  { icon: Mail, title: "E-mail", value: COMPANY.email, href: `mailto:${COMPANY.email}`, label: "Envie suas dúvidas e ideias" },
+  { icon: Clock, title: "Horário de atendimento", value: "Seg–Sex: 9h às 18h", href: null, label: "Horário de Brasília" },
 ];
 
-// Opções de serviço para o select
-// SUBSTITUA: Adicione/remova opções conforme seus serviços
-const serviceOptions = [
-  "Selecione o serviço...",
-  "Site Institucional",
-  "Site para Autônomo",
-  "Landing Page",
-  "E-commerce",
-  "SEO & Performance",
-  "Aplicativo Web",
-  "Manutenção/Suporte",
-  "Outro",
-];
-
-// Opções de orçamento — idênticas a lib/constants.ts, lidas de lá
-const budgetOptions = BUDGET_OPTIONS;
-
-type FormData = {
-  name:    string;
-  email:   string;
-  phone:   string;
-  company: string;
-  service: string;
-  budget:  string;
-  message: string;
-};
-
-const initialForm: FormData = {
-  name:    "",
-  email:   "",
-  phone:   "",
-  company: "",
-  service: serviceOptions[0],
-  budget:  budgetOptions[0],
-  message: "",
-};
-
-// ─── Máscara de telefone: (00) 0 0000-0000 ─────────────────────────────
-// Remove tudo que não é número e formata progressivamente enquanto digita
-function formatPhone(value: string): string {
-  const digits = value.replace(/\D/g, "").slice(0, 11); // máx 11 dígitos (DDD + 9 dígitos)
-
-  if (digits.length === 0) return "";
-  if (digits.length <= 2) return `(${digits}`;
-  if (digits.length <= 3) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2, 3)} ${digits.slice(3)}`;
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 3)} ${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
-}
-
-// ─── Validação de e-mail ────────────────────────────────────────────────
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const initialForm: ContactData = { name: "", email: "", phone: "", company: "", service: "", budget: "", message: "" };
+const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+const formAvailable = isFormEndpointConfigured(endpoint);
+const labelClass = "block font-outfit text-sm text-gray-300 mb-1.5";
 
 export function ContactSection() {
-  const [formData, setFormData]   = useState<FormData>(initialForm);
+  const [formData, setFormData] = useState<ContactData>(initialForm);
+  const [errors, setErrors] = useState<ContactErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted]   = useState(false);
-  const [error, setError]               = useState<string | null>(null);
-  const [emailTouched, setEmailTouched] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const errorRef = useRef<HTMLParagraphElement>(null);
+  const selectService = useCallback((service: string) => {
+    setFormData((current) => ({ ...current, service }));
+  }, []);
 
-  // E-mail é válido se vazio (campo ainda não preenchido) ou se bate com o regex
-  const isEmailValid = formData.email === "" || EMAIL_REGEX.test(formData.email);
+  const wasSubmitted = useRef(false);
+  useEffect(() => {
+    if (isSubmitted) successRef.current?.focus();
+    else if (wasSubmitted.current) (formRef.current?.elements.namedItem("name") as HTMLInputElement | null)?.focus();
+    wasSubmitted.current = isSubmitted;
+  }, [isSubmitted]);
+  useEffect(() => { if (submitError) errorRef.current?.focus(); }, [submitError]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const field = event.target.name as keyof ContactData;
+    const value = field === "phone" ? formatPhone(event.target.value) : event.target.value;
+    const next = { ...formData, [field]: value };
+    setFormData(next);
+    if (errors[field]) setErrors((previous) => ({ ...previous, [field]: validateContact(next)[field] }));
   };
 
-  // Telefone: aplica máscara (00) 0 0000-0000 e bloqueia letras/símbolos
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const masked = formatPhone(e.target.value);
-    setFormData((prev) => ({ ...prev, phone: masked }));
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const field = event.target.name as keyof ContactData;
+    setErrors((previous) => ({ ...previous, [field]: validateContact(formData)[field] }));
   };
 
-  // ─── SUBMIT DO FORMULÁRIO ────────────────────────────────────────────
-  // Envio real via Formspree. O endpoint vem de uma variável de ambiente
-  // (NEXT_PUBLIC_FORMSPREE_ENDPOINT) em vez de ficar hardcoded no código —
-  // assim você troca de formulário sem precisar editar/re-buildar o código.
-  //
-  // Como configurar (veja também o arquivo .env.local.example):
-  //   1. Crie uma conta grátis em https://formspree.io
-  //   2. Crie um novo formulário e configure o e-mail de destino como
-  //      digitalsd.contato@gmail.com
-  //   3. Copie a URL do endpoint (algo como https://formspree.io/f/xxxxxxx)
-  //   4. Local: crie um arquivo .env.local na raiz do projeto com:
-  //        NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxxx
-  //   5. No GitHub: Settings → Secrets and variables → Actions → New repository
-  //      secret, nome FORMSPREE_ENDPOINT, valor = a mesma URL. O workflow
-  //      (.github/workflows/deploy.yml) já está configurado para injetá-la
-  //      no build automaticamente.
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validação extra de e-mail antes de enviar
-    if (!EMAIL_REGEX.test(formData.email)) {
-      setEmailTouched(true);
-      setError("Digite um e-mail válido para continuar.");
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+    setSubmitError(null);
+    const nextErrors = validateContact(formData);
+    setErrors(nextErrors);
+    const firstInvalid = Object.keys(nextErrors)[0];
+    if (firstInvalid) {
+      (formRef.current?.elements.namedItem(firstInvalid) as HTMLInputElement | null)?.focus();
       return;
     }
-
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-
-    // Se o endpoint ainda não foi configurado, avisa claramente em vez de
-    // fingir que enviou (evita o formulário "funcionar" silenciosamente errado).
-    if (!endpoint) {
-      setError(
-        "Formulário ainda não configurado. Defina NEXT_PUBLIC_FORMSPREE_ENDPOINT (veja .env.local.example)."
-      );
+    if (!isFormEndpointConfigured(endpoint)) {
+      setSubmitError("O envio pelo formulário está indisponível no momento. Fale conosco pelo WhatsApp ou e-mail abaixo.");
       return;
     }
-
     setIsSubmitting(true);
-    setError(null);
-
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(Object.entries(formData).map(([key, value]) => [key, value.trim()]))),
+        signal: controller.signal,
       });
-
-      if (!response.ok) throw new Error("Falha no envio");
-
+      if (!response.ok) throw new Error("Envio não confirmado");
       setIsSubmitted(true);
       setFormData(initialForm);
-      setEmailTouched(false);
+      setErrors({});
     } catch {
-      setError("Erro ao enviar. Tente pelo WhatsApp ou email.");
+      setSubmitError("Não foi possível confirmar o envio. Seus dados foram mantidos para tentar novamente. Você também pode falar conosco pelo WhatsApp ou e-mail abaixo.");
     } finally {
+      window.clearTimeout(timeout);
       setIsSubmitting(false);
     }
   };
 
+  const fieldError = (field: keyof ContactData) => errors[field] ? (
+    <p id={`contact-${field}-error`} className="text-red-300 text-sm mt-1.5" role="alert">{errors[field]}</p>
+  ) : null;
+
   return (
     <section id="contato" className="py-20 md:py-28 bg-brand-black">
+      <Suspense fallback={null}><ContactServiceIntent onSelect={selectService} /></Suspense>
       <div className="container-custom">
-
-        {/* ─── CABEÇALHO ────────────────────────────────────────────── */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="badge mb-4">
-            <Send size={12} />
-            Fale conosco
-          </span>
-          {/* SUBSTITUA: Título da seção de contato */}
-          <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            Pronto para{" "}
-            <span className="text-gradient">começar seu projeto?</span>
-          </h2>
-          {/* SUBSTITUA: Subtítulo / promessa */}
-          <p className="font-outfit text-gray-400 text-base md:text-lg">
-            Preencha o formulário e receba um orçamento sem compromisso em até 24h.
-            Ou fale direto pelo WhatsApp para resposta imediata.
-          </p>
+          <span className="badge mb-4"><Send size={12} aria-hidden="true" />Fale conosco</span>
+          <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">Pronto para <span className="text-gradient">começar seu projeto?</span></h2>
+          <p className="text-gray-300 text-base md:text-lg">Conte o que você precisa para conversarmos sobre um orçamento sem compromisso. Se preferir, fale pelo WhatsApp ou e-mail.</p>
         </div>
-
-        {/* ─── LAYOUT PRINCIPAL ─────────────────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 max-w-5xl mx-auto">
-
-          {/* ── SIDEBAR: INFORMAÇÕES ──────────────────────────────────── */}
-          <div className="lg:col-span-2 space-y-5">
-
-            {/* Cards de contato */}
+          <div className="lg:col-span-2 space-y-5 min-w-0">
             {contactInfo.map((info) => (
-              <div key={info.title} className="card-base group">
+              <div key={info.title} className="card-base">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/20
-                                  flex items-center justify-center shrink-0 mt-0.5
-                                  group-hover:bg-brand-blue/20 transition-colors">
-                    <info.icon size={18} className="text-brand-blue" />
-                  </div>
-                  <div>
-                    <p className="font-outfit text-xs text-gray-500 mb-0.5">{info.title}</p>
-                    {info.href ? (
-                      <a
-                        href={info.href}
-                        target={info.href.startsWith("http") ? "_blank" : undefined}
-                        rel="noopener noreferrer"
-                        className="font-outfit font-semibold text-white text-sm
-                                   hover:text-brand-blue transition-colors"
-                      >
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="font-outfit font-semibold text-white text-sm">{info.value}</p>
-                    )}
-                    <p className="font-outfit text-xs text-gray-600 mt-0.5">{info.label}</p>
+                  <div className="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center shrink-0"><info.icon size={18} className="text-blue-400" aria-hidden="true" /></div>
+                  <div className="min-w-0">
+                    <p className="text-xs text-gray-400 mb-0.5">{info.title}</p>
+                    {info.href ? <a href={info.href} target={info.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="inline-block py-2 font-semibold text-white text-sm break-words hover:underline">{info.value}</a> : <p className="font-semibold text-white text-sm">{info.value}</p>}
+                    <p className="text-xs text-gray-400 mt-0.5">{info.label}</p>
                   </div>
                 </div>
               </div>
             ))}
-
-            {/* CTA WhatsApp destaque */}
-            {/* SUBSTITUA: href com seu WhatsApp real */}
-            <a
-              href="https://wa.me/5531992998761?text=Olá!+Quero+um+orçamento"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary w-full justify-center text-sm"
-            >
-              <MessageCircle size={16} />
-              Chamar no WhatsApp
-            </a>
-
-            {/* Aviso de privacidade */}
-            <p className="text-xs font-outfit text-gray-600 text-center leading-relaxed">
-              Não enviamos spam. Seus dados são usados apenas para responder ao seu contato.
-            </p>
+            <a href={LINKS.whatsappOrcamento} target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-sm"><MessageCircle size={16} aria-hidden="true" />Chamar no WhatsApp</a>
+            <p className="text-xs text-gray-400 text-center leading-relaxed">Seus dados são usados para responder ao seu contato.</p>
           </div>
-
-          {/* ── FORMULÁRIO ───────────────────────────────────────────── */}
-          <div className="lg:col-span-3">
-            <div className="relative overflow-hidden rounded-2xl border border-white/5
-                            bg-brand-navy p-6 md:p-8">
-              {/* Brilho decorativo */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-brand-blue/5 rounded-full
-                              blur-3xl pointer-events-none" />
-
-              {/* Estado de sucesso */}
+          <div className="lg:col-span-3 min-w-0">
+            <div className="rounded-2xl border border-white/10 bg-brand-navy p-5 md:p-8">
               {isSubmitted ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20
-                                  flex items-center justify-center">
-                    <CheckCircle size={32} className="text-green-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-sora font-bold text-white text-xl mb-2">
-                      Mensagem enviada!
-                    </h3>
-                    {/* SUBSTITUA: Mensagem de confirmação personalizada */}
-                    <p className="font-outfit text-gray-400 text-sm">
-                      Obrigado! Entraremos em contato em até 24h úteis.
-                      Se preferir resposta imediata, chame no WhatsApp.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => { setIsSubmitted(false); setEmailTouched(false); }}
-                    className="btn-outline text-sm mt-2"
-                  >
-                    Enviar outra mensagem
-                  </button>
+                  <CheckCircle size={40} className="text-green-400" aria-hidden="true" />
+                  <h3 ref={successRef} tabIndex={-1} className="font-sora font-bold text-white text-xl">Mensagem enviada!</h3>
+                  <p className="text-gray-300 text-sm">Obrigado pelo contato! Nossa equipe vai analisar sua mensagem e retornar pelo contato informado.</p>
+                  <button type="button" onClick={() => setIsSubmitted(false)} className="btn-outline text-sm mt-2">Enviar outra mensagem</button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
-
-                  {/* Linha 1: Nome + Empresa */}
+                <form ref={formRef} onSubmit={handleSubmit} noValidate aria-label="Solicitar orçamento" aria-busy={isSubmitting} className="space-y-4">
+                  <p className="text-sm text-gray-300">Campos com * são obrigatórios.</p>
+                  {!formAvailable && <p className="text-sm text-amber-200" role="status">O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.</p>}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        Nome *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        // SUBSTITUA: placeholder com exemplo real
-                        placeholder="Seu nome completo"
-                        className="input-field"
-                      />
+                      <label htmlFor="contact-name" className={labelClass}>Nome *</label>
+                      <input id="contact-name" name="name" type="text" autoComplete="name" required maxLength={120} value={formData.name} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "contact-name-error" : undefined} className="input-field" placeholder="Seu nome completo" />
+                      {fieldError("name")}
                     </div>
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        Empresa
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="Nome da empresa"
-                        className="input-field"
-                      />
+                      <label htmlFor="contact-company" className={labelClass}>Empresa (opcional)</label>
+                      <input id="contact-company" name="company" type="text" autoComplete="organization" maxLength={160} value={formData.company} onChange={handleChange} className="input-field" placeholder="Nome da empresa" />
                     </div>
                   </div>
-
-                  {/* Linha 2: Email + Telefone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        E-mail *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        onBlur={() => setEmailTouched(true)}
-                        placeholder="seu@email.com.br"
-                        className={`input-field ${
-                          emailTouched && !isEmailValid
-                            ? "border-red-500/60 focus:border-red-500 focus:ring-red-500"
-                            : ""
-                        }`}
-                      />
-                      {emailTouched && !isEmailValid && (
-                        <p className="text-red-400 text-xs font-outfit mt-1.5">
-                          Digite um e-mail válido (ex: nome@empresa.com).
-                        </p>
-                      )}
+                      <label htmlFor="contact-email" className={labelClass}>E-mail *</label>
+                      <input id="contact-email" name="email" type="email" autoComplete="email" inputMode="email" required maxLength={254} value={formData.email} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "contact-email-error" : undefined} className="input-field" placeholder="seu@email.com.br" />
+                      {fieldError("email")}
                     </div>
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        WhatsApp / Telefone *
-                      </label>
-                      <input
-                        type="tel"
-                        inputMode="numeric"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handlePhoneChange}
-                        placeholder="(00) 0 0000-0000"
-                        maxLength={16}
-                        className="input-field"
-                      />
+                      <label htmlFor="contact-phone" className={labelClass}>WhatsApp / Telefone *</label>
+                      <input id="contact-phone" name="phone" type="tel" autoComplete="tel-national" inputMode="tel" required maxLength={24} value={formData.phone} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.phone)} aria-describedby={`contact-phone-hint${errors.phone ? " contact-phone-error" : ""}`} className="input-field" placeholder="(31) 99999-9999" />
+                      <p id="contact-phone-hint" className="text-xs text-gray-400 mt-1.5">Inclua o DDD. Aceitamos fixo ou celular.</p>
+                      {fieldError("phone")}
                     </div>
                   </div>
-
-                  {/* Linha 3: Serviço + Orçamento */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        Serviço desejado
-                      </label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="input-field"
-                      >
-                        {serviceOptions.map((opt) => (
-                          <option key={opt} value={opt} className="bg-gray-900">
-                            {opt}
-                          </option>
-                        ))}
+                      <label htmlFor="contact-service" className={labelClass}>Serviço desejado (opcional)</label>
+                      <select id="contact-service" name="service" value={formData.service} onChange={handleChange} className="input-field">
+                        {SERVICE_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{option}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                        Orçamento disponível
-                      </label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleChange}
-                        className="input-field"
-                      >
-                        {budgetOptions.map((opt) => (
-                          <option key={opt} value={opt} className="bg-gray-900">
-                            {opt}
-                          </option>
-                        ))}
+                      <label htmlFor="contact-budget" className={labelClass}>Orçamento disponível (opcional)</label>
+                      <select id="contact-budget" name="budget" value={formData.budget} onChange={handleChange} className="input-field">
+                        {BUDGET_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{option}</option>)}
                       </select>
                     </div>
                   </div>
-
-                  {/* Linha 4: Mensagem */}
                   <div>
-                    <label className="block font-outfit text-xs text-gray-400 mb-1.5">
-                      Descreva seu projeto
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      placeholder="Conte sobre o seu negócio, o que precisa e qual o objetivo do projeto..."
-                      className="input-field resize-none"
-                    />
+                    <label htmlFor="contact-message" className={labelClass}>Descreva seu projeto (opcional)</label>
+                    <textarea id="contact-message" name="message" maxLength={5000} value={formData.message} onChange={handleChange} rows={4} placeholder="Conte sobre o seu negócio e o que precisa..." className="input-field resize-y" />
                   </div>
-
-                  {/* Erro de envio */}
-                  {error && (
-                    <p className="font-outfit text-red-400 text-xs text-center">{error}</p>
-                  )}
-
-                  {/* Botão submit */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary w-full justify-center text-base py-4
-                               disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Enviando...
-                      </>
-                    ) : (
-                      <>
-                        <Send size={16} />
-                        Solicitar orçamento grátis
-                      </>
-                    )}
-                  </button>
-
-                  <p className="font-outfit text-gray-600 text-xs text-center">
-                    Sem compromisso · Resposta em até 24h úteis
-                  </p>
+                  {submitError && <p ref={errorRef} tabIndex={-1} role="alert" className="text-red-300 text-sm">{submitError}</p>}
+                  {(!formAvailable || submitError) && <div className="flex flex-wrap gap-4 text-sm"><a className="text-blue-300 underline py-2" href={LINKS.whatsappOrcamento} target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a><a className="text-blue-300 underline py-2" href={`mailto:${COMPANY.email}`}>Enviar e-mail</a></div>}
+                  <button type="submit" disabled={isSubmitting || !formAvailable} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"><Send size={16} aria-hidden="true" />{isSubmitting ? "Enviando..." : "Solicitar orçamento grátis"}</button>
                 </form>
               )}
+              <p role="status" aria-live="polite" className="sr-only">{isSubmitting ? "Enviando sua mensagem. Aguarde a confirmação." : isSubmitted ? "Mensagem enviada com sucesso." : ""}</p>
             </div>
           </div>
         </div>

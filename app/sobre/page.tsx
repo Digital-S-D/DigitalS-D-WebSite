@@ -22,15 +22,17 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="relative overflow-hidden">
+    <>
       <Header />
-      <AboutHeroSection />
-      <MissionSection />
-      <PillarsSection />
-      <ProcessSection />
-      <TeamSection />
-      <AboutCtaSection />
+      <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
+        <AboutHeroSection />
+        <MissionSection />
+        <PillarsSection />
+        <ProcessSection />
+        <TeamSection />
+        <AboutCtaSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

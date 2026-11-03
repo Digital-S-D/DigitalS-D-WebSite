@@ -43,6 +43,13 @@
   ::-webkit-scrollbar-track { background: #0f172a; }
   ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 3px; }
 
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 4px;
+  }
+
+  section[id], main[id] { scroll-margin-top: 6rem; }
+
   ::selection { background: #2563eb; color: #ffffff; }
 }
 
@@ -61,7 +68,7 @@
 
   .btn-outline {
     @apply inline-flex items-center gap-2 px-6 py-3 border border-brand-blue
-           text-brand-blue font-outfit font-semibold rounded-lg transition-all duration-300
+           text-blue-300 font-outfit font-semibold rounded-lg transition-all duration-300
            hover:bg-brand-blue hover:text-white hover:-translate-y-0.5 active:translate-y-0;
   }
 
@@ -73,13 +80,13 @@
 
   .badge {
     @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-outfit font-medium
-           bg-brand-blue/10 text-brand-blue border border-brand-blue/20 rounded-full;
+           bg-brand-blue/10 text-blue-300 border border-brand-blue/20 rounded-full;
   }
 
   .input-field {
-    @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3
-           text-white placeholder-gray-500 font-outfit text-sm
-           focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue
+    @apply w-full bg-white/5 border border-slate-500 rounded-lg px-4 py-3
+           text-white placeholder-gray-400 font-outfit text-base
+           focus:border-brand-blue focus:ring-1 focus:ring-brand-blue
            transition-all duration-200;
   }
 
@@ -92,7 +99,7 @@
 @layer utilities {
   /* Azul sólido nos títulos de destaque */
   .text-gradient {
-    @apply text-brand-blue;
+    @apply text-blue-400;
   }
 
   .animation-delay-100 { animation-delay: 100ms; }
@@ -107,5 +114,16 @@
       linear-gradient(rgba(37, 99, 235, 0.07) 1px, transparent 1px),
       linear-gradient(90deg, rgba(37, 99, 235, 0.07) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, html.scroll-smooth { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

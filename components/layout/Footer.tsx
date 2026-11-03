@@ -1,31 +1,23 @@
 import Link from "next/link";
-import { Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
-import { COMPANY, LINKS } from "@/lib/constants";
+import Image from "next/image";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { PRIMARY_SERVICES } from "@/lib/offers";
+import { BASE_PATH, COMPANY, LINKS } from "@/lib/constants";
 
 // ─── LINKS ESTÁTICOS DO FOOTER (não fazem parte dos dados centrais) ────
 const footerLinks = {
   servicos: [
-    { label: "Sites Institucionais", href: "/#servicos" },
-    { label: "Landing Pages",        href: "/#servicos" },
-    { label: "E-commerce",           href: "/#servicos" },
-    { label: "Sistemas Web",         href: "/#servicos" },
-    { label: "Manutenção de Sites",  href: "/#servicos" },
+    ...PRIMARY_SERVICES.map((service) => ({ label: service.title, href: `/#${service.id}` })),
+    { label: "Soluções complementares", href: "/#solucoes-complementares" },
   ],
   empresa: [
     { label: "Sobre Nós",   href: LINKS.about }, // antes era "#sobre" (âncora inexistente); agora aponta para a página real
-    { label: "Portfólio",   href: "/#portfolio" },
-    { label: "Blog",        href: "/blog" },
+    { label: "Portfólio", href: "/#portfolio" },
+    { label: "Perguntas frequentes", href: "/perguntas-frequentes" },
     { label: "Contato",     href: "/#contato" },
     { label: "Privacidade", href: "/privacidade" },
   ],
 };
-
-// Ícones das redes sociais, com URL vinda de lib/constants.ts (LINKS)
-const socialLinks = [
-  { icon: Instagram, label: "Instagram", href: LINKS.instagram },
-  { icon: Linkedin,  label: "LinkedIn",  href: LINKS.linkedin },
-  { icon: Youtube,   label: "YouTube",   href: LINKS.youtube },
-];
 
 export function Footer() {
   return (
@@ -37,42 +29,18 @@ export function Footer() {
 
           {/* Coluna 1: Logo + Descrição */}
           <div className="sm:col-span-2 lg:col-span-1">
-            {/* SUBSTITUA: Troque pelo componente <Image> com sua logo
-                <Image src="/images/logo-text.png" alt="Digital S&D" width={140} height={36} className="mb-4" />
-            */}
-            <div className="flex items-center gap-1 mb-4">
-              <span className="font-sora font-bold text-xl text-white">DIGITAL</span>
-              <span className="font-sora font-bold text-xl text-brand-blue">S&D</span>
-            </div>
+            <Image src={`${BASE_PATH}/images/brand-logo.png`} alt="Digital S&D" width={672} height={241} className="w-36 h-auto mb-4" />
             <p className="font-outfit text-gray-400 text-sm leading-relaxed mb-6">
               {COMPANY.tagline} {COMPANY.description}
             </p>
 
-            {/* Redes sociais */}
-            <div className="flex items-center gap-3">
-              {socialLinks.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg
-                             border border-white/10 text-gray-400
-                             hover:border-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10
-                             transition-all duration-200"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Coluna 2: Serviços */}
           <div>
-            <h4 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
+            <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
               Serviços
-            </h4>
+            </h2>
             <ul className="space-y-3">
               {footerLinks.servicos.map((link) => (
                 <li key={link.label}>
@@ -91,9 +59,9 @@ export function Footer() {
 
           {/* Coluna 3: Empresa */}
           <div>
-            <h4 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
+            <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
               Empresa
-            </h4>
+            </h2>
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
                 <li key={link.label}>
@@ -112,9 +80,9 @@ export function Footer() {
 
           {/* Coluna 4: Contato — lida de lib/constants.ts (COMPANY) */}
           <div>
-            <h4 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
+            <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
               Contato
-            </h4>
+            </h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail size={15} className="text-brand-blue mt-0.5 shrink-0" />
@@ -135,7 +103,7 @@ export function Footer() {
                 <MapPin size={15} className="text-brand-blue mt-0.5 shrink-0" />
                 <span className="font-outfit text-sm text-gray-400">
                   {COMPANY.city}<br />
-                  <span className="text-gray-600 text-xs">Atendimento remoto nacional</span>
+                  <span className="text-gray-400 text-xs">Atendimento remoto nacional</span>
                 </span>
               </li>
             </ul>
@@ -146,7 +114,7 @@ export function Footer() {
       {/* ─── RODAPÉ INFERIOR ──────────────────────────────────────────── */}
       <div className="border-t border-white/5">
         <div className="container-custom py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600 font-outfit">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 font-outfit">
             <p>© {COMPANY.year} {COMPANY.name}. Todos os direitos reservados.</p>
             <div className="flex items-center gap-4">
               <Link href="/privacidade" className="hover:text-gray-400 transition-colors">Privacidade</Link>

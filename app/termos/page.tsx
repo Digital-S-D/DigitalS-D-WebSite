@@ -13,10 +13,12 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="relative overflow-hidden">
+    <>
       <Header />
-      <LegalDocumentSection doc={TERMS_OF_USE} />
+      <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
+        <LegalDocumentSection doc={TERMS_OF_USE} />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

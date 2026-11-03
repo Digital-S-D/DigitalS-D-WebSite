@@ -5,22 +5,26 @@
 import { Header, Footer }         from "@/components/layout";
 import {
   HeroSection,
-  ProblemSection,
-  ServicesSection,
   PortfolioSection,
+  ProjectPlanSection,
+  FaqSection,
+  ServicesSection,
   ContactSection,
 } from "@/components/sections";
 
 export default function HomePage() {
   return (
-    <main className="relative overflow-hidden">
+    <>
       <Header />
-      <HeroSection />
-      <ProblemSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <ContactSection />
+      <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
+        <HeroSection />
+        <PortfolioSection />
+        <ServicesSection />
+        <ProjectPlanSection />
+        <FaqSection />
+        <ContactSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

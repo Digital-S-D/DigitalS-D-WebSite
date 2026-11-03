@@ -1,108 +1,58 @@
-# Digital S&D — Landing Page
+# Digital S&D
 
-[https://digitalsd.com.br/](https://digitalsd.com.br/)
+Site institucional em Next.js com exportação estática. Site público: [digitalsd.com.br](https://digitalsd.com.br/).
 
-## 🚀 Como rodar o projeto
+## Desenvolvimento
 
-```bash
-npm install
+```sh
+npm ci
 npm run dev
-# Acesse: http://localhost:3000
 ```
 
----
+Use Node.js 22.18 ou superior para executar também os testes de contato. A hospedagem atual usa Node.js 20 para o build.
 
-## 🗂️ Estrutura de Pastas
+## Formulário de contato
 
-```
-digital-sd/
-│
-├── app/                          # Núcleo do Next.js (App Router)
-│   ├── globals.css               # Estilos globais, fontes e variáveis CSS
-│   ├── layout.tsx                # HTML raiz: <head>, fontes, metadados SEO
-│   └── page.tsx                  # Página inicial — monta todas as seções
-│
-├── components/                   # Todos os componentes visuais do site
-│   │
-│   ├── layout/                   # Componentes que aparecem em TODAS as páginas
-│   │   ├── Header.tsx            # Navbar fixa com blur + menu mobile hambúrguer
-│   │   ├── Footer.tsx            # Rodapé com links, redes sociais e CTA
-│   │   └── index.ts              # Barrel export → import { Header, Footer } from "@/components/layout"
-│   │
-│   └── sections/                 # Seções da landing page (na ordem que aparecem)
-│       ├── HeroSection.tsx       # Seção principal: título, CTAs, mockup animado
-│       ├── ProblemSection.tsx    # Comparativo: problema do cliente × nossa solução
-│       ├── ServicesSection.tsx   # Grid de serviços oferecidos
-│       ├── PortfolioSection.tsx  # Cases e projetos realizados
-│       ├── ContactSection.tsx    # Formulário de captura de leads
-│       └── index.ts              # Barrel export → import { HeroSection, ... } from "@/components/sections"
-│
-├── lib/                          # Lógica e dados reutilizáveis
-│   └── constants.ts              # ⭐ CENTRAL DE CONTEÚDO: textos, links, dados
-│                                 #    Edite aqui para atualizar o site todo
-│
-├── public/                       # Arquivos estáticos (acessíveis via URL direta)
-│   └── images/
-│       ├── logo-texto.png        # Logo completa (DIGITAL S&D) — use no Header desktop
-│       ├── logo-icone.png        # Somente o ícone SD — use no Header mobile
-│       └── portfolio/            # Screenshots dos projetos do portfólio (800×500px)
-│           ├── clinica-saude.jpg
-│           ├── loja-moda.jpg
-│           └── ...
-│
-├── tailwind.config.js            # Design system: cores (#2563EB, #0F172A), fontes
-├── postcss.config.js             # Necessário para o Tailwind funcionar
-├── next.config.js                # Configurações do Next.js
-├── tsconfig.json                 # Configurações do TypeScript
-└── package.json                  # Dependências do projeto
+1. Copie `.env.local.example` para `.env.local` e informe o endpoint do formulário existente no Formspree.
+2. Confirme no Formspree que o destinatário é `digitalsd.contato@gmail.com`.
+3. Na hospedagem, configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` antes da compilação. A variável é pública e incorporada ao JavaScript: alterações exigem um novo build.
+4. Sem um endpoint válido, o formulário informa a indisponibilidade, desativa o envio e oferece WhatsApp e e-mail.
+5. Após publicar, envie um teste identificado, com autorização, e confirme a chegada à caixa esperada. Uma resposta de sucesso do serviço não comprova entrega na caixa de entrada.
+
+O formulário exige nome, e-mail e telefone brasileiro com DDD. Aceita telefone fixo, celular e colagem com código +55. Campos opcionais são enviados vazios quando não preenchidos. Erros preservam os dados para nova tentativa; a confirmação só aparece após resposta de sucesso do Formspree.
+
+## Verificação e build
+
+```sh
+node --test tests/contact.test.mts
+npx tsc --noEmit
+npm run build
 ```
 
----
+O build exporta os arquivos para `out/`, conforme `next.config.js`. O Netlify usa essa pasta. A configuração `DEPLOY_TARGET=github-pages` preserva o prefixo `/DigitalS-D-WebSite` quando necessário.
 
-## ✏️ Como editar o conteúdo
+## Onde editar
 
-**Para mudar textos, links e dados do site**, edite apenas o arquivo:
+- `lib/constants.ts`: dados da empresa, WhatsApp, navegação, opções do formulário e conteúdo de Sobre.
+- `lib/offers.ts`: serviços principais, serviços complementares, etapas comerciais e FAQ (a Home e a página completa usam as mesmas respostas).
+- `lib/portfolio.ts`: apresentação e galeria do OdontoHub.
+- `public/images/portfolio/odontohub/`: seis capturas reais do projeto demonstrativo, em WebP.
+- `lib/contact.ts`: máscara, validação dos contatos e verificação do endpoint.
+- `lib/legal.ts`: conteúdo de Privacidade e Termos.
+- `components/sections/`: textos e estrutura de cada seção.
+- `components/layout/`: cabeçalho, menu mobile e rodapé.
+- `app/layout.tsx`: metadados e acesso direto ao conteúdo pelo teclado.
+- `public/images/brand-logo.png` e `brand-icon.png`: versões recortadas da marca oficial; os originais foram preservados.
+- `public/og-image.jpg`: imagem de compartilhamento de 1200 × 630 px.
 
-```
-lib/constants.ts
-```
+## Etapas da auditoria
 
-Lá você encontra, organizados em seções:
-- Dados da empresa (nome, email, WhatsApp, cidade)
-- Links de CTA (WhatsApp, redes sociais)
-- Menu de navegação
-- Estatísticas dos cards de números
-- Lista de serviços
-- Projetos do portfólio
-- Opções do formulário de contato
+Na etapa 1, redes sociais sem perfis oficiais, blog inexistente e projetos fictícios foram retirados; contato e acessibilidade foram corrigidos.
 
----
+Na etapa 2, a Home passa a priorizar sites e landing pages, apresenta o OdontoHub como projeto demonstrativo e inclui processo, equipe e cinco dúvidas essenciais. As páginas `/portfolio/odontohub/` e `/perguntas-frequentes/` completam a apresentação. Os botões das ofertas e do case preservam o serviço no formulário pelo parâmetro `servico`, validado contra as opções conhecidas.
 
-## 🖼️ Como adicionar imagens
+Valores, pagamento, prazos, revisões, titularidade e suporte são definidos por proposta, sem condições fixas inventadas. Medição e atualização de dependências continuam na etapa 3.
 
-1. Coloque o arquivo em `/public/images/`
-2. Referencie no código como `src="/images/nome-do-arquivo.jpg"`
-3. Para o portfólio, preencha o campo `imageSrc` em `lib/constants.ts`
+Veja `docs/etapa-1.md` para o registro de validação, incluindo o teste de envio e o recebimento na caixa de entrada confirmado pelo usuário em 03/11/2026.
 
----
-
-## 📦 Dependências principais
-
-| Pacote | Para que serve |
-|--------|---------------|
-| `next` | Framework React (App Router) |
-| `tailwindcss` | Estilização utility-first |
-| `lucide-react` | Ícones |
-| `typescript` | Tipagem estática |
-
----
-
-## 🎨 Design System
-
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `brand-blue` | `#2563EB` | CTAs, destaques, links |
-| `brand-navy` | `#0F172A` | Fundo principal |
-| `brand-black` | `#000000` | Seções alternadas, cards |
-| `font-sora` | Sora | Títulos (h1, h2, h3) |
-| `font-outfit` | Outfit | Textos, parágrafos, botões |
+Veja `docs/etapa-2.md` para escopo, origem das capturas e verificação das novas páginas.

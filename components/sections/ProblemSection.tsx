@@ -15,9 +15,9 @@ const comparisons = [
     },
     solution: {
       icon: CheckCircle,
-      title: "Performance de elite",
+      title: "Foco em desempenho",
       description:
-        "Sites com 98+ no Google PageSpeed. Carregamento em menos de 2 segundos em qualquer dispositivo.",
+        "Cuidamos da estrutura, das imagens e do carregamento para oferecer uma navegação leve e ágil.",
     },
   },
   {
@@ -39,13 +39,13 @@ const comparisons = [
       icon: XCircle,
       title: "Horrível no celular",
       description:
-        "Mais de 70% dos acessos são mobile. Se o seu site quebrando no smartphone, você está perdendo a maioria dos clientes.",
+        "Textos pequenos, botões difíceis de tocar e conteúdo cortado podem impedir o contato pelo celular.",
     },
     solution: {
       icon: CheckCircle,
-      title: "100% responsivo",
+      title: "Design responsivo",
       description:
-        "Design mobile-first. Perfeito em qualquer tela: smartphone, tablet ou monitor ultrawide.",
+        "Design mobile-first. Layouts adaptados para navegação em smartphones, tablets e computadores.",
     },
   },
   {
@@ -162,7 +162,7 @@ export function ProblemSection() {
           </p>
           {/* SUBSTITUA: href para WhatsApp ou formulário */}
           <a href="#contato" className="btn-primary text-sm">
-            Solicitar diagnóstico gratuito
+            Pedir orçamento
             <CheckCircle size={16} />
           </a>
         </div>

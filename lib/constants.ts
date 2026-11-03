@@ -1,8 +1,10 @@
+import { PRIMARY_SERVICES } from "./offers";
+
 // ═══════════════════════════════════════════════════════════════════════
 // lib/constants.ts — CENTRAL DE CONTEÚDO
 // ═══════════════════════════════════════════════════════════════════════
-// Todos os textos, links e dados do site ficam AQUI.
-// Para editar o conteúdo do site, você só precisa mexer neste arquivo.
+// Dados compartilhados: empresa, contatos, navegação e opções de formulário.
+// Alguns textos de apresentação ainda ficam nos componentes de seção.
 // ═══════════════════════════════════════════════════════════════════════
 
 // ─── basePath do GitHub Pages ────────────────────────────────────────────
@@ -19,8 +21,8 @@ export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 // SUBSTITUA: Preencha com os dados reais da sua agência
 export const COMPANY = {
   name:        "Digital S&D",
-  tagline:     "Desenvolvemos sites que vendem.",
-  description: "Parceiros digitais de PMEs que querem crescer online com resultados reais.",
+  tagline:     "Sites e landing pages para o seu negócio.",
+  description: "Design e desenvolvimento web para PMEs e profissionais autônomos.",
   email:       "digitalsd.contato@gmail.com",
   phone:       "+55 (31) 9 9299-8761",             // SUBSTITUA
   whatsapp:    "5531992998761",                     // SUBSTITUA (só números)
@@ -32,10 +34,7 @@ export const COMPANY = {
 // SUBSTITUA: Cole aqui a mensagem que vai pré-preencher o WhatsApp
 export const LINKS = {
   whatsappOrcamento: `https://wa.me/${COMPANY.whatsapp}?text=Olá!+Quero+um+orçamento+para+meu+site`,
-  whatsappDiagnostico: `https://wa.me/${COMPANY.whatsapp}?text=Olá!+Quero+um+diagnóstico+gratuito+do+meu+site`,
-  instagram: "https://instagram.com/digitalsed",  // SUBSTITUA
-  linkedin:  "https://linkedin.com/company/digitalsed", // SUBSTITUA
-  youtube:   "https://youtube.com/@digitalsed",   // SUBSTITUA
+  whatsappCustomizado: `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent("Olá! Preciso de uma solução customizada.")}`,
   about:     "/sobre", // rota da página "Sobre Nós"
 };
 
@@ -46,110 +45,18 @@ export const LINKS = {
 // (o navegador não recarrega, apenas rola até a âncora).
 export const NAV_LINKS = [
   { label: "Início",    href: "/#hero" },
-  { label: "Sobre",     href: "/sobre" },
   { label: "Serviços",  href: "/#servicos" },
   { label: "Portfólio", href: "/#portfolio" },
+  { label: "Dúvidas", href: "/perguntas-frequentes" },
+  { label: "Sobre", href: "/sobre" },
   { label: "Contato",   href: "/#contato" },
-];
-
-// ─── SERVIÇOS ─────────────────────────────────────────────────────────
-// SUBSTITUA: Edite, adicione ou remova serviços conforme sua oferta
-export const SERVICES = [
-  {
-    emoji:       "🌐",
-    title:       "Sites Institucionais",
-    description: "Presença digital profissional que transmite credibilidade e converte visitantes em clientes. Design exclusivo, copywriting e SEO inclusos.",
-    features:    ["Design exclusivo", "Até 10 páginas", "Formulários integrados", "Google Analytics"],
-    highlight:   false,
-  },
-  {
-    emoji:       "⚡",
-    title:       "Landing Pages",
-    description: "Página focada em uma única ação: gerar leads ou vender. Ideal para campanhas de tráfego pago, lançamentos e promoções.",
-    features:    ["Alta conversão", "A/B testing", "Pixels de rastreamento", "Integração com CRM"],
-    highlight:   true, // destaque = borda azul + badge "Mais popular"
-  },
-  {
-    emoji:       "🛒",
-    title:       "E-commerce",
-    description: "Loja virtual completa, segura e rápida. Venda 24h com checkout otimizado e integração com meios de pagamento.",
-    features:    ["Checkout otimizado", "Pix e cartão", "Gestão de estoque", "Painel de vendas"],
-    highlight:   false,
-  },
-  {
-    emoji:       "🔍",
-    title:       "SEO & Performance",
-    description: "Auditoria técnica, otimização on-page e estratégia de conteúdo para ranquear no Google.",
-    features:    ["Auditoria técnica", "On-page SEO", "Core Web Vitals", "Relatório mensal"],
-    highlight:   false,
-  },
-  {
-    emoji:       "📱",
-    title:       "Aplicativos Web (PWA)",
-    description: "Apps web progressivos que funcionam no navegador como apps nativos. Sem passar pela App Store.",
-    features:    ["Funciona offline", "Instalável no celular", "Push notifications", "Cross-platform"],
-    highlight:   false,
-  },
-  {
-    emoji:       "📊",
-    title:       "Manutenção & Suporte",
-    description: "Plano mensal com manutenção preventiva, atualizações de segurança, backups e suporte prioritário.",
-    features:    ["Backup diário", "Atualizações de segurança", "Suporte prioritário", "Relatório mensal"],
-    highlight:   false,
-  },
-];
-
-// ─── PORTFÓLIO ────────────────────────────────────────────────────────
-// SUBSTITUA: Troque pelos seus projetos reais.
-// Para imagem, adicione o arquivo em /public/images/portfolio/
-// e preencha o campo imageSrc com o nome do arquivo.
-export const PORTFOLIO_PROJECTS = [
-  {
-    title:       "Clínica Saúde & Vida",
-    category:    "Site Institucional",
-    description: "Site completo com agendamento online, painel administrativo e integração com sistema de prontuários.",
-    tags:        ["Next.js", "Tailwind", "Node.js", "MySQL"],
-    href:        "#portfolio",        // SUBSTITUA: URL real do projeto
-    imageSrc:    null as string|null, // SUBSTITUA: "clinica-saude.jpg"
-  },
-  {
-    title:       "Loja Moda Express",
-    category:    "E-commerce",
-    description: "E-commerce de roupas femininas com +500 produtos, checkout via Pix e cartão.",
-    tags:        ["Shopify", "SEO", "Performance"],
-    href:        "#portfolio",
-    imageSrc:    null as string|null,
-  },
-  {
-    title:       "Construtora Horizonte",
-    category:    "Landing Page",
-    description: "Landing page de lançamento imobiliário que gerou +300 leads qualificados em 30 dias.",
-    tags:        ["Next.js", "Google Ads", "CRM"],
-    href:        "#portfolio",
-    imageSrc:    null as string|null,
-  },
-  {
-    title:       "Advocacia Digital",
-    category:    "Site Institucional",
-    description: "Site para escritório de advocacia com blog jurídico e captação de clientes.",
-    tags:        ["Astro", "Prismic CMS", "TypeScript"],
-    href:        "#portfolio",
-    imageSrc:    null as string|null,
-  },
-  {
-    title:       "Academia FitPlus",
-    category:    "Sistema Web",
-    description: "Sistema de gestão de academia com controle de matrículas, treinos e financeiro.",
-    tags:        ["React", "Node.js", "PostgreSQL"],
-    href:        "#portfolio",
-    imageSrc:    null as string|null,
-  },
 ];
 
 // ─── FORMULÁRIO DE CONTATO ────────────────────────────────────────────
 // SUBSTITUA: Faixas de orçamento conforme sua tabela de preços
 export const BUDGET_OPTIONS = [
   "Selecione seu orçamento...",
+  "Ainda não sei",
   "Até R$ 1.500",
   "R$ 1.500 – R$ 3.000",
   "R$ 3.000 – R$ 6.000",
@@ -159,13 +66,14 @@ export const BUDGET_OPTIONS = [
 
 export const SERVICE_OPTIONS = [
   "Selecione o serviço...",
-  "Site Institucional",
+  ...PRIMARY_SERVICES.map((service) => service.interest),
   "Site para Autônomo",
-  "Landing Page",
+  "Sistema Web personalizado",
   "E-commerce",
   "SEO & Performance",
   "Aplicativo Web",
   "Manutenção / Suporte",
+  "Ainda não sei",
   "Outro",
 ];
 
@@ -176,8 +84,8 @@ export const SERVICE_OPTIONS = [
 export const PILLARS = [
   {
     icon:        "Zap",
-    title:       "Velocidade Extrema",
-    description: "Do primeiro contato ao site no ar em poucos dias — sem burocracia, sem enrolação, sem abrir mão da qualidade em nenhuma etapa.",
+    title:       "Planejamento Claro",
+    description: "Organizamos as etapas e combinamos o prazo conforme o escopo, os materiais e as aprovações de cada projeto.",
   },
   {
     icon:        "Target",
@@ -187,7 +95,7 @@ export const PILLARS = [
   {
     icon:        "Sparkles",
     title:       "Design Exclusivo",
-    description: "Nada de templates prontos. Cada projeto nasce do zero, pensado para a identidade única da sua marca.",
+    description: "O layout e a organização do conteúdo são pensados para a identidade da sua marca e o objetivo do projeto.",
   },
   {
     icon:        "ShieldCheck",
@@ -227,7 +135,7 @@ export const PROCESS_STEPS = [
     number:      "05",
     icon:        "Rocket",
     title:       "Lançamento",
-    description: "Publicamos, testamos tudo e acompanhamos os primeiros dias no ar junto com você.",
+    description: "Conferimos a entrega e combinamos publicação, acessos e suporte conforme as condições da proposta.",
   },
 ];
 

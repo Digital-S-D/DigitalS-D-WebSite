@@ -5,7 +5,6 @@
 export { HeroSection }     from "./HeroSection";
 export { ProblemSection }  from "./ProblemSection";
 export { ServicesSection } from "./ServicesSection";
-export { PortfolioSection} from "./PortfolioSection";
 export { ContactSection }  from "./ContactSection";
 
 // Seções da página "Sobre Nós" (/sobre)
@@ -18,3 +17,7 @@ export { AboutCtaSection }  from "./AboutCtaSection";
 
 // Páginas legais (/privacidade e /termos)
 export { LegalDocumentSection } from "./LegalDocumentSection";
+
+export { PortfolioSection } from "./PortfolioSection";
+export { ProjectPlanSection } from "./ProjectPlanSection";
+export { FaqSection } from "./FaqSection";

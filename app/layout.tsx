@@ -7,7 +7,7 @@ import { BASE_PATH } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Digital S&D | Desenvolvimento Web para PMEs",
   description:
-    "Criamos sites modernos, rápidos e focados em vendas para pequenas e médias empresas. Transforme sua presença digital em uma máquina de gerar clientes.",
+    "Sites e landing pages para pequenas e médias empresas e profissionais autônomos. Conheça a Digital S&D e peça um orçamento.",
   keywords: [
     "desenvolvimento web",
     "sites para empresas",
@@ -28,10 +28,11 @@ export const metadata: Metadata = {
     siteName: "Digital S&D",
     type: "website",
     // SUBSTITUA: Adicione caminho para imagem OG em /public/og-image.jpg (1200x630px)
-    images: [{ url: `${BASE_PATH}/og-image.jpg`, width: 1200, height: 630 }],
+    images: [{ url: `${BASE_PATH}/og-image.jpg`, width: 1200, height: 630, alt: "Digital S&D — Sites e landing pages" }],
   },
   twitter: {
     card: "summary_large_image",
+    images: [`${BASE_PATH}/og-image.jpg`],
     title: "Digital S&D | Desenvolvimento Web para PMEs",
     description:
       "Criamos sites modernos, rápidos e focados em vendas para pequenas e médias empresas.",
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <body className="font-outfit bg-brand-navy text-white antialiased">
+        <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:text-brand-navy focus:p-3">Pular para o conteúdo</a>
         {children}
       </body>
     </html>

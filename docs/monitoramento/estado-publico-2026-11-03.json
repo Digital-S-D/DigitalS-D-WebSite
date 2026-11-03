@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-03T20:01:50.013553-03:00",
+  "pages": [
+    {
+      "url": "https://digitalsd.com.br/",
+      "status": 200,
+      "final_url": "https://digitalsd.com.br/",
+      "first_reply_new": false,
+      "previous_hours": true,
+      "alvorada_mentioned": false,
+      "canonical": false
+    },
+    {
+      "url": "https://digitalsd.com.br/atendimento/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://digitalsd.com.br/portfolio/alvorada/",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://digitalsd.com.br/portfolio/odontohub/",
+      "status": 200,
+      "final_url": "https://digitalsd.com.br/portfolio/odontohub/",
+      "first_reply_new": false,
+      "previous_hours": false,
+      "alvorada_mentioned": false,
+      "canonical": false
+    },
+    {
+      "url": "https://digitalsd.com.br/perguntas-frequentes/",
+      "status": 200,
+      "final_url": "https://digitalsd.com.br/perguntas-frequentes/",
+      "first_reply_new": false,
+      "previous_hours": false,
+      "alvorada_mentioned": false,
+      "canonical": false
+    },
+    {
+      "url": "https://digitalsd.com.br/robots.txt",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://digitalsd.com.br/sitemap.xml",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found"
+    }
+  ]
+}

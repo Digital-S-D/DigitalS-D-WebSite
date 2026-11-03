@@ -2,7 +2,7 @@
 
 Site da Digital S&D, voltado à apresentação de serviços de criação de sites e landing pages para pequenas e médias empresas e profissionais autônomos.
 
-Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta o OdontoHub como um projeto demonstrativo com dados fictícios.
+Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta a landing page Alvorada e o sistema OdontoHub como projetos demonstrativos com dados fictícios e capturas reais das interfaces.
 
 **Site:** [digitalsd.com.br](https://digitalsd.com.br/)
 
@@ -32,8 +32,10 @@ digital-sd/
 │   ├── layout.tsx                # Layout raiz e metadados padrão
 │   ├── page.tsx                  # Página inicial
 │   ├── sobre/                    # Empresa, equipe e processo de trabalho
+│   ├── atendimento/              # Acompanhamento, política de resposta e atualizações
 │   ├── perguntas-frequentes/     # Dúvidas sobre serviços e contratação
-│   ├── portfolio/odontohub/      # Apresentação do projeto demonstrativo
+│   ├── portfolio/alvorada/       # Landing page demonstrativa imobiliária
+│   ├── portfolio/odontohub/      # Sistema web demonstrativo
 │   ├── privacidade/              # Política de Privacidade
 │   └── termos/                   # Termos de Uso
 │
@@ -45,7 +47,7 @@ digital-sd/
 │   │
 │   └── sections/                 # Seções e componentes de conteúdo
 │       ├── HeroSection.tsx       # Apresentação e chamadas para ação
-│       ├── PortfolioSection.tsx  # Projeto em destaque
+│       ├── PortfolioSection.tsx  # Alvorada e OdontoHub em destaque
 │       ├── ServicesSection.tsx   # Ofertas principais e complementares
 │       ├── ProjectPlanSection.tsx # Processo comercial e fundadores
 │       ├── FaqSection.tsx        # Resumo das perguntas frequentes
@@ -56,7 +58,7 @@ digital-sd/
 ├── lib/                          # Conteúdo e lógica compartilhados
 │   ├── constants.ts              # Empresa, contatos, menu e opções do formulário
 │   ├── offers.ts                 # Serviços, processo comercial e FAQ
-│   ├── portfolio.ts              # Dados e galeria do OdontoHub
+│   ├── portfolio.ts              # Dados dos projetos demonstrativos
 │   ├── contact.ts                # Máscara e validação do formulário
 │   └── legal.ts                  # Textos de Privacidade e Termos
 │
@@ -67,7 +69,7 @@ digital-sd/
 │       ├── brand-icon.png        # Ícone usado no cabeçalho mobile
 │       ├── logo-icone.png        # Favicon
 │       ├── team/                 # Fotos dos fundadores
-│       └── portfolio/odontohub/   # Capturas da interface demonstrativa em WebP
+│       └── portfolio/             # Capturas e assets de Alvorada e OdontoHub
 │
 ├── tests/                        # Testes de validação do formulário
 ├── netlify.toml                  # Build e diretório de publicação
@@ -87,10 +89,11 @@ O conteúdo compartilhado está organizado por assunto:
 | Conteúdo | Arquivo |
 |----------|---------|
 | Empresa, contatos, menu, equipe e opções do formulário | `lib/constants.ts` |
-| Serviços, etapas comerciais e perguntas frequentes | `lib/offers.ts` |
-| Descrição, capa e galeria do OdontoHub | `lib/portfolio.ts` |
+| Serviços e perguntas frequentes | `lib/offers.ts` |
+| Política de resposta, acompanhamento e formas de atualização | `lib/customer-care.ts` |
+| Descrições, capas e galerias dos projetos | `lib/portfolio.ts` |
 | Política de Privacidade e Termos de Uso | `lib/legal.ts` |
-| Título, descrição e imagem de compartilhamento padrão | `app/layout.tsx` |
+| Domínio, rotas, metadados e dados da organização | `lib/seo.ts` e páginas de `app/` |
 
 Os textos específicos de apresentação ficam nos componentes de `components/sections/` e nas respectivas páginas de `app/`. A Home e a página de perguntas frequentes compartilham as respostas de `lib/offers.ts`.
 
@@ -137,4 +140,24 @@ npm run build
 
 Os testes de contato requerem Node.js 22.18 ou superior. O build verifica os tipos e gera os arquivos estáticos em `out/`.
 
-O Netlify está configurado em `netlify.toml` para usar Node.js 20, executar `npm run build` e publicar `out/`. Configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` também no ambiente de build da hospedagem; mudar seu valor exige uma nova compilação.
+O Netlify está configurado em `netlify.toml` para usar Node.js 24, executar `npm run build` e publicar `out/`. Configure `NEXT_PUBLIC_FORMSPREE_ENDPOINT` também no ambiente de build da hospedagem; mudar seu valor exige uma nova compilação.
+
+## Atendimento ao cliente
+
+A política confirmada é primeira resposta em até 1 dia útil, sem horário fixo, com atendimento compartilhado pela equipe. O prazo de execução de uma alteração é avaliado separadamente. A página `/atendimento/`, o resumo da Home, os contatos e a FAQ usam essas condições.
+
+A rotina interna e os modelos de mensagem estão em `docs/rotina-atendimento.md`. O registro da implementação está em `docs/passo-1-atendimento.md`.
+
+## Descoberta e indexação
+
+`lib/seo.ts` centraliza o domínio oficial, as rotas públicas, os metadados e os dados da organização. Ao criar uma página, definir seus metadados com `pageMetadata()` e incluí-la em `PUBLIC_PATHS`. A lista gera `/sitemap.xml`; `/robots.txt` anuncia esse sitemap e permite rastreamento.
+
+Depois de `npm run build`, executar `npm run check:seo` para verificar os arquivos finais de `out/`. A verificação detecta páginas ausentes no sitemap, canonical herdado incorretamente, previews inconsistentes e imagens inexistentes.
+
+A variável opcional `GOOGLE_SITE_VERIFICATION` recebe somente o token real do método de tag HTML do Search Console, quando utilizado; configurar no ambiente de build da hospedagem e recompilar. Propriedades já verificadas por DNS não precisam dela. O estado da publicação, as dependências de acesso e o roteiro para o administrador estão em `docs/passo-2-indexacao.md`.
+
+## Evidências e medição
+
+O inventário em `docs/provas-do-trabalho.md` distingue demonstrações de resultados de clientes. A Alvorada usa capturas do HTML original no computador e celular; números e condições imobiliárias exibidos pertencem ao cenário fictício.
+
+O protocolo, as consultas do Modo IA e o acompanhamento manual de oportunidades estão em `docs/monitoramento/`. Não há analytics ou automação novos instalados por esse registro. A explicação para o administrador do Search Console está em `docs/explicacao-search-console.md`.

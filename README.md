@@ -169,3 +169,5 @@ O protocolo, as consultas do Modo IA e o acompanhamento manual de oportunidades 
 Next.js 16.4.5, React 19.3.1 e ícones/tipagens compatíveis. As configurações usam módulos ESM (`.mjs`) e o pacote declara `type: module`. Imagens antecipadas usam `preload`, conforme o Next.js 16.
 
 A revisão das pendências e seus estados atuais estão em `docs/pendencias-base-tecnica.md`. Os relatórios de etapas anteriores preservam o estado observado em cada rodada; não representam a lista atual de pendências.
+
+O build executa automaticamente um pós-processamento dos caminhos de segmentos de navegação para compatibilidade da exportação Windows com o roteador do Next.js. Os arquivos originais são preservados; o teste do export confere os caminhos solicitados pelo navegador.

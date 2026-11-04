@@ -14,6 +14,7 @@ Revisão de 03/11/2026, após os commits `1d081ba` e `79af78c`. Este é o estado
 | Configurações e teste TypeScript com módulos ambíguos | Pacote ESM e configurações `.mjs`; testes rodam sem o aviso anterior de tipo de módulo |
 | Imagem com propriedade depreciada | `priority` substituído por `preload`, conforme Next.js 16 |
 | Regressão de menu e anúncio do formulário | Fundo do diálogo tratado pela API nativa; Escape, foco e fechamento preservados. Resultado assíncrono usa `output` com região viva |
+| Caminhos RSC da exportação no Windows | Pós-build preserva os originais e cria os caminhos planos esperados pelo navegador, com teste de regressão |
 | Rotina de validação | `npm run check` reúne lint, build e testes; `npm run typecheck` disponível separadamente |
 
 A cadeia ESLint experimentada durante a migração trouxe dependências legadas com avisos e contratos incompatíveis com o minimatch corrigido. A configuração final usa regras nativas do Oxlint, sem essas dependências, sem ignorar avisos de auditoria e sem forçar versões principais de bibliotecas transitivas. Não foram adicionadas supressões de segurança. A regra de exigir React global no JSX fica desligada porque o projeto usa o runtime automático `react-jsx`.
@@ -22,7 +23,7 @@ A cadeia ESLint experimentada durante a migração trouxe dependências legadas 
 
 - `npm ci --cache .npm-cache`: instalação limpa concluída, 122 pacotes auditados e zero vulnerabilidades reportadas, incluindo dependências de desenvolvimento. É o resultado da base de avisos consultada nesta data, não garantia de ausência de falhas desconhecidas.
 - Build Next.js 16 com Turbopack concluído; todas as oito páginas públicas, 404, robots e sitemap continuam exportados.
-- Lint e TypeScript sem erros; dez testes aprovados após o build.
+- Lint e TypeScript sem erros; onze testes aprovados após o build.
 - Home, FAQ, atendimento e Alvorada conferidos em 320, 390, 768 e 1440 px: um H1 por página e sem transbordamento horizontal nas dimensões verificadas.
 - Cabeçalho em 1024 px sem sobreposição dos links com o CTA.
 - Menu mobile: foco inicial em fechar, Escape, retorno ao botão de abertura, liberação da rolagem e fechamento por clique no fundo.
@@ -55,3 +56,11 @@ A coleta posterior de visibilidade e contatos exige observação depois da publi
 - [sirv-cli](https://github.com/lukeed/sirv/tree/master/packages/sirv-cli).
 
 O próximo projeto ainda não foi integrado nesta rodada.
+
+## Complemento: navegação estática no Windows
+
+A conferência final dos logs encontrou 404 em arquivos de antecipação da navegação na prévia Windows, apesar de as páginas abrirem e o navegador não registrar erro. O build havia gerado os segmentos em diretórios, enquanto o cliente pedia nomes planos. O mesmo caminho respondeu 200 no site publicado em Linux; o problema local corresponde ao [relato Next.js #85374](https://github.com/vercel/next.js/issues/85374).
+
+`postbuild` executa `scripts/finalize-static-export.mjs`: preserva os arquivos originais e cria aliases idênticos nos caminhos esperados, sem sobrescrever conteúdo divergente. Em plataformas que já exportam os nomes corretos, não precisa criar aliases. Não altera dependências nem desliga o prefetch.
+
+`npm run check` completo passou com lint, build, pós-build e onze testes. A nova verificação exige o segmento de navegação de cada página pública no caminho pedido pelo cliente. Atendimento e os dois cases responderam 200 para esses arquivos na prévia; a navegação por links entre Home, FAQ, atendimento e Alvorada foi repetida sem 404 nos logs monitorados. O serviço escolhido continuou preservado ao chegar ao formulário.

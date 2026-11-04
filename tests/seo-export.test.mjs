@@ -109,3 +109,11 @@ test("Organization é JSON válido e corresponde à empresa e aos fundadores vis
 test("a página de erro permanece fora da indexação", () => {
   assert.ok(meta(read(join(out, "404.html")), "robots").some((value) => /\bnoindex\b/.test(value)));
 });
+
+test("os segmentos de navegação existem nos caminhos planos pedidos pelo navegador", () => {
+  for (const page of pages) {
+    const segments = page.path.split("/").filter(Boolean);
+    const filename = `__next.${[...segments, "__PAGE__"].join(".")}.txt`;
+    assert.ok(existsSync(join(out, ...segments, filename)), `${page.path}: ${filename}`);
+  }
+});

@@ -1,3 +1,12 @@
+export const ADVOCACIA_DIGITAL = {
+  title: "Advocacia Digital",
+  href: "/portfolio/advocacia-digital",
+  category: "Projeto demonstrativo · Site institucional",
+  description: "Áreas de atuação, perfis e conteúdo editorial em um site institucional com identidade sóbria e navegação pensada para o celular.",
+  cover: "/images/portfolio/advocacia-digital/visao-geral.webp",
+  repository: "https://github.com/Digital-S-D/advocacia-digital",
+};
+
 export const ALVORADA = {
   title: "Construtora Alvorada",
   href: "/portfolio/alvorada",

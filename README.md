@@ -2,7 +2,7 @@
 
 Site da Digital S&D, voltado à apresentação de serviços de criação de sites e landing pages para pequenas e médias empresas e profissionais autônomos.
 
-Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta a landing page Alvorada e o sistema OdontoHub como projetos demonstrativos com dados fictícios e capturas reais das interfaces.
+Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta o site institucional Advocacia Digital, a landing page Alvorada e o sistema OdontoHub como projetos demonstrativos com dados fictícios e capturas reais das interfaces.
 
 **Site:** [digitalsd.com.br](https://digitalsd.com.br/)
 
@@ -34,6 +34,7 @@ digital-sd/
 │   ├── sobre/                    # Empresa, equipe e processo de trabalho
 │   ├── atendimento/              # Acompanhamento, política de resposta e atualizações
 │   ├── perguntas-frequentes/     # Dúvidas sobre serviços e contratação
+│   ├── portfolio/advocacia-digital/ # Site institucional demonstrativo
 │   ├── portfolio/alvorada/       # Landing page demonstrativa imobiliária
 │   ├── portfolio/odontohub/      # Sistema web demonstrativo
 │   ├── privacidade/              # Política de Privacidade
@@ -47,7 +48,7 @@ digital-sd/
 │   │
 │   └── sections/                 # Seções e componentes de conteúdo
 │       ├── HeroSection.tsx       # Apresentação e chamadas para ação
-│       ├── PortfolioSection.tsx  # Alvorada e OdontoHub em destaque
+│       ├── PortfolioSection.tsx  # Advocacia Digital, Alvorada e OdontoHub
 │       ├── ServicesSection.tsx   # Ofertas principais e complementares
 │       ├── ProjectPlanSection.tsx # Processo comercial e fundadores
 │       ├── FaqSection.tsx        # Resumo das perguntas frequentes
@@ -69,7 +70,7 @@ digital-sd/
 │       ├── brand-icon.png        # Ícone usado no cabeçalho mobile
 │       ├── logo-icone.png        # Favicon
 │       ├── team/                 # Fotos dos fundadores
-│       └── portfolio/             # Capturas e assets de Alvorada e OdontoHub
+│       └── portfolio/             # Capturas reais dos três projetos demonstrativos
 │
 ├── tests/                        # Testes de validação do formulário
 ├── netlify.toml                  # Build e diretório de publicação

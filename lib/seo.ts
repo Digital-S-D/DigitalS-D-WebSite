@@ -11,6 +11,7 @@ export const PUBLIC_PATHS = [
   "/sobre/",
   "/portfolio/odontohub/",
   "/portfolio/alvorada/",
+  "/portfolio/advocacia-digital/",
   "/privacidade/",
   "/termos/",
 ] as const;

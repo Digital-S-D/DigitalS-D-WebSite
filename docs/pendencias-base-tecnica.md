@@ -55,7 +55,7 @@ A coleta posterior de visibilidade e contatos exige observação depois da publi
 - [Oxlint: plugins nativos](https://oxc.rs/docs/guide/usage/linter/plugins).
 - [sirv-cli](https://github.com/lukeed/sirv/tree/master/packages/sirv-cli).
 
-O próximo projeto ainda não foi integrado nesta rodada.
+A rodada de preparação terminou antes da inclusão do próximo projeto. A revisão e inclusão posteriores da Advocacia Digital estão registradas em [Integração da Advocacia Digital](integracao-advocacia-digital.md).
 
 ## Complemento: navegação estática no Windows
 

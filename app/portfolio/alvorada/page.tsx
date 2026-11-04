@@ -1,3 +1,4 @@
+import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
 import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +14,7 @@ export const metadata = pageMetadata(
   "/portfolio/alvorada/",
   title,
   description,
-  { url: ALVORADA.cover, width: 1425, height: 940, alt: "Captura real da landing page demonstrativa Alvorada" },
+  { url: ALVORADA.cover, width: 1440, height: 960, alt: "Captura real da landing page demonstrativa Alvorada" },
 );
 
 export default function AlvoradaPage() {
@@ -26,6 +27,7 @@ export default function AlvoradaPage() {
             <Link href="/#portfolio" className="inline-flex py-3 mb-5 text-sm text-blue-300 underline underline-offset-4">Voltar aos projetos</Link>
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
+                <Link href="/en/portfolio/alvorada/" hrefLang="en" lang="en" className="block mb-4 text-blue-300 underline underline-offset-4">Read in English</Link>
                 <span className="badge mb-5">Projeto demonstrativo · Landing page</span>
                 <h1 className="font-sora font-bold text-4xl md:text-5xl mb-5">Construtora Alvorada<span className="block text-gradient text-2xl md:text-3xl mt-4">Uma apresentação à altura do empreendimento.</span></h1>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">Uma landing page que organiza os diferenciais, as opções de apartamentos e as dúvidas de quem está considerando um novo imóvel.</p>
@@ -34,30 +36,31 @@ export default function AlvoradaPage() {
               </div>
               <figure>
                 <a href={`${BASE_PATH}${ALVORADA.cover}`} aria-label="Ampliar captura da abertura da Alvorada" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}${ALVORADA.cover}`} alt="Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada." width={1425} height={940} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${BASE_PATH}${ALVORADA.cover}`} alt="Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada." width={1440} height={960} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Abertura da landing page em execução. Os números, prazos e condições exibidos pertencem ao cenário fictício da demonstração. Toque na imagem para ampliar.</figcaption>
               </figure>
             </div>
           </div>
         </section>
-        <section className="py-16 md:py-24" aria-labelledby="alvorada-telas">
+        <CaseProjectDetails slug="alvorada" />
+        <section className="py-16 md:py-24" id="telas" aria-labelledby="alvorada-telas">
           <div className="container-custom">
             <div className="max-w-3xl mb-10">
               <span className="badge mb-4">Capturas da interface</span>
               <h2 id="alvorada-telas" className="font-sora font-semibold text-3xl mb-5">A mesma oferta, em telas diferentes.</h2>
-              <p className="text-gray-300 leading-relaxed">No computador, as opções de apartamentos aparecem lado a lado. No celular, o conteúdo é reorganizado e a chamada para visita permanece ao alcance. As capturas mostram o projeto original em funcionamento.</p>
+              <p className="text-gray-300 leading-relaxed">No computador, as opções de apartamentos aparecem lado a lado. No celular, o conteúdo é reorganizado e a chamada para testar o formulário permanece ao alcance. As capturas mostram o projeto original em funcionamento.</p>
             </div>
             <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start">
               <figure>
                 <a href={`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`} aria-label="Ampliar captura da apresentação dos apartamentos" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`} alt="Captura real da seção de apartamentos, com duas opções de metragem e características organizadas em cartões." width={1425} height={940} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`} alt="Captura real da seção de apartamentos, com duas opções de metragem e características organizadas em cartões." width={1440} height={960} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Apresentação de metragens, características e valores ilustrativos. Não é uma oferta imobiliária real.</figcaption>
               </figure>
               <figure className="max-w-[260px] mx-auto w-full">
                 <a href={`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`} aria-label="Ampliar captura da Alvorada no celular" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`} alt="Captura real da abertura da Alvorada no celular, com título, botões e chamada fixa para visita." width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`} alt="Captura real da abertura da Alvorada no celular, com título, botões e chamada fixa para testar o formulário." width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Versão mobile da demonstração.</figcaption>
               </figure>

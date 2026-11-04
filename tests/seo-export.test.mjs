@@ -117,3 +117,24 @@ test("os segmentos de navegação existem nos caminhos planos pedidos pelo naveg
     assert.ok(existsSync(join(out, ...segments, filename)), `${page.path}: ${filename}`);
   }
 });
+
+test("os três casos têm idiomas pareados, contato e evidências sem expor o código privado", () => {
+  for (const slug of ["alvorada", "advocacia-digital", "odontohub"]) {
+    const pt = pages.find(page => page.path === `/portfolio/${slug}/`);
+    const en = pages.find(page => page.path === `/en/portfolio/${slug}/`);
+    assert.ok(pt && en, slug);
+    for (const page of [pt, en]) {
+      const alternates = Array.from(page.html.matchAll(/<link\b[^>]*>/g), ([tag]) => attributes(tag)).filter(link => link.rel === "alternate");
+      assert.ok(alternates.some(link => link.hrefLang === "en" && link.href === en.url), page.path);
+      assert.ok(alternates.some(link => link.hrefLang === "pt-BR" && link.href === pt.url), page.path);
+      const visible = decode(page.html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").replace(/<[^>]*>/g, " "));
+      assert.match(visible, /Álvaro Marinho/);
+      assert.match(visible, /Arthur Leite/);
+      assert.doesNotMatch(page.html, /https:\/\/github\.com\/Digital-S-D\/OdontoHub/);
+    }
+    assert.ok(en.html.includes('lang="en"'));
+    assert.ok(en.html.includes("mailto:digitalsd.contato@gmail.com"));
+    assert.match(decode(en.html), /Implementation decisions|Evidence/);
+    assert.equal(meta(en.html, "og:locale")[0], "en_US");
+  }
+});

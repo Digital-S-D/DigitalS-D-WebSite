@@ -1,5 +1,7 @@
 # Digital S&D — Site Institucional
 
+[English](README.en.md) · [Alvorada: PT](https://digitalsd.com.br/portfolio/alvorada/) / [EN](https://digitalsd.com.br/en/portfolio/alvorada/) · [Advocacia: PT](https://digitalsd.com.br/portfolio/advocacia-digital/) / [EN](https://digitalsd.com.br/en/portfolio/advocacia-digital/) · [OdontoHub: PT](https://digitalsd.com.br/portfolio/odontohub/) / [EN](https://digitalsd.com.br/en/portfolio/odontohub/)
+
 Site da Digital S&D, voltado à apresentação de serviços de criação de sites e landing pages para pequenas e médias empresas e profissionais autônomos.
 
 Reúne serviços, informações sobre a equipe, perguntas frequentes, portfólio e canais de contato por formulário, WhatsApp e e-mail. O portfólio apresenta o site institucional Advocacia Digital, a landing page Alvorada e o sistema OdontoHub como projetos demonstrativos com dados fictícios e capturas reais das interfaces.
@@ -172,3 +174,11 @@ Next.js 16.4.5, React 19.3.1 e ícones/tipagens compatíveis. As configurações
 A revisão das pendências e seus estados atuais estão em `docs/pendencias-base-tecnica.md`. Os relatórios de etapas anteriores preservam o estado observado em cada rodada; não representam a lista atual de pendências.
 
 O build executa automaticamente um pós-processamento dos caminhos de segmentos de navegação para compatibilidade da exportação Windows com o roteador do Next.js. Os arquivos originais são preservados; o teste do export confere os caminhos solicitados pelo navegador.
+
+## Casos bilíngues e participação
+
+Os três casos têm problema proposto, público, participação da equipe, decisões, entrega, evidências e limites. O conteúdo estruturado fica em `lib/case-studies.ts`; `CaseProjectDetails` complementa as páginas em português e `EnglishCaseStudy` apresenta as versões em `/en/portfolio/`. Cada par tem canonical próprio, alternância de idioma e links hreflang; as rotas são incluídas no sitemap.
+
+As capturas foram atualizadas a partir das demonstrações verificadas nesta revisão. Alvorada: cinco testes de navegador. Advocacia: diagnósticos Astro sem erros/avisos, 26 páginas e seis testes. OdontoHub: lint sem avisos, quatro testes, build e verificação dos fluxos documentados. Os resultados são evidência técnica da versão, sem atribuir vendas, pacientes ou clientes reais. O financeiro do OdontoHub nesta versão contém indicadores fictícios, sem módulo de movimentações conectado.
+
+Projeto da equipe Digital S&D, fundada por Álvaro Marinho e Arthur Leite. O portfólio não atribui toda a implementação a uma única pessoa. O roteiro para compartilhar os casos está em `docs/casos-e-prospeccao.md`; não há envio automático de mensagens.

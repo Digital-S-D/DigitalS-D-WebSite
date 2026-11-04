@@ -14,17 +14,18 @@ export const ALVORADA = {
   description: "Uma apresentação imobiliária com identidade inspirada em arquitetura, comparação de apartamentos e um percurso até o contato.",
   cover: "/images/portfolio/alvorada/visao-geral.webp",
   illustration: "/images/portfolio/alvorada/fachada.svg",
+  repository: "https://github.com/Digital-S-D/Construtora-Alvorada_LandingPage",
 };
 export const ODONTOHUB = {
   title: "OdontoHub",
   href: "/portfolio/odontohub",
   category: "Projeto demonstrativo · Sistema web",
-  description: "Agenda, prontuário e financeiro em uma experiência de gestão odontológica adaptável à identidade de cada clínica.",
+  description: "Interfaces de agenda, pacientes e personalização para explorar uma rotina odontológica com dados fictícios.",
   cover: "/images/portfolio/odontohub/visao-geral.webp",
   gallery: [
     { id: "agenda", title: "Uma agenda, diferentes leituras", description: "Visualizações por dia, semana, mês e lista, com horários de atendimento e checagem de conflitos na demonstração.", image: "agenda.webp", alt: "Agenda real da demonstração OdontoHub, com controles de data e visualizações dos agendamentos fictícios." },
     { id: "prontuario", title: "O contexto do atendimento reunido", description: "Prontuário, odontograma e anamnese conectados à navegação do paciente. Os registros exibidos são fictícios.", image: "prontuario.webp", alt: "Prontuário demonstrativo do OdontoHub com odontograma e seleção dos dentes." },
-    { id: "financeiro", title: "Financeiro para demonstrar o fluxo", description: "Indicadores, movimentações e simulações locais de recebimentos e despesas. Os valores ilustram a interface; não são resultados da Digital S&D ou de uma clínica cliente.", image: "financeiro.webp", alt: "Financeiro do OdontoHub com indicadores e gráfico de entradas e saídas fictícias." },
-    { id: "personalizacao", title: "A identidade da clínica na interface", description: "Nome, marca, cores e temas podem ser experimentados na demonstração. Uma implantação é planejada conforme a identidade e a rotina de cada cliente.", image: "personalizacao.webp", alt: "Configurações reais do OdontoHub com opções de cor da marca e temas claro, escuro e blackout." },
+    { id: "visao-geral", title: "Um panorama do dia", description: "Indicadores e agenda com dados constantes de exemplo. O financeiro é ilustrativo: esta versão não implementa movimentações, recebimentos ou pagamentos.", image: "visao-geral.webp", alt: "Visão geral do OdontoHub com agenda e indicadores fictícios; não há módulo de transações conectado." },
+    { id: "personalizacao", title: "Cor e tema lembrados no navegador", description: "Seis cores e três temas persistem neste navegador. Nome e logo são prévias locais; as alterações de negócio não são sincronizadas ou salvas em banco.", image: "personalizacao.webp", alt: "Configurações reais do OdontoHub com opções de cor e temas claro, escuro e blackout." },
   ],
 };

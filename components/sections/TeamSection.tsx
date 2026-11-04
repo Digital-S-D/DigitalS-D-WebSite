@@ -1,3 +1,5 @@
+
+import { createTranslator, type Locale } from "@/lib/i18n";
 import Image from "next/image";
 import { User } from "lucide-react";
 import { BASE_PATH, TEAM_MEMBERS } from "@/lib/constants";
@@ -6,24 +8,23 @@ import { BASE_PATH, TEAM_MEMBERS } from "@/lib/constants";
 // Dados em lib/constants.ts (TEAM_MEMBERS) — funciona bem com 1, 2 ou mais membros.
 // Para foto real: coloque o arquivo em /public/images/team/ e preencha photoSrc.
 
-export function TeamSection() {
+export function TeamSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section className="py-20 md:py-28 bg-brand-navy">
       <div className="container-custom">
 
         {/* ─── CABEÇALHO ────────────────────────────────────────────── */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="badge mb-4">Quem Faz Acontecer</span>
+          <span className="badge mb-4">{t("Quem Faz Acontecer")}</span>
           {/* SUBSTITUA: Título da seção */}
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            Por trás de cada{" "}
-            <span className="text-gradient">projeto</span>
+            {t("Por trás de cada")}{t(" ")}
+            <span className="text-gradient">{t("projeto")}</span>
           </h2>
           {/* SUBSTITUA: Subtítulo */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
-            Sem call center, sem terceirização. Você fala direto com quem
-            constrói o seu site.
-          </p>
+            {t("Sem call center, sem terceirização. Você fala direto com quem constrói o seu site.")}</p>
         </div>
 
         {/* ─── CARDS DE EQUIPE ──────────────────────────────────────────
@@ -47,7 +48,7 @@ export function TeamSection() {
                 {member.photoSrc ? (
                   <Image
                     src={`${BASE_PATH}/images/team/${member.photoSrc}`}
-                    alt={member.name}
+                    alt={t(member.name)}
                     width={320}
                     height={320}
                     className="w-full h-full object-cover"
@@ -58,18 +59,17 @@ export function TeamSection() {
               </div>
               {!member.photoSrc && (
                 <p className="font-outfit text-gray-700 text-[11px] mb-4 -mt-2">
-                  Adicione: /images/team/{/* SUBSTITUA */}foto.jpg
-                </p>
+                  {t("Adicione: /images/team/")}{/* SUBSTITUA */}{t("foto.jpg")}</p>
               )}
 
               {/* SUBSTITUA: Nome real */}
               <h3 className="font-sora font-semibold text-white text-lg mb-1">
-                {member.name}
+                {t(member.name)}
               </h3>
 
               {/* SUBSTITUA: Cargo/função */}
               <p className="font-outfit text-brand-blue text-sm font-medium">
-                {member.role}
+                {t(member.role)}
               </p>
             </div>
           ))}

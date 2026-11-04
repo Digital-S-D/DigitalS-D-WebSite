@@ -1,3 +1,5 @@
+
+import { createTranslator, type Locale } from "@/lib/i18n";
 import {
   Search,
   ClipboardList,
@@ -20,24 +22,23 @@ const iconMap: Record<string, LucideIcon> = {
   Rocket,
 };
 
-export function ProcessSection() {
+export function ProcessSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section className="py-20 md:py-28 bg-brand-black">
       <div className="container-custom">
 
         {/* ─── CABEÇALHO ────────────────────────────────────────────── */}
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <span className="badge mb-4">Como Trabalhamos</span>
+          <span className="badge mb-4">{t("Como Trabalhamos")}</span>
           {/* SUBSTITUA: Título da seção */}
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            Do diagnóstico ao{" "}
-            <span className="text-gradient">site no ar</span>
+            {t("Do diagnóstico ao")}{t(" ")}
+            <span className="text-gradient">{t("site no ar")}</span>
           </h2>
           {/* SUBSTITUA: Subtítulo */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
-            Um processo claro, sem surpresas, para você saber exatamente
-            o que esperar em cada etapa.
-          </p>
+            {t("Um processo claro, sem surpresas, para você saber exatamente o que esperar em cada etapa.")}</p>
         </div>
 
         {/* ─── TIMELINE ─────────────────────────────────────────────── */}
@@ -63,17 +64,17 @@ export function ProcessSection() {
                   <div className="md:px-2">
                     {/* Número da etapa */}
                     <span className="font-sora font-bold text-brand-blue/50 text-xs tracking-widest">
-                      {step.number}
+                      {t(step.number)}
                     </span>
 
                     {/* SUBSTITUA: Nome da etapa */}
                     <h3 className="font-sora font-semibold text-white text-base md:text-lg mt-1 mb-1.5">
-                      {step.title}
+                      {t(step.title)}
                     </h3>
 
                     {/* SUBSTITUA: Descrição da etapa */}
                     <p className="font-outfit text-gray-400 text-sm leading-relaxed md:max-w-[180px] md:mx-auto">
-                      {step.description}
+                      {t(step.description)}
                     </p>
                   </div>
                 </div>

@@ -1,3 +1,5 @@
+
+import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -20,7 +22,8 @@ const footerLinks = {
   ],
 };
 
-export function Footer() {
+export function Footer({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <footer className="bg-brand-black border-t border-white/5">
 
@@ -30,9 +33,9 @@ export function Footer() {
 
           {/* Coluna 1: Logo + Descrição */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Image src={`${BASE_PATH}/images/brand-logo.png`} alt="Digital S&D" width={672} height={241} className="w-36 h-auto mb-4" />
+            <Image src={`${BASE_PATH}/images/brand-logo.png`} alt={t("Digital S&D")} width={672} height={241} className="w-36 h-auto mb-4" />
             <p className="font-outfit text-gray-400 text-sm leading-relaxed mb-6">
-              {COMPANY.tagline} {COMPANY.description}
+              {t(COMPANY.tagline)} {t(COMPANY.description)}
             </p>
 
           </div>
@@ -40,18 +43,17 @@ export function Footer() {
           {/* Coluna 2: Serviços */}
           <div>
             <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
-              Serviços
-            </h2>
+              {t("Serviços")}</h2>
             <ul className="space-y-3">
               {footerLinks.servicos.map((link) => (
                 <li key={link.label}>
                   <Link
-                    href={link.href}
+                    href={localizedHref(link.href, locale)}
                     className="font-outfit text-sm text-gray-400 hover:text-white
                                transition-colors duration-200 flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-brand-blue/50 group-hover:bg-brand-blue transition-colors" />
-                    {link.label}
+                    {t(link.label)}
                   </Link>
                 </li>
               ))}
@@ -61,18 +63,17 @@ export function Footer() {
           {/* Coluna 3: Empresa */}
           <div>
             <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
-              Empresa
-            </h2>
+              {t("Empresa")}</h2>
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
                 <li key={link.label}>
                   <Link
-                    href={link.href}
+                    href={localizedHref(link.href, locale)}
                     className="font-outfit text-sm text-gray-400 hover:text-white
                                transition-colors duration-200 flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-brand-blue/50 group-hover:bg-brand-blue transition-colors" />
-                    {link.label}
+                    {t(link.label)}
                   </Link>
                 </li>
               ))}
@@ -82,29 +83,28 @@ export function Footer() {
           {/* Coluna 4: Contato — lida de lib/constants.ts (COMPANY) */}
           <div>
             <h2 className="font-sora font-semibold text-white text-sm mb-5 uppercase tracking-wider">
-              Contato
-            </h2>
+              {t("Contato")}</h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail size={15} className="text-brand-blue mt-0.5 shrink-0" />
-                <a href={`mailto:${COMPANY.email}`}
+                <a href={localizedHref(`mailto:${COMPANY.email}`, locale)}
                    className="font-outfit text-sm text-gray-400 hover:text-white transition-colors">
-                  {COMPANY.email}
+                  {t(COMPANY.email)}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={15} className="text-brand-blue mt-0.5 shrink-0" />
-                <a href={LINKS.whatsappOrcamento}
+                <a href={localizedHref(LINKS.whatsappOrcamento, locale)}
                    target="_blank" rel="noopener noreferrer"
                    className="font-outfit text-sm text-gray-400 hover:text-white transition-colors">
-                  {COMPANY.phone}
+                  {t(COMPANY.phone)}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={15} className="text-brand-blue mt-0.5 shrink-0" />
                 <span className="font-outfit text-sm text-gray-400">
-                  {COMPANY.city}<br />
-                  <span className="text-gray-400 text-xs">Atendimento remoto nacional</span>
+                  {t(COMPANY.city)}<br />
+                  <span className="text-gray-400 text-xs">{t("Atendimento remoto nacional")}</span>
                 </span>
               </li>
             </ul>
@@ -116,10 +116,10 @@ export function Footer() {
       <div className="border-t border-white/5">
         <div className="container-custom py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400 font-outfit">
-            <p>© {COMPANY.year} {COMPANY.name}. Todos os direitos reservados.</p>
+            <p>{t("© ")}{t(COMPANY.year)} {t(COMPANY.name)}{t(". Todos os direitos reservados.")}</p>
             <div className="flex items-center gap-4">
-              <Link href="/privacidade" className="hover:text-gray-400 transition-colors">Privacidade</Link>
-              <Link href="/termos"      className="hover:text-gray-400 transition-colors">Termos de Uso</Link>
+              <Link href={localizedHref("/privacidade", locale)} className="hover:text-gray-400 transition-colors">{t("Privacidade")}</Link>
+              <Link href={localizedHref("/termos", locale)}      className="hover:text-gray-400 transition-colors">{t("Termos de Uso")}</Link>
             </div>
           </div>
         </div>

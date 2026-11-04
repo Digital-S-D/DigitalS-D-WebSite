@@ -29,20 +29,15 @@ Para habilitar o formulário, copie `.env.local.example` para `.env.local` e con
 ```text
 digital-sd/
 │
-├── app/                          # Páginas do Next.js (App Router)
-│   ├── globals.css               # Estilos globais e fontes
-│   ├── layout.tsx                # Layout raiz e metadados padrão
-│   ├── page.tsx                  # Página inicial
-│   ├── sobre/                    # Empresa, equipe e processo de trabalho
-│   ├── atendimento/              # Acompanhamento, política de resposta e atualizações
-│   ├── perguntas-frequentes/     # Dúvidas sobre serviços e contratação
-│   ├── portfolio/advocacia-digital/ # Site institucional demonstrativo
-│   ├── portfolio/alvorada/       # Landing page demonstrativa imobiliária
-│   ├── portfolio/odontohub/      # Sistema web demonstrativo
-│   ├── privacidade/              # Política de Privacidade
-│   └── termos/                   # Termos de Uso
+├── app/                          # Rotas e metadados do Next.js
+│   ├── globals.css               # CSS compartilhado, sem variações por idioma
+│   ├── (pt)/                     # Layout pt-BR e nove rotas sem prefixo público
+│   ├── en/                       # Layout en e as mesmas nove rotas em /en/
+│   ├── robots.ts                 # Permissões de rastreamento
+│   └── sitemap.ts                # Todos os endereços públicos
 │
 ├── components/                   # Componentes visuais reutilizáveis
+│   ├── pages/                    # Nove templates compartilhados PT/EN
 │   ├── layout/
 │   │   ├── Header.tsx            # Cabeçalho fixo e menu mobile
 │   │   ├── Footer.tsx            # Rodapé com navegação e contatos
@@ -177,8 +172,19 @@ O build executa automaticamente um pós-processamento dos caminhos de segmentos 
 
 ## Casos bilíngues e participação
 
-Os três casos têm problema proposto, público, participação da equipe, decisões, entrega, evidências e limites. O conteúdo estruturado fica em `lib/case-studies.ts`; `CaseProjectDetails` complementa as páginas em português e `EnglishCaseStudy` apresenta as versões em `/en/portfolio/`. Cada par tem canonical próprio, alternância de idioma e links hreflang; as rotas são incluídas no sitemap.
+Os três casos têm problema proposto, público, participação da equipe, decisões, entrega, evidências e limites. O conteúdo estruturado fica em `lib/case-studies.ts`; `CaseProjectDetails` complementa os mesmos templates de página nos dois idiomas. As versões em inglês usam `/en/` em todo o site, sem um template visual separado. Cada par tem canonical próprio, alternância de idioma e links hreflang; as rotas são incluídas no sitemap.
 
 As capturas foram atualizadas a partir das demonstrações verificadas nesta revisão. Alvorada: cinco testes de navegador. Advocacia: diagnósticos Astro sem erros/avisos, 26 páginas e seis testes. OdontoHub: lint sem avisos, quatro testes, build e verificação dos fluxos documentados. Os resultados são evidência técnica da versão, sem atribuir vendas, pacientes ou clientes reais. O financeiro do OdontoHub nesta versão contém indicadores fictícios, sem módulo de movimentações conectado.
 
 Projeto da equipe Digital S&D, fundada por Álvaro Marinho e Arthur Leite. O portfólio não atribui toda a implementação a uma única pessoa. O roteiro para compartilhar os casos está em `docs/casos-e-prospeccao.md`; não há envio automático de mensagens.
+
+
+## Idiomas e preservação do layout
+
+Português permanece em `/`; inglês usa `/en/`, com os mesmos caminhos de páginas e âncoras. O seletor PT | EN do cabeçalho preserva a página, a seção e os parâmetros da URL. Não há tradução automática por manipulação do DOM nem redirecionamento por idioma do navegador.
+
+Os nove templates de página ficam em `components/pages/` e são reutilizados por `app/(pt)/` e `app/en/`. O grupo `(pt)` não aparece na URL. `DocumentLayout` define o atributo `lang` correto; cabeçalho, rodapé, seções, imagens e classes CSS são compartilhados. Os textos ingleses ficam em `lib/translations/en.json` e são aplicados durante a geração do HTML e a renderização React por `createTranslator()`.
+
+Ao editar um texto português usado com `t()`, atualize sua entrada inglesa correspondente. Não traduza IDs, nomes de arquivos, valores internos de opções ou dados digitados pelo visitante. As capturas continuam mostrando os projetos em português. O formulário conserva seu endpoint, valores comerciais e regras de telefone brasileiro; rótulos, opções visíveis e mensagens são traduzidos. O método HTML `dialog` impede submissão nativa acidental enquanto o JavaScript não estiver disponível; o envio normal continua sendo tratado pelo fetch ao Formspree.
+
+Canonical, hreflang e sitemap cobrem os 18 endereços. Os testes comparam a estrutura e as classes de cada par, as imagens, a língua do documento e os metadados. Detalhes da revisão: [site bilíngue](docs/site-bilingue.md).

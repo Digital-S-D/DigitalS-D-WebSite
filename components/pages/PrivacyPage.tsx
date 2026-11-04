@@ -1,3 +1,5 @@
+
+import { type Locale } from "@/lib/i18n";
 // ─── PÁGINA "POLÍTICA DE PRIVACIDADE" (/privacidade) ────────────────────
 // Os textos ficam em lib/legal.ts (PRIVACY_POLICY).
 
@@ -12,14 +14,14 @@ export const metadata = pageMetadata(
   PRIVACY_POLICY.description,
 );
 
-export default function PrivacyPage() {
+export default function PrivacyPage({ locale = "pt" }: { locale?: Locale } = {}) {
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
-        <LegalDocumentSection doc={PRIVACY_POLICY} />
+        <LegalDocumentSection locale={locale} doc={PRIVACY_POLICY} />
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

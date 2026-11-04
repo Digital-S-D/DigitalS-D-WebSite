@@ -1,5 +1,7 @@
 "use client";
 
+import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
+
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Send, CheckCircle, MessageCircle, Mail, Clock } from "lucide-react";
 import { BUDGET_OPTIONS, COMPANY, LINKS, SERVICE_OPTIONS } from "@/lib/constants";
@@ -18,7 +20,8 @@ const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
 const formAvailable = isFormEndpointConfigured(endpoint);
 const labelClass = "block font-outfit text-sm text-gray-300 mb-1.5";
 
-export function ContactSection() {
+export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   const [formData, setFormData] = useState<ContactData>(initialForm);
   const [errors, setErrors] = useState<ContactErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,7 +93,7 @@ export function ContactSection() {
   };
 
   const fieldError = (field: keyof ContactData) => errors[field] ? (
-    <p id={`contact-${field}-error`} className="text-red-300 text-sm mt-1.5" role="alert">{errors[field]}</p>
+    <p id={`contact-${field}-error`} className="text-red-300 text-sm mt-1.5" role="alert">{t(errors[field])}</p>
   ) : null;
 
   return (
@@ -98,9 +101,9 @@ export function ContactSection() {
       <Suspense fallback={null}><ContactServiceIntent onSelect={selectService} /></Suspense>
       <div className="container-custom">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="badge mb-4"><Send size={12} aria-hidden="true" />Fale conosco</span>
-          <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">Pronto para <span className="text-gradient">começar seu projeto?</span></h2>
-          <p className="text-gray-300 text-base md:text-lg">Pode começar contando sobre seu negócio, mesmo sem saber os termos técnicos. A equipe ajuda a organizar o pedido e responde pelo WhatsApp ou e-mail em até 1 dia útil.</p>
+          <span className="badge mb-4"><Send size={12} aria-hidden="true" />{t("Fale conosco")}</span>
+          <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">{t("Pronto para ")}<span className="text-gradient">{t("começar seu projeto?")}</span></h2>
+          <p className="text-gray-300 text-base md:text-lg">{t("Pode começar contando sobre seu negócio, mesmo sem saber os termos técnicos. A equipe ajuda a organizar o pedido e responde pelo WhatsApp ou e-mail em até 1 dia útil.")}</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 max-w-5xl mx-auto">
           <div className="lg:col-span-2 space-y-5 min-w-0">
@@ -109,77 +112,78 @@ export function ContactSection() {
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center shrink-0"><info.icon size={18} className="text-blue-400" aria-hidden="true" /></div>
                   <div className="min-w-0">
-                    <p className="text-xs text-gray-400 mb-0.5">{info.title}</p>
-                    {info.href ? <a href={info.href} target={info.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="inline-block py-2 font-semibold text-white text-sm break-words hover:underline">{info.value}</a> : <p className="font-semibold text-white text-sm">{info.value}</p>}
-                    <p className="text-xs text-gray-400 mt-0.5">{info.label}</p>
+                    <p className="text-xs text-gray-400 mb-0.5">{t(info.title)}</p>
+                    {info.href ? <a href={localizedHref(info.href, locale)} target={info.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="inline-block py-2 font-semibold text-white text-sm break-words hover:underline">{t(info.value)}</a> : <p className="font-semibold text-white text-sm">{t(info.value)}</p>}
+                    <p className="text-xs text-gray-400 mt-0.5">{t(info.label)}</p>
                   </div>
                 </div>
               </div>
             ))}
-            <a href={LINKS.whatsappOrcamento} target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-sm"><MessageCircle size={16} aria-hidden="true" />Chamar no WhatsApp</a>
-            <p className="text-xs text-gray-400 text-center leading-relaxed">Seus dados são usados para responder ao seu contato.</p>
+            <a href={localizedHref(LINKS.whatsappOrcamento, locale)} target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-sm"><MessageCircle size={16} aria-hidden="true" />{t("Chamar no WhatsApp")}</a>
+            <p className="text-xs text-gray-400 text-center leading-relaxed">{t("Seus dados são usados para responder ao seu contato.")}</p>
           </div>
           <div className="lg:col-span-3 min-w-0">
             <div className="rounded-2xl border border-white/10 bg-brand-navy p-5 md:p-8">
               {isSubmitted ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
                   <CheckCircle size={40} className="text-green-400" aria-hidden="true" />
-                  <h3 ref={successRef} tabIndex={-1} className="font-sora font-bold text-white text-xl">Mensagem enviada!</h3>
-                  <p className="text-gray-300 text-sm">Obrigado pelo contato! Nossa equipe fará o retorno inicial em até 1 dia útil pelo contato informado.</p>
-                  <button type="button" onClick={() => setIsSubmitted(false)} className="btn-outline text-sm mt-2">Enviar outra mensagem</button>
+                  <h3 ref={successRef} tabIndex={-1} className="font-sora font-bold text-white text-xl">{t("Mensagem enviada!")}</h3>
+                  <p className="text-gray-300 text-sm">{t("Obrigado pelo contato! Nossa equipe fará o retorno inicial em até 1 dia útil pelo contato informado.")}</p>
+                  <button type="button" onClick={() => setIsSubmitted(false)} className="btn-outline text-sm mt-2">{t("Enviar outra mensagem")}</button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} noValidate aria-label="Solicitar orçamento" aria-busy={isSubmitting} className="space-y-4">
-                  <p className="text-sm text-gray-300">Campos com * são obrigatórios.</p>
-                  {!formAvailable && <p className="text-sm text-amber-200">O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.</p>}
+                <form ref={formRef} method="dialog" onSubmit={handleSubmit} noValidate aria-label={t("Solicitar orçamento")} aria-busy={isSubmitting} className="space-y-4">
+                  <p className="text-sm text-gray-300">{t("Campos com * são obrigatórios.")}</p>
+                  <noscript><p className="text-sm text-amber-200">{t("Ative o JavaScript para usar o formulário ou fale conosco pelo WhatsApp ou e-mail.")}</p></noscript>
+                  {!formAvailable && <p className="text-sm text-amber-200">{t("O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.")}</p>}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-name" className={labelClass}>Nome *</label>
-                      <input id="contact-name" name="name" type="text" autoComplete="name" required maxLength={120} value={formData.name} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "contact-name-error" : undefined} className="input-field" placeholder="Seu nome completo" />
-                      {fieldError("name")}
+                      <label htmlFor="contact-name" className={labelClass}>{t("Nome *")}</label>
+                      <input id="contact-name" name="name" type="text" autoComplete="name" required maxLength={120} value={formData.name} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "contact-name-error" : undefined} className="input-field" placeholder={t("Seu nome completo")} />
+                      {t(fieldError("name"))}
                     </div>
                     <div>
-                      <label htmlFor="contact-company" className={labelClass}>Empresa (opcional)</label>
-                      <input id="contact-company" name="company" type="text" autoComplete="organization" maxLength={160} value={formData.company} onChange={handleChange} className="input-field" placeholder="Nome da empresa" />
+                      <label htmlFor="contact-company" className={labelClass}>{t("Empresa (opcional)")}</label>
+                      <input id="contact-company" name="company" type="text" autoComplete="organization" maxLength={160} value={formData.company} onChange={handleChange} className="input-field" placeholder={t("Nome da empresa")} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-email" className={labelClass}>E-mail *</label>
-                      <input id="contact-email" name="email" type="email" autoComplete="email" inputMode="email" required maxLength={254} value={formData.email} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "contact-email-error" : undefined} className="input-field" placeholder="seu@email.com.br" />
-                      {fieldError("email")}
+                      <label htmlFor="contact-email" className={labelClass}>{t("E-mail *")}</label>
+                      <input id="contact-email" name="email" type="email" autoComplete="email" inputMode="email" required maxLength={254} value={formData.email} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "contact-email-error" : undefined} className="input-field" placeholder={t("seu@email.com.br")} />
+                      {t(fieldError("email"))}
                     </div>
                     <div>
-                      <label htmlFor="contact-phone" className={labelClass}>WhatsApp / Telefone *</label>
-                      <input id="contact-phone" name="phone" type="tel" autoComplete="tel-national" inputMode="tel" required maxLength={24} value={formData.phone} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.phone)} aria-describedby={`contact-phone-hint${errors.phone ? " contact-phone-error" : ""}`} className="input-field" placeholder="(31) 99999-9999" />
-                      <p id="contact-phone-hint" className="text-xs text-gray-400 mt-1.5">Inclua o DDD. Aceitamos fixo ou celular.</p>
-                      {fieldError("phone")}
+                      <label htmlFor="contact-phone" className={labelClass}>{t("WhatsApp / Telefone *")}</label>
+                      <input id="contact-phone" name="phone" type="tel" autoComplete="tel-national" inputMode="tel" required maxLength={24} value={formData.phone} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.phone)} aria-describedby={`contact-phone-hint${errors.phone ? " contact-phone-error" : ""}`} className="input-field" placeholder={t("(31) 99999-9999")} />
+                      <p id="contact-phone-hint" className="text-xs text-gray-400 mt-1.5">{t("Inclua o DDD. Aceitamos fixo ou celular.")}</p>
+                      {t(fieldError("phone"))}
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-service" className={labelClass}>Serviço desejado (opcional)</label>
+                      <label htmlFor="contact-service" className={labelClass}>{t("Serviço desejado (opcional)")}</label>
                       <select id="contact-service" name="service" value={formData.service} onChange={handleChange} className="input-field">
-                        {SERVICE_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{option}</option>)}
+                        {SERVICE_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{t(option)}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="contact-budget" className={labelClass}>Orçamento disponível (opcional)</label>
+                      <label htmlFor="contact-budget" className={labelClass}>{t("Orçamento disponível (opcional)")}</label>
                       <select id="contact-budget" name="budget" value={formData.budget} onChange={handleChange} className="input-field">
-                        {BUDGET_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{option}</option>)}
+                        {BUDGET_OPTIONS.map((option, index) => <option key={option} value={index === 0 ? "" : option} className="bg-gray-900">{t(option)}</option>)}
                       </select>
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="contact-message" className={labelClass}>Descreva seu projeto (opcional)</label>
-                    <textarea id="contact-message" name="message" maxLength={5000} value={formData.message} onChange={handleChange} rows={4} placeholder="Conte sobre o seu negócio e o que precisa..." className="input-field resize-y" />
+                    <label htmlFor="contact-message" className={labelClass}>{t("Descreva seu projeto (opcional)")}</label>
+                    <textarea id="contact-message" name="message" maxLength={5000} value={formData.message} onChange={handleChange} rows={4} placeholder={t("Conte sobre o seu negócio e o que precisa...")} className="input-field resize-y" />
                   </div>
-                  {submitError && <p ref={errorRef} tabIndex={-1} role="alert" className="text-red-300 text-sm">{submitError}</p>}
-                  {(!formAvailable || submitError) && <div className="flex flex-wrap gap-4 text-sm"><a className="text-blue-300 underline py-2" href={LINKS.whatsappOrcamento} target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a><a className="text-blue-300 underline py-2" href={`mailto:${COMPANY.email}`}>Enviar e-mail</a></div>}
-                  <button type="submit" disabled={isSubmitting || !formAvailable} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"><Send size={16} aria-hidden="true" />{isSubmitting ? "Enviando..." : "Solicitar orçamento grátis"}</button>
+                  {submitError && <p ref={errorRef} tabIndex={-1} role="alert" className="text-red-300 text-sm">{t(submitError)}</p>}
+                  {(!formAvailable || submitError) && <div className="flex flex-wrap gap-4 text-sm"><a className="text-blue-300 underline py-2" href={localizedHref(LINKS.whatsappOrcamento, locale)} target="_blank" rel="noopener noreferrer">{t("Falar pelo WhatsApp")}</a><a className="text-blue-300 underline py-2" href={localizedHref(`mailto:${COMPANY.email}`, locale)}>{t("Enviar e-mail")}</a></div>}
+                  <button type="submit" disabled={isSubmitting || !formAvailable} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"><Send size={16} aria-hidden="true" />{t(isSubmitting ? "Enviando..." : "Solicitar orçamento grátis")}</button>
                 </form>
               )}
-              <output aria-live="polite" className="sr-only">{isSubmitting ? "Enviando sua mensagem. Aguarde a confirmação." : isSubmitted ? "Mensagem enviada com sucesso." : ""}</output>
+              <output aria-live="polite" className="sr-only">{t(isSubmitting ? "Enviando sua mensagem. Aguarde a confirmação." : isSubmitted ? "Mensagem enviada com sucesso." : "")}</output>
             </div>
           </div>
         </div>

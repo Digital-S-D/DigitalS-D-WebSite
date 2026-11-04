@@ -1,3 +1,5 @@
+
+import { createTranslator, type Locale } from "@/lib/i18n";
 import { Zap, Target, Sparkles, ShieldCheck, type LucideIcon } from "lucide-react";
 import { PILLARS } from "@/lib/constants";
 
@@ -12,23 +14,23 @@ const iconMap: Record<string, LucideIcon> = {
   ShieldCheck,
 };
 
-export function PillarsSection() {
+export function PillarsSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section className="py-20 md:py-28 bg-brand-navy">
       <div className="container-custom">
 
         {/* ─── CABEÇALHO ────────────────────────────────────────────── */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="badge mb-4">Nossos Pilares</span>
+          <span className="badge mb-4">{t("Nossos Pilares")}</span>
           {/* SUBSTITUA: Título da seção */}
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            O que nos torna{" "}
-            <span className="text-gradient">diferentes</span>
+            {t("O que nos torna")}{t(" ")}
+            <span className="text-gradient">{t("diferentes")}</span>
           </h2>
           {/* SUBSTITUA: Subtítulo */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
-            Quatro princípios que guiam cada projeto que colocamos no ar.
-          </p>
+            {t("Quatro princípios que guiam cada projeto que colocamos no ar.")}</p>
         </div>
 
         {/* ─── GRID DE PILARES ─────────────────────────────────────── */}
@@ -51,12 +53,12 @@ export function PillarsSection() {
 
                 {/* SUBSTITUA: Título do pilar */}
                 <h3 className="font-sora font-semibold text-white text-lg mb-2">
-                  {pillar.title}
+                  {t(pillar.title)}
                 </h3>
 
                 {/* SUBSTITUA: Descrição do pilar */}
                 <p className="font-outfit text-gray-400 text-sm leading-relaxed">
-                  {pillar.description}
+                  {t(pillar.description)}
                 </p>
 
                 {/* Gradiente de borda inferior decorativo, no padrão da Home */}

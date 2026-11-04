@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, relative, dirname, sep } from "node:path";
 import { test } from "node:test";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { createSegmentRequestKeyPart, convertSegmentPathToStaticExportFilename } = require("next/dist/shared/lib/segment-cache/segment-value-encoding.js");
 
 const origin = "https://digitalsd.com.br";
 const root = process.cwd();
@@ -15,7 +18,7 @@ function pagePaths(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) return pagePaths(path);
     if (entry.name !== "page.tsx") return [];
-    const route = relative(join(root, "app"), dirname(path)).split(sep).filter(Boolean).join("/");
+    const route = relative(join(root, "app"), dirname(path)).split(sep).filter((segment) => segment && !segment.startsWith("(")).join("/");
     return [route ? `/${route}/` : "/"];
   });
 }
@@ -113,7 +116,11 @@ test("a página de erro permanece fora da indexação", () => {
 test("os segmentos de navegação existem nos caminhos planos pedidos pelo navegador", () => {
   for (const page of pages) {
     const segments = page.path.split("/").filter(Boolean);
-    const filename = `__next.${[...segments, "__PAGE__"].join(".")}.txt`;
+    // Use the router's encoding: route groups are internal segments even
+    // though they are omitted from public URLs.
+    const internalSegments = page.path.startsWith("/en/") ? segments : ["(pt)", ...segments];
+    const key = "/" + [...internalSegments, "__PAGE__"].map(createSegmentRequestKeyPart).join("/");
+    const filename = convertSegmentPathToStaticExportFilename(key);
     assert.ok(existsSync(join(out, ...segments, filename)), `${page.path}: ${filename}`);
   }
 });
@@ -136,5 +143,53 @@ test("os três casos têm idiomas pareados, contato e evidências sem expor o c�
     assert.ok(en.html.includes("mailto:digitalsd.contato@gmail.com"));
     assert.match(decode(en.html), /Implementation decisions|Evidence/);
     assert.equal(meta(en.html, "og:locale")[0], "en_US");
+  }
+});
+
+test("as nove páginas têm tradução completa e a mesma estrutura visual nos dois idiomas", () => {
+  const portuguese = pages.filter((page) => !page.path.startsWith("/en/"));
+  assert.equal(portuguese.length, 9);
+  assert.equal(pages.length, 18);
+  for (const pt of portuguese) {
+    const en = pages.find((page) => page.path === `/en${pt.path}`);
+    assert.ok(en, pt.path);
+    assert.match(pt.html, /<html[^>]*lang="pt-BR"/);
+    assert.match(en.html, /<html[^>]*lang="en"/);
+    const structure = (html) => {
+      const main = html.match(/<main\b[\s\S]*?<\/main>/)?.[0];
+      assert.ok(main);
+      return Array.from(main.matchAll(/<([a-z][\w-]*)\b[^>]*>/g), ([tag, name]) => ({ name, className: attributes(tag).class || "" }));
+    };
+    assert.deepEqual(structure(en.html), structure(pt.html), `Estrutura/classes divergentes: ${pt.path}`);
+    const images = (html) => Array.from(html.matchAll(/<img\b[^>]*>/g), ([tag]) => attributes(tag).src);
+    assert.deepEqual(images(en.html), images(pt.html), `Imagens divergentes: ${pt.path}`);
+    const alternates = Array.from(en.html.matchAll(/<link\b[^>]*>/g), ([tag]) => attributes(tag)).filter((link) => link.rel === "alternate");
+    assert.ok(alternates.some((link) => link.hrefLang === "pt-BR" && link.href === pt.url));
+    assert.ok(alternates.some((link) => link.hrefLang === "en" && link.href === en.url));
+    assert.ok(alternates.some((link) => link.hrefLang === "x-default" && link.href === pt.url));
+    assert.match(en.html, /aria-label="Language"/);
+    assert.match(en.html, /Skip to content/);
+  }
+});
+
+test("o HTML inglês não deixa textos portugueses com tradução cadastrada", () => {
+  const translations = JSON.parse(read(join(root, "lib/translations/en.json")));
+  for (const page of pages.filter((item) => item.path.startsWith("/en/"))) {
+    const html = page.html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+    const texts = Array.from(html.matchAll(/>([^<>]+)</g), ([, value]) => decode(value).replace(/\s+/g, " ").trim());
+    for (const value of texts) {
+      assert.ok(!translations[value] || translations[value] === value, `${page.path}: texto sem tradução: ${value}`);
+    }
+  }
+});
+
+test("o formulário evita GET nativo e tem alternativa sem JavaScript nos dois idiomas", () => {
+  for (const path of ["/", "/en/"]) {
+    const html = pages.find((page) => page.path === path).html;
+    const forms = Array.from(html.matchAll(/<form\b[^>]*>/g), ([tag]) => attributes(tag));
+    assert.equal(forms.length, 1);
+    assert.equal(forms[0].method, "dialog", path);
+    assert.match(html, /<noscript>/);
+    assert.match(html, /mailto:digitalsd.contato@gmail.com/);
   }
 });

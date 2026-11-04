@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
+import { createTranslator, localePath } from "./i18n";
 import { COMPANY, TEAM_MEMBERS } from "./constants";
 
 // The public domain remains canonical for previews and subdirectory builds.
 export const SITE_URL = "https://digitalsd.com.br";
 
-export const PUBLIC_PATHS = [
-  "/",
-  "/atendimento/",
-  "/perguntas-frequentes/",
-  "/sobre/",
-  "/portfolio/odontohub/",
-  "/portfolio/alvorada/",
-  "/portfolio/advocacia-digital/",
-  "/en/portfolio/advocacia-digital/",
-  "/en/portfolio/alvorada/",
-  "/en/portfolio/odontohub/",
-  "/privacidade/",
-  "/termos/",
-] as const;
+export const PORTUGUESE_PATHS = ["/", "/atendimento/", "/perguntas-frequentes/", "/sobre/", "/portfolio/odontohub/", "/portfolio/alvorada/", "/portfolio/advocacia-digital/", "/privacidade/", "/termos/"] as const;
+export const PUBLIC_PATHS = [...PORTUGUESE_PATHS, ...PORTUGUESE_PATHS.map((path) => localePath(path, "en"))];
 
 export function siteUrl(path: string): string {
   return new URL(path, `${SITE_URL}/`).href;
@@ -40,10 +29,11 @@ export function pageMetadata(
   const shareImage = { ...image, url: siteUrl(image.url) };
   const english = path.startsWith("/en/");
   const portuguesePath = english ? path.slice(3) : path;
-  const languages = portuguesePath.startsWith("/portfolio/") ? {
+  const languages = {
     "pt-BR": siteUrl(portuguesePath),
     "en": siteUrl(`/en${portuguesePath}`),
-  } : undefined;
+    "x-default": siteUrl(portuguesePath),
+  };
   return {
     title,
     description,
@@ -86,3 +76,11 @@ export const ORGANIZATION = {
     url: siteUrl("/atendimento/"),
   },
 };
+
+// Reuse the Portuguese page metadata; only language-dependent text/URLs differ.
+export function englishMetadata(metadata: Metadata): Metadata {
+  const t = createTranslator("en");
+  const path = new URL(String(metadata.alternates?.canonical), SITE_URL).pathname;
+  const image = (metadata.openGraph as { images: ShareImage[] }).images[0];
+  return pageMetadata(localePath(path, "en"), t(String(metadata.title)), t(metadata.description ?? ""), { ...image, alt: t(image.alt) });
+}

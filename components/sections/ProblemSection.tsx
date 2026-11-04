@@ -1,3 +1,5 @@
+
+import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import { XCircle, CheckCircle, AlertTriangle } from "lucide-react";
 
 // ─── PROBLEMAS VS SOLUÇÕES ────────────────────────────────────────────
@@ -64,7 +66,8 @@ const comparisons = [
   },
 ];
 
-export function ProblemSection() {
+export function ProblemSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section className="py-20 md:py-28 bg-brand-navy" id="sobre">
       <div className="container-custom">
@@ -74,17 +77,14 @@ export function ProblemSection() {
           {/* SUBSTITUA: Tag acima do título */}
           <span className="badge mb-4">
             <AlertTriangle size={12} />
-            A realidade das PMEs e autônomos
-          </span>
+            {t("A realidade das PMEs e autônomos")}</span>
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4">
-            Problemas que custam{" "}
-            <span className="text-gradient">clientes e dinheiro</span>
+            {t("Problemas que custam")}{t(" ")}
+            <span className="text-gradient">{t("clientes e dinheiro")}</span>
           </h2>
           {/* SUBSTITUA: Subtítulo da seção */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
-            A maioria das PMEs e dos profissionais autônomos perde clientes todo dia
-            por causa de problemas digitais que têm solução simples e acessível.
-          </p>
+            {t("A maioria das PMEs e dos profissionais autônomos perde clientes todo dia por causa de problemas digitais que têm solução simples e acessível.")}</p>
         </div>
 
         {/* ─── GRID DE COMPARAÇÃO ─────────────────────────────────────── */}
@@ -109,11 +109,11 @@ export function ProblemSection() {
                     <div>
                       {/* SUBSTITUA: Título do problema */}
                       <h3 className="font-sora font-semibold text-white text-base mb-1">
-                        {item.problem.title}
+                        {t(item.problem.title)}
                       </h3>
                       {/* SUBSTITUA: Descrição do problema */}
                       <p className="font-outfit text-gray-400 text-sm leading-relaxed">
-                        {item.problem.description}
+                        {t(item.problem.description)}
                       </p>
                     </div>
                   </div>
@@ -140,11 +140,11 @@ export function ProblemSection() {
                     <div>
                       {/* SUBSTITUA: Título da solução */}
                       <h3 className="font-sora font-semibold text-white text-base mb-1">
-                        {item.solution.title}
+                        {t(item.solution.title)}
                       </h3>
                       {/* SUBSTITUA: Descrição da solução */}
                       <p className="font-outfit text-gray-400 text-sm leading-relaxed">
-                        {item.solution.description}
+                        {t(item.solution.description)}
                       </p>
                     </div>
                   </div>
@@ -158,12 +158,10 @@ export function ProblemSection() {
         <div className="mt-14 text-center">
           <p className="font-outfit text-gray-400 text-base mb-4">
             {/* SUBSTITUA: Chamada de urgência / benefício */}
-            Pronto para ter um site que trabalha por você?
-          </p>
+            {t("Pronto para ter um site que trabalha por você?")}</p>
           {/* SUBSTITUA: href para WhatsApp ou formulário */}
-          <a href="#contato" className="btn-primary text-sm">
-            Pedir orçamento
-            <CheckCircle size={16} />
+          <a href={localizedHref("#contato", locale)} className="btn-primary text-sm">
+            {t("Pedir orçamento")}<CheckCircle size={16} />
           </a>
         </div>
       </div>

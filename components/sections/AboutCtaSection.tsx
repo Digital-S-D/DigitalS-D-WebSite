@@ -1,3 +1,5 @@
+
+import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -5,7 +7,8 @@ import { ArrowRight } from "lucide-react";
 // Aponta para "/#contato" (o formulário real, que vive na Home) em vez de
 // duplicar o formulário aqui — mantém uma única fonte de verdade para leads.
 
-export function AboutCtaSection() {
+export function AboutCtaSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section className="pb-20 md:pb-28 bg-brand-navy">
       <div className="container-custom">
@@ -17,19 +20,15 @@ export function AboutCtaSection() {
           <div className="relative z-10">
             {/* SUBSTITUA: Título de encerramento, retomando a metáfora do Hero */}
             <h2 className="font-sora font-bold text-2xl md:text-4xl text-white mb-4">
-              Você explica seu negócio. A equipe orienta o próximo passo.
-            </h2>
+              {t("Você explica seu negócio. A equipe orienta o próximo passo.")}</h2>
             {/* SUBSTITUA: Parágrafo de convite */}
             <p className="font-outfit text-gray-400 text-base md:text-lg mb-8 max-w-xl mx-auto">
-              Você pode começar sem entender de tecnologia. Explicamos as opções,
-              organizamos os materiais com você e combinamos as etapas do projeto.
-            </p>
+              {t("Você pode começar sem entender de tecnologia. Explicamos as opções, organizamos os materiais com você e combinamos as etapas do projeto.")}</p>
             {/* Link para o formulário de contato, que vive na Home */}
-            <Link href="/#contato" className="btn-primary text-base px-8 py-4">
-              Conversar sobre meu site
-              <ArrowRight size={18} />
+            <Link href={localizedHref("/#contato", locale)} className="btn-primary text-base px-8 py-4">
+              {t("Conversar sobre meu site")}<ArrowRight size={18} />
             </Link>
-            <p className="mt-5"><Link href="/atendimento" className="inline-flex py-3 text-blue-300 underline underline-offset-4">Entender o acompanhamento e as atualizações</Link></p>
+            <p className="mt-5"><Link href={localizedHref("/atendimento", locale)} className="inline-flex py-3 text-blue-300 underline underline-offset-4">{t("Entender o acompanhamento e as atualizações")}</Link></p>
           </div>
         </div>
       </div>

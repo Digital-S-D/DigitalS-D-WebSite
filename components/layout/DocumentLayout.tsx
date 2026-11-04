@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
+import { createTranslator, type Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/seo";
 import { BASE_PATH, COMPANY } from "@/lib/constants";
 
@@ -18,15 +19,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
+export default function DocumentLayout({
+  children, locale = "pt",
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; locale?: Locale;
 }) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
+    <html lang={locale === "en" ? "en" : "pt-BR"} className="scroll-smooth">
       <body className="font-outfit bg-brand-navy text-white antialiased">
-        <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:text-brand-navy focus:p-3">Pular para o conteúdo</a>
+        <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:text-brand-navy focus:p-3">{createTranslator(locale)("Pular para o conteúdo")}</a>
         {children}
       </body>
     </html>

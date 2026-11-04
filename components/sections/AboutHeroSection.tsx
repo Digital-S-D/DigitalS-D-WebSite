@@ -1,10 +1,13 @@
+
+import { createTranslator, type Locale } from "@/lib/i18n";
 import { ArrowDown } from "lucide-react";
 
 // ─── HERO DE PROPÓSITO ─────────────────────────────────────────────────
 // SUBSTITUA: Este título deve responder "por que a agência existe",
 // não "o que ela vende" (isso já está na Home). Máximo 2-3 linhas.
 
-export function AboutHeroSection() {
+export function AboutHeroSection({ locale = "pt" }: { locale?: Locale } = {}) {
+  const t = createTranslator(locale);
   return (
     <section
       id="sobre-hero"
@@ -22,7 +25,7 @@ export function AboutHeroSection() {
           {/* Badge */}
           <div className="flex justify-center mb-6 animate-fadeInUp opacity-0" style={{ animationFillMode: "both" }}>
             {/* SUBSTITUA: Texto da badge */}
-            <span className="badge">Sobre a Digital S&D</span>
+            <span className="badge">{t("Sobre a Digital S&D")}</span>
           </div>
 
           {/* ─── TÍTULO DE PROPÓSITO ────────────────────────────────────
@@ -34,10 +37,9 @@ export function AboutHeroSection() {
                        animate-fadeInUp opacity-0 animation-delay-100"
             style={{ animationFillMode: "both" }}
           >
-            Não construímos apenas sites,{" "}
+            {t("Não construímos apenas sites,")}{t(" ")}
             <span className="text-brand-blue text-glow">
-              construímos pontes entre empresas e clientes
-            </span>
+              {t("construímos pontes entre empresas e clientes")}</span>
           </h1>
 
           {/* ─── SUBTÍTULO ──────────────────────────────────────────────
@@ -50,10 +52,7 @@ export function AboutHeroSection() {
                        animate-fadeInUp opacity-0 animation-delay-200"
             style={{ animationFillMode: "both" }}
           >
-            Acreditamos que pequenas empresas e profissionais autônomos merecem
-            uma presença digital tão boa quanto a de qualquer grande marca — sem
-            precisar de um orçamento de grande marca para isso.
-          </p>
+            {t("Acreditamos que pequenas empresas e profissionais autônomos merecem uma presença digital tão boa quanto a de qualquer grande marca — sem precisar de um orçamento de grande marca para isso.")}</p>
         </div>
       </div>
 

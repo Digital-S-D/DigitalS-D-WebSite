@@ -1,3 +1,5 @@
+
+import { type Locale } from "@/lib/i18n";
 // ─── PÁGINA "TERMOS DE USO" (/termos) ───────────────────────────────────
 // Os textos ficam em lib/legal.ts (TERMS_OF_USE).
 
@@ -12,14 +14,14 @@ export const metadata = pageMetadata(
   TERMS_OF_USE.description,
 );
 
-export default function TermsPage() {
+export default function TermsPage({ locale = "pt" }: { locale?: Locale } = {}) {
   return (
     <>
-      <Header />
+      <Header locale={locale} />
       <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
-        <LegalDocumentSection doc={TERMS_OF_USE} />
+        <LegalDocumentSection locale={locale} doc={TERMS_OF_USE} />
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

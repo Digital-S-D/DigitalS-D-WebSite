@@ -12,6 +12,9 @@ export const PUBLIC_PATHS = [
   "/portfolio/odontohub/",
   "/portfolio/alvorada/",
   "/portfolio/advocacia-digital/",
+  "/en/portfolio/advocacia-digital/",
+  "/en/portfolio/alvorada/",
+  "/en/portfolio/odontohub/",
   "/privacidade/",
   "/termos/",
 ] as const;
@@ -35,14 +38,20 @@ export function pageMetadata(
 ): Metadata {
   const url = siteUrl(path);
   const shareImage = { ...image, url: siteUrl(image.url) };
+  const english = path.startsWith("/en/");
+  const portuguesePath = english ? path.slice(3) : path;
+  const languages = portuguesePath.startsWith("/portfolio/") ? {
+    "pt-BR": siteUrl(portuguesePath),
+    "en": siteUrl(`/en${portuguesePath}`),
+  } : undefined;
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages },
     openGraph: {
       title, description, url,
       siteName: COMPANY.name,
-      locale: "pt_BR",
+      locale: english ? "en_US" : "pt_BR",
       type: "website",
       images: [shareImage],
     },

@@ -1,3 +1,4 @@
+import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -11,7 +12,7 @@ export const metadata = pageMetadata(
   "/portfolio/advocacia-digital/",
   "Advocacia Digital — site institucional demonstrativo | Digital S&D",
   "Conheça o projeto demonstrativo Advocacia Digital: site institucional da Digital S&D com áreas de atuação, perfis fictícios, conteúdo editorial e navegação mobile.",
-  { url: ADVOCACIA_DIGITAL.cover, width: 1425, height: 930, alt: "Captura real do site institucional demonstrativo Advocacia Digital" },
+  { url: ADVOCACIA_DIGITAL.cover, width: 1425, height: 940, alt: "Captura real do site institucional demonstrativo Advocacia Digital" },
 );
 
 const imageRoot = `${BASE_PATH}/images/portfolio/advocacia-digital`;
@@ -26,6 +27,7 @@ export default function AdvocaciaDigitalPage() {
             <Link href="/#portfolio" className="inline-flex py-3 mb-5 text-sm text-blue-300 underline underline-offset-4">Voltar aos projetos</Link>
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
+                <Link href="/en/portfolio/advocacia-digital/" hrefLang="en" lang="en" className="block mb-4 text-blue-300 underline underline-offset-4">Read in English</Link>
                 <span className="badge mb-5">{ADVOCACIA_DIGITAL.category}</span>
                 <h1 className="font-sora font-bold text-4xl md:text-5xl mb-5">Advocacia Digital<span className="block text-gradient text-2xl md:text-3xl mt-4">Uma apresentação clara, da primeira visita ao contato.</span></h1>
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">Um conceito de site institucional que organiza serviços, equipe e conteúdo em uma identidade visual sóbria. A navegação ajuda o visitante a explorar cada área e encontrar o próximo passo.</p>
@@ -34,14 +36,15 @@ export default function AdvocaciaDigitalPage() {
               </div>
               <figure>
                 <a href={`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`} aria-label="Ampliar captura da abertura da Advocacia Digital" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`} alt="Abertura real da demonstração Advocacia Digital no desktop, com tipografia editorial, chamadas de navegação e aviso de escritório fictício." width={1425} height={930} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`} alt="Abertura real da demonstração Advocacia Digital no desktop, com tipografia editorial, chamadas de navegação e aviso de escritório fictício." width={1425} height={940} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Captura do projeto em execução. Os números descrevem os elementos da demonstração, sem representar clientes ou resultados. Toque para ampliar.</figcaption>
               </figure>
             </div>
           </div>
         </section>
-        <section className="py-16 md:py-24" aria-labelledby="advocacia-navegacao">
+        <CaseProjectDetails slug="advocacia-digital" />
+        <section className="py-16 md:py-24" id="telas" aria-labelledby="advocacia-navegacao">
           <div className="container-custom">
             <div className="max-w-3xl mb-10">
               <span className="badge mb-4">Estrutura e navegação</span>
@@ -51,7 +54,7 @@ export default function AdvocaciaDigitalPage() {
             <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start">
               <figure>
                 <a href={`${imageRoot}/areas.webp`} aria-label="Ampliar captura das áreas de atuação" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${imageRoot}/areas.webp`} alt="Página real de áreas de atuação da demonstração, com cartões de serviços e links para páginas específicas." width={1425} height={930} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
+                  <Image src={`${imageRoot}/areas.webp`} alt="Página real de áreas de atuação da demonstração, com cartões de serviços e links para páginas específicas." width={1425} height={940} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </a>
                 <figcaption className="text-gray-400 text-sm mt-3">Organização dos serviços em cartões, com páginas próprias para detalhar cada área fictícia.</figcaption>
               </figure>
@@ -73,7 +76,7 @@ export default function AdvocaciaDigitalPage() {
         <section className="py-16 md:py-24">
           <div className="container-custom grid lg:grid-cols-2 gap-10 items-center">
             <figure>
-              <a href={`${imageRoot}/contato.webp`} aria-label="Ampliar captura do formulário demonstrativo" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"><Image src={`${imageRoot}/contato.webp`} alt="Página de contato real da demonstração, com aviso de simulação sem envio, campos identificados e canais de atendimento não conectados." width={1425} height={930} sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /></a>
+              <a href={`${imageRoot}/contato.webp`} aria-label="Ampliar captura do formulário demonstrativo" className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"><Image src={`${imageRoot}/contato.webp`} alt="Página de contato real da demonstração, com aviso de simulação sem envio, campos identificados e canais de atendimento não conectados." width={1425} height={940} sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /></a>
               <figcaption className="text-gray-400 text-sm mt-3">O formulário demonstra a interação. Nenhuma consulta é recebida ou agendada.</figcaption>
             </figure>
             <div><span className="badge mb-4">Um contato com contexto</span><h2 className="font-sora font-semibold text-3xl mb-5">O próximo passo precisa ser compreensível.</h2><p className="text-gray-300 leading-relaxed mb-5">Os rótulos orientam o preenchimento e a validação indica o primeiro campo que precisa de atenção. A confirmação explica que a simulação terminou, sem prometer um atendimento que não existe.</p><p className="text-gray-400 text-sm mb-5">Uma implantação real exige conteúdo e credenciais verificados, revisão jurídica, canais autorizados e integração de envio testada. A demonstração usa conteúdo local e não tem CMS conectado.</p><a href={ADVOCACIA_DIGITAL.repository} className="inline-flex py-3 text-blue-300 underline underline-offset-4">Ver o código do projeto no GitHub</a></div>

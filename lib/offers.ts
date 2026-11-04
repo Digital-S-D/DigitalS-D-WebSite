@@ -124,6 +124,6 @@ export const FAQ_ITEMS = [
   {
     id: "odontohub", category: "Recursos e atendimento", home: false,
     question: "O que é o OdontoHub? Posso contratar algo parecido?",
-    answer: "O OdontoHub é um projeto demonstrativo desenvolvido pela equipe para mostrar a experiência de um sistema de gestão odontológica personalizável. As telas usam dados fictícios e armazenamento no navegador. Você pode conversar conosco sobre uma solução semelhante; implantação, autenticação, banco de dados, permissões e integrações são definidos conforme a necessidade. A demonstração não é uma operação clínica real.",
+    answer: "O OdontoHub é uma demonstração de interfaces para gestão odontológica. Usa dados fictícios: agenda e alterações de negócio ficam na memória da página; somente cor e tema persistem no navegador. Não há autenticação, banco ou API de dados conectados. Você pode conversar conosco sobre uma solução semelhante; implantação, permissões e integrações são definidas conforme a necessidade. A demonstração não é uma operação clínica real.",
   },
 ];

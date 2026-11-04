@@ -5,7 +5,8 @@ Inventário iniciado em 03/11/2026. Distinguir o que foi desenvolvido, o que foi
 | Projeto | Natureza | Evidência disponível | O que permite avaliar | O que não foi comprovado |
 | --- | --- | --- | --- | --- |
 | Alvorada | Landing page demonstrativa, negócio fictício | HTML/CSS/JS originais, capturas desktop/mobile e apresentação de apartamentos | Organização da oferta, identidade visual, caminhos de contato e adaptação de layout | Cliente atendido, campanha em operação, volume de leads, vendas, retorno financeiro, atendimento imobiliário |
-| OdontoHub | Sistema demonstrativo interno com dados fictícios | Capturas da interface e escopo registrado na etapa 2 | Agenda, prontuário, financeiro demonstrativo e personalização visual | Implantação clínica real, autenticação real, tratamento de dados de pacientes, receita ou satisfação de clientes |
+| OdontoHub | Interfaces demonstrativas internas com dados fictícios | Capturas atuais, README PT/EN e roteiro verificado no repositório privado | Agenda com conflito local, busca, odontograma e aparência; somente cor/tema persistem no navegador. Indicadores financeiros são constantes, sem módulo de movimentações | Backend conectado, permissões por usuário, implantação clínica, pagamentos, tratamento de dados reais ou resultados comerciais |
+| Advocacia Digital | Site institucional demonstrativo, escritório fictício | 26 páginas exportadas, seis testes, capturas e simulação de contato verificada | Hierarquia editorial, navegação, validação sem envio e estrutura de conteúdo local | Atendimento jurídico, credenciais, clientes, CMS conectado ou retorno comercial |
 | Site Digital S&D | Site próprio | Código, exportação estática e teste de formulário anterior confirmado pelo usuário na caixa de entrada | Implementação de site próprio e funcionamento do fluxo de contato no teste realizado | Resultado comercial de terceiros ou cumprimento futuro do prazo de resposta |
 
 ## Como transformar um trabalho autorizado em um caso público
@@ -28,3 +29,7 @@ Depoimentos devem usar a opinião real, com autoria e permissão registradas. Ma
 - Situação da autorização de divulgação.
 
 Não há depoimentos de clientes, métricas de vendas ou novas autorizações de divulgação obtidos nesta execução.
+
+## Revisão dos casos em português e inglês
+
+Os casos atuais usam `lib/case-studies.ts` e rotas pareadas em `/portfolio/` e `/en/portfolio/`. Capturas substituídas por imagens das versões verificadas. Alvorada passou cinco testes de navegador, Advocacia seis testes e build de 26 páginas, e OdontoHub lint, quatro testes e build. A agenda e a aparência do OdontoHub foram verificadas em execução; a distinção entre memória da página e persistência visual é explícita no caso. O site da SD passou lint, build, tipos e 12 testes, incluindo canonical, sitemap e alternância de idioma. Os testes não medem resultados de clientes.

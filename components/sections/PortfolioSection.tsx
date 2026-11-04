@@ -5,8 +5,8 @@ import { BASE_PATH } from "@/lib/constants";
 import { ADVOCACIA_DIGITAL, ALVORADA, ODONTOHUB } from "@/lib/portfolio";
 
 const projects = [
-  { ...ADVOCACIA_DIGITAL, width: 1425, height: 930, alt: "Captura real da abertura da Advocacia Digital, com fundo claro, tipografia editorial e aviso de projeto demonstrativo.", note: "Conceito de escritório fictício. Perfis e textos ilustrativos; formulário com simulação local, sem envio de dados." },
-  { ...ALVORADA, width: 1425, height: 940, alt: "Captura real da abertura da landing page demonstrativa Alvorada, com identidade azul e dourada e chamada para visita.", note: "Captura da landing page desenvolvida pela equipe. Empresa, empreendimento e condições são fictícios." },
+  { ...ADVOCACIA_DIGITAL, width: 1425, height: 940, alt: "Captura real da abertura da Advocacia Digital, com fundo claro, tipografia editorial e aviso de projeto demonstrativo.", note: "Conceito de escritório fictício. Perfis e textos ilustrativos; formulário com simulação local, sem envio de dados." },
+  { ...ALVORADA, width: 1440, height: 960, alt: "Captura real da abertura da landing page demonstrativa Alvorada, com identidade azul e dourada e chamada para testar o formulário.", note: "Captura da landing page desenvolvida pela equipe. Empresa, empreendimento e condições são fictícios." },
   { ...ODONTOHUB, width: 1425, height: 940, alt: "Visão geral real do projeto demonstrativo OdontoHub, com agenda e indicadores fictícios.", note: "Desenvolvimento interno com dados fictícios. Uma demonstração de interface e personalização." },
 ];
 

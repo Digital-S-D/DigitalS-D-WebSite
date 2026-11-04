@@ -1,3 +1,4 @@
+import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
 import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import { BASE_PATH } from "@/lib/constants";
 import { ODONTOHUB } from "@/lib/portfolio";
 import { quoteHref } from "@/lib/offers";
 
-const description = "Conheça o OdontoHub, projeto demonstrativo da Digital S&D com agenda, prontuário, financeiro e personalização para a rotina odontológica.";
+const description = "Conheça o OdontoHub, projeto demonstrativo da Digital S&D com agenda, pacientes e personalização para a rotina odontológica.";
 export const metadata = pageMetadata(
   "/portfolio/odontohub/",
   "OdontoHub — projeto demonstrativo | Digital S&D",
@@ -24,10 +25,11 @@ export default function OdontoHubPage() {
           <div className="container-custom">
             <Link href="/#portfolio" className="inline-flex py-3 mb-5 text-sm text-blue-300 underline underline-offset-4">Voltar aos projetos</Link>
             <div className="max-w-3xl">
-              <span className="badge mb-5">Projeto demonstrativo · Desenvolvimento interno</span>
+              <Link href="/en/portfolio/odontohub/" hrefLang="en" lang="en" className="block mb-4 text-blue-300 underline underline-offset-4">Read in English</Link>
+                <span className="badge mb-5">Projeto demonstrativo · Desenvolvimento interno</span>
               <h1 className="font-sora font-bold text-4xl md:text-6xl mb-5">OdontoHub{" "}<span className="block text-gradient text-2xl md:text-4xl mt-3">A rotina da clínica, em uma experiência conectada.</span></h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">Uma vitrine da nossa capacidade de transformar rotinas em interfaces claras: da visão do dia ao contexto do paciente, com identidade visual personalizável.</p>
-              <p className="text-sm text-blue-200 border-l-2 border-blue-400 pl-4 mb-7">Criado pela equipe Digital S&D para demonstração. Usa dados fictícios e armazenamento no navegador; não representa uma implantação em clínica cliente.</p>
+              <p className="text-sm text-blue-200 border-l-2 border-blue-400 pl-4 mb-7">Criado pela equipe Digital S&D para demonstração. Usa dados fictícios. Os dados de negócio ficam na memória da página; apenas cor e tema persistem no navegador. Não é uma implantação em clínica cliente.</p>
               <div className="flex flex-wrap gap-3"><a href="#telas" className="btn-primary">Explorar as telas <ArrowRight size={17} aria-hidden="true" /></a><Link href={quoteHref("Sistema Web personalizado")} className="btn-outline">Conversar sobre algo parecido</Link></div>
             </div>
             <figure className="mt-10 md:mt-12">
@@ -36,10 +38,11 @@ export default function OdontoHubPage() {
             </figure>
           </div>
         </section>
+        <CaseProjectDetails slug="odontohub" />
         <section className="py-12 md:py-20 bg-brand-black">
           <div className="container-custom grid md:grid-cols-2 gap-8 md:gap-16">
-            <div><span className="text-blue-300 text-sm">O problema explorado</span><h2 className="font-sora font-semibold text-2xl md:text-3xl mt-3 mb-4">Informações que precisam fazer sentido juntas.</h2><p className="text-gray-300 leading-relaxed">Agenda, histórico do paciente e movimentações financeiras fazem parte da mesma rotina. O projeto explora como apresentar esse contexto com navegação direta, estados claros e diferentes formas de consultar a informação.</p></div>
-            <div><span className="text-blue-300 text-sm">A experiência construída</span><h2 className="font-sora font-semibold text-2xl md:text-3xl mt-3 mb-4">Do panorama ao detalhe.</h2><ul className="space-y-3 text-gray-300">{["Visão do dia e busca de pacientes", "Agenda com visualizações e regras de horário", "Prontuário, odontograma e anamnese", "Financeiro demonstrativo e personalização visual"].map((text) => <li key={text} className="flex items-start gap-3"><Check size={18} className="text-blue-300 shrink-0 mt-1" aria-hidden="true" />{text}</li>)}</ul></div>
+            <div><span className="text-blue-300 text-sm">O problema explorado</span><h2 className="font-sora font-semibold text-2xl md:text-3xl mt-3 mb-4">Informações que precisam fazer sentido juntas.</h2><p className="text-gray-300 leading-relaxed">Agenda, histórico do paciente e configurações fazem parte da mesma rotina. O projeto explora como apresentar esse contexto com navegação direta, estados claros e diferentes formas de consultar a informação.</p></div>
+            <div><span className="text-blue-300 text-sm">A experiência construída</span><h2 className="font-sora font-semibold text-2xl md:text-3xl mt-3 mb-4">Do panorama ao detalhe.</h2><ul className="space-y-3 text-gray-300">{["Visão do dia e busca de pacientes", "Agenda com visualizações e regras de horário", "Prontuário, odontograma e anamnese", "Indicadores financeiros fictícios e personalização visual"].map((text) => <li key={text} className="flex items-start gap-3"><Check size={18} className="text-blue-300 shrink-0 mt-1" aria-hidden="true" />{text}</li>)}</ul></div>
           </div>
         </section>
         <section id="telas" className="py-16 md:py-24">
@@ -66,7 +69,7 @@ export default function OdontoHubPage() {
           <div className="container-custom max-w-4xl">
             <h2 className="font-sora font-semibold text-2xl md:text-3xl mb-5">O que esta demonstração inclui — e a próxima etapa.</h2>
             <div className="grid sm:grid-cols-2 gap-6 mb-10">
-              <div className="rounded-xl border border-white/15 p-6"><h3 className="font-semibold text-lg mb-3">Nesta vitrine</h3><p className="text-gray-300 leading-relaxed">Interfaces navegáveis, dados fictícios, simulações locais e configurações de aparência. O financeiro não processa pagamentos, emite boletos ou envia cobranças.</p></div>
+              <div className="rounded-xl border border-white/15 p-6"><h3 className="font-semibold text-lg mb-3">Nesta vitrine</h3><p className="text-gray-300 leading-relaxed">Interfaces navegáveis, dados fictícios, simulações locais e configurações de aparência. Os indicadores financeiros são exemplos constantes; não há módulo de movimentações, pagamentos ou cobranças implementado.</p></div>
               <div className="rounded-xl border border-white/15 p-6"><h3 className="font-semibold text-lg mb-3">Em uma implantação</h3><p className="text-gray-300 leading-relaxed">Autenticação, banco de dados, permissões, integrações e os requisitos de privacidade e segurança são planejados e implementados conforme o projeto. A demo não deve receber dados clínicos reais.</p></div>
             </div>
             <div className="rounded-2xl bg-brand-blue/10 border border-brand-blue/30 p-6 md:p-9">

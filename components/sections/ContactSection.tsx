@@ -7,6 +7,7 @@ import { Send, CheckCircle, MessageCircle, Mail, Clock } from "lucide-react";
 import { BUDGET_OPTIONS, COMPANY, LINKS, SERVICE_OPTIONS } from "@/lib/constants";
 import { formatPhone, isFormEndpointConfigured, validateContact, type ContactData, type ContactErrors } from "@/lib/contact";
 import { CUSTOMER_CARE } from "@/lib/customer-care";
+import { MobileDetails } from "./MobileDetails";
 import { ContactServiceIntent } from "./ContactServiceIntent";
 
 const contactInfo = [
@@ -107,6 +108,14 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 max-w-5xl mx-auto">
           <div className="lg:col-span-2 space-y-5 min-w-0">
+            <div className="md:hidden">
+              <div className="flex flex-wrap gap-3">
+                <a className="btn-primary min-h-12 justify-center" href={localizedHref(LINKS.whatsappOrcamento, locale)} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a className="btn-outline min-h-12 justify-center" href={`mailto:${COMPANY.email}`}>{t("Enviar e-mail")}</a>
+              </div>
+              <p className="text-base text-gray-300 mt-3">{t(CUSTOMER_CARE.replyDescription)}</p>
+            </div>
+            <div className="hidden md:block space-y-5">
             {contactInfo.map((info) => (
               <div key={info.title} className="card-base">
                 <div className="flex items-start gap-4">
@@ -121,6 +130,7 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
             ))}
             <a href={localizedHref(LINKS.whatsappOrcamento, locale)} target="_blank" rel="noopener noreferrer" className="btn-primary w-full justify-center text-sm"><MessageCircle size={16} aria-hidden="true" />{t("Chamar no WhatsApp")}</a>
             <p className="text-xs text-gray-400 text-center leading-relaxed">{t("Seus dados são usados para responder ao seu contato.")}</p>
+            </div>
           </div>
           <div className="lg:col-span-3 min-w-0">
             <div className="rounded-2xl border border-white/10 bg-brand-navy p-5 md:p-8">
@@ -136,18 +146,15 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
                   <p className="text-sm text-gray-300">{t("Campos com * são obrigatórios.")}</p>
                   <noscript><p className="text-sm text-amber-200">{t("Ative o JavaScript para usar o formulário ou fale conosco pelo WhatsApp ou e-mail.")}</p></noscript>
                   {!formAvailable && <p className="text-sm text-amber-200">{t("O formulário está temporariamente indisponível. Entre em contato pelo WhatsApp ou e-mail.")}</p>}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label htmlFor="contact-name" className={labelClass}>{t("Nome *")}</label>
                       <input id="contact-name" name="name" type="text" autoComplete="name" required maxLength={120} value={formData.name} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "contact-name-error" : undefined} className="input-field" placeholder={t("Seu nome completo")} />
                       {t(fieldError("name"))}
                     </div>
-                    <div>
-                      <label htmlFor="contact-company" className={labelClass}>{t("Empresa (opcional)")}</label>
-                      <input id="contact-company" name="company" type="text" autoComplete="organization" maxLength={160} value={formData.company} onChange={handleChange} className="input-field" placeholder={t("Nome da empresa")} />
-                    </div>
+
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-email" className={labelClass}>{t("E-mail *")}</label>
                       <input id="contact-email" name="email" type="email" autoComplete="email" inputMode="email" required maxLength={254} value={formData.email} onChange={handleChange} onBlur={handleBlur} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "contact-email-error" : undefined} className="input-field" placeholder={t("seu@email.com.br")} />
@@ -160,7 +167,12 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
                       {t(fieldError("phone"))}
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <MobileDetails label={t("Adicionar detalhes do projeto (opcional)")}>
+                    <div>
+                      <label htmlFor="contact-company" className={labelClass}>{t("Empresa (opcional)")}</label>
+                      <input id="contact-company" name="company" type="text" autoComplete="organization" maxLength={160} value={formData.company} onChange={handleChange} className="input-field" placeholder={t("Nome da empresa")} />
+                    </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-service" className={labelClass}>{t("Serviço desejado (opcional)")}</label>
                       <select id="contact-service" name="service" value={formData.service} onChange={handleChange} className="input-field">
@@ -178,6 +190,7 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
                     <label htmlFor="contact-message" className={labelClass}>{t("Descreva seu projeto (opcional)")}</label>
                     <textarea id="contact-message" name="message" maxLength={5000} value={formData.message} onChange={handleChange} rows={4} placeholder={t("Conte sobre o seu negócio e o que precisa...")} className="input-field resize-y" />
                   </div>
+                  </MobileDetails>
                   {submitError && <p ref={errorRef} tabIndex={-1} role="alert" className="text-red-300 text-sm">{t(submitError)}</p>}
                   {(!formAvailable || submitError) && <div className="flex flex-wrap gap-4 text-sm"><a className="text-blue-300 underline py-2" href={localizedHref(LINKS.whatsappOrcamento, locale)} target="_blank" rel="noopener noreferrer">{t("Falar pelo WhatsApp")}</a><a className="text-blue-300 underline py-2" href={localizedHref(`mailto:${COMPANY.email}`, locale)}>{t("Enviar e-mail")}</a></div>}
                   <button type="submit" disabled={isSubmitting || !formAvailable} className="btn-primary w-full justify-center text-base py-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"><Send size={16} aria-hidden="true" />{t(isSubmitting ? "Enviando..." : "Solicitar orçamento grátis")}</button>

@@ -26,10 +26,10 @@ export default function HomePage({ locale = "pt" }: { locale?: Locale } = {}) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION).replace(/</g, "\\u003c") }} />
       <Header locale={locale} />
-      <main id="conteudo" tabIndex={-1} className="relative overflow-hidden">
+      <main id="conteudo" tabIndex={-1} className="home-page relative overflow-hidden">
         <HeroSection locale={locale} />
-        <PortfolioSection locale={locale} />
         <ServicesSection locale={locale} />
+        <PortfolioSection locale={locale} />
         <ProjectPlanSection locale={locale} />
         <FaqSection locale={locale} />
         <ContactSection locale={locale} />

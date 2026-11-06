@@ -9,6 +9,7 @@ import { CUSTOMER_CARE } from "@/lib/customer-care";
 
 export function ProjectPlanSection({ locale = "pt" }: { locale?: Locale } = {}) {
   const t = createTranslator(locale);
+  const summaries = ["Conte seu objetivo; ajudamos a organizar o pedido.", "Receba a proposta, reúna os materiais e aprove as versões.", "Receba os acessos e as orientações para atualizar seu site."];
   return (
     <section id="como-funciona" className="py-16 md:py-24 bg-brand-black">
       <div className="container-custom">
@@ -25,11 +26,12 @@ export function ProjectPlanSection({ locale = "pt" }: { locale?: Locale } = {}) 
             <li key={item.title} className="border-t border-white/20 pt-5">
               <span className="text-blue-300 text-sm">{t("0")}{t(index + 1)}</span>
               <h3 className="font-sora font-semibold text-xl my-3">{t(item.title)}</h3>
-              <p className="text-gray-300 leading-relaxed">{t(item.description)}</p>
+              <p className="text-gray-300 leading-relaxed md:hidden">{t(summaries[index])}</p>
+              <p className="hidden md:block text-gray-300 leading-relaxed">{t(item.description)}</p>
             </li>
           ))}
         </ol>
-        <div className="mt-10 rounded-2xl border border-blue-400/25 bg-brand-blue/10 p-5 md:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="hidden md:flex mt-10 rounded-2xl border border-blue-400/25 bg-brand-blue/10 p-5 md:p-7 flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="flex items-start gap-3 max-w-2xl">
             <MessageCircle size={22} className="shrink-0 text-blue-300 mt-1" aria-hidden="true" />
             <div>
@@ -42,6 +44,7 @@ export function ProjectPlanSection({ locale = "pt" }: { locale?: Locale } = {}) 
             {t("Entender o acompanhamento ")}<ArrowRight size={17} aria-hidden="true" />
           </Link>
         </div>
+        <Link href={localizedHref("/atendimento", locale)} className="inline-flex md:hidden min-h-12 items-center gap-2 mt-4 text-blue-300 underline underline-offset-4">{t("Entender o acompanhamento ")}<ArrowRight size={17} aria-hidden="true" /></Link>
         <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="flex -space-x-2 shrink-0">

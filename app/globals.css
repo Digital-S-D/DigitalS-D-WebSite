@@ -11,6 +11,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Responsive disclosure does not depend on hydration for desktop layout. */
+.mobile-details-content { display: none; }
+.mobile-details[data-expanded] > .mobile-details-content { display: block; }
+@media (min-width: 768px) {
+  .mobile-details > .mobile-details-content { display: block; }
+  .mobile-details > .mobile-details-toggle { display: none; }
+}
+
+/* Mobile density: preserve readable type and touch targets, reduce decoration. */
+@media (max-width: 767px) {
+  .home-page > section { padding-block: 40px; }
+  .home-page > #hero { padding-top: 96px; }
+  .home-page h2 { font-size: 1.5rem; }
+  .home-page .mb-10, .home-page .mb-14 { margin-bottom: 24px; }
+  .home-page #hero .mb-6 { margin-bottom: 16px; }
+  .home-page #servicos article { padding: 20px; }
+  .home-page #servicos article > .mb-5 { margin-bottom: 12px; }
+  .home-page #servicos article > p { margin-bottom: 12px; }
+  .home-page #solucoes-complementares { margin-top: 24px; padding-top: 16px; }
+  .home-page #como-funciona ol { gap: 16px; }
+  .home-page #como-funciona li { padding-top: 12px; }
+  .home-page #como-funciona li h3 { margin-block: 8px; }
+  .home-page :is(a, button, input, select, summary) { min-height: 48px; }
+  .home-page :is(button, input, select) { min-width: 48px; }
+  .home-page a { display: inline-flex; align-items: center; min-width: 48px; }
+  .home-page .portfolio-card { align-items: stretch; }
+  header :is(button, a) { min-height: 48px; min-width: 48px; }
+  dialog :is(button, a) { min-height: 48px; min-width: 48px; }
+}
+
 /* ─── Base Reset ─────────────────────────────────────────────────── */
 @layer base {
   * {

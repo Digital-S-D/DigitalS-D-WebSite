@@ -14,15 +14,15 @@ export function HeroSection({ locale = "pt" }: { locale?: Locale } = {}) {
       <div aria-hidden="true" className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-brand-blue/10 blur-[120px] pointer-events-none" />
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <Image src={`${BASE_PATH}/images/brand-logo.png`} alt={t("Digital S&D")} width={672} height={241} preload className="w-40 sm:w-48 md:w-56 h-auto mx-auto mb-6" />
+          <Image src={`${BASE_PATH}/images/brand-logo.png`} alt={t("Digital S&D")} width={672} height={241} className="hidden md:block w-40 sm:w-48 md:w-56 h-auto mx-auto mb-6" />
           <h1 className="font-sora font-extrabold text-3xl sm:text-5xl md:text-6xl text-white leading-[1.15] tracking-tight mb-5">
             {t("Sites e landing pages ")}<span className="text-gradient">{t("para aproximar clientes.")}</span>
           </h1>
           <p className="font-outfit text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto mb-6">
-            {t("Desenvolvemos sites e landing pages para pequenas e médias empresas e profissionais autônomos. Você conta o que precisa; nossa equipe orienta as escolhas, os materiais e as aprovações.")}</p>
+            {t("Sites para empresas e profissionais. Você conta o que precisa; nossa equipe orienta do planejamento à entrega.")}</p>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-6">
             <a href={localizedHref("#contato", locale)} className="btn-primary justify-center text-base px-6 py-3">{t("Pedir orçamento ")}<ArrowRight size={18} aria-hidden="true" /></a>
-            <a href={localizedHref("#portfolio", locale)} className="btn-outline justify-center text-base px-6 py-3">{t("Conhecer nosso trabalho")}</a>
+            <a href={localizedHref("#portfolio", locale)} className="inline-flex min-h-12 items-center justify-center text-blue-300 underline underline-offset-4 md:btn-outline text-base px-6 py-3">{t("Conhecer nosso trabalho")}</a>
           </div>
           <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {quickBenefits.map((benefit) => (

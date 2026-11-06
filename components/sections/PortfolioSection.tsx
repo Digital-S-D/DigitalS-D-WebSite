@@ -24,16 +24,17 @@ export function PortfolioSection({ locale = "pt" }: { locale?: Locale } = {}) {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
-            <Link key={project.href} href={localizedHref(project.href, locale)} aria-label={t(`Conhecer o projeto demonstrativo ${project.title}`)} className="group flex flex-col rounded-2xl border border-white/15 bg-[#101e35] overflow-hidden hover:border-blue-400/60 transition-colors">
-              <div className="p-4 md:p-6 bg-gradient-to-br from-blue-500/10 to-transparent">
-                <Image src={`${BASE_PATH}${project.cover}`} alt={t(project.alt)} width={project.width} height={project.height} sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="w-full aspect-[3/2] object-cover object-top rounded-lg border border-white/20" />
+            <Link key={project.href} href={localizedHref(project.href, locale)} aria-label={t(`Conhecer o projeto demonstrativo ${project.title}`)} className="portfolio-card group flex flex-row md:flex-col rounded-2xl border border-white/15 bg-[#101e35] overflow-hidden hover:border-blue-400/60 transition-colors">
+              <div className="w-24 shrink-0 p-3 md:w-auto md:p-6 bg-gradient-to-br from-blue-500/10 to-transparent">
+                <Image src={`${BASE_PATH}${project.cover}`} alt={t(project.alt)} width={project.width} height={project.height} sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 96px" className="w-full aspect-[3/2] object-cover object-top rounded-lg border border-white/20" />
               </div>
-              <div className="p-6 pt-2 flex flex-col flex-1">
-                <span className="text-blue-300 text-xs font-medium uppercase tracking-wider mb-4">{t(project.category)}</span>
-                <h3 className="font-sora font-bold text-2xl mb-4">{t(project.title)}</h3>
-                <p className="text-gray-300 leading-relaxed mb-5">{t(project.description)}</p>
-                <p className="text-gray-400 text-sm mb-7">{t(project.note)}</p>
-                <span className="inline-flex items-center gap-2 text-blue-300 font-semibold group-hover:underline mt-auto">{t("Conhecer o projeto ")}<ArrowRight size={18} aria-hidden="true" /></span>
+              <div className="min-w-0 p-3 pl-0 md:p-6 md:pt-2 flex flex-col flex-1">
+                <span className="text-blue-300 text-xs font-medium uppercase tracking-wider mb-1 md:mb-4">{t(project.category)}</span>
+                <h3 className="font-sora font-bold text-lg md:text-2xl mb-1 md:mb-4">{t(project.title)}</h3>
+                <p className="hidden md:block text-gray-300 leading-relaxed mb-5">{t(project.description)}</p>
+                <p className="hidden md:block text-gray-400 text-sm mb-7">{t(project.note)}</p>
+                <span className="text-sm text-gray-300 md:hidden">{t("Projeto demonstrativo")}</span>
+                <span className="hidden md:inline-flex items-center gap-2 text-blue-300 font-semibold group-hover:underline mt-auto">{t("Conhecer o projeto ")}<ArrowRight size={18} aria-hidden="true" /></span>
               </div>
             </Link>
           ))}

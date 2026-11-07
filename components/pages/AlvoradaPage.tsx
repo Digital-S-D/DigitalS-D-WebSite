@@ -2,7 +2,7 @@
 import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
 import { pageMetadata } from "@/lib/seo";
-import Image from "next/image";
+import { ProjectImage, ProjectImageViewer } from "@/components/sections/ProjectImageViewer";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
@@ -24,6 +24,7 @@ export default function AlvoradaPage({ locale = "pt" }: { locale?: Locale } = {}
   return (
     <>
       <Header locale={locale} />
+      <ProjectImageViewer locale={locale}>
       <main id="conteudo" tabIndex={-1}>
         <section className="pt-28 md:pt-36 pb-16 bg-grid">
           <div className="container-custom">
@@ -37,9 +38,7 @@ export default function AlvoradaPage({ locale = "pt" }: { locale?: Locale } = {}
                 <Link href={localizedHref(quoteHref("Landing Page"), locale)} className="btn-primary">{t("Quero uma landing page ")}<ArrowRight size={17} aria-hidden="true" /></Link>
               </div>
               <figure>
-                <a href={localizedHref(`${BASE_PATH}${ALVORADA.cover}`, locale)} aria-label={t("Ampliar captura da abertura da Alvorada")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}${ALVORADA.cover}`} alt={t("Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada.")} width={1440} height={960} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${BASE_PATH}${ALVORADA.cover}`} alt={t("Captura real da Alvorada no computador: título, botões de contato e ilustração arquitetônica na identidade azul e dourada.")} width={1440} height={960} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Abertura da landing page em execução. Os números, prazos e condições exibidos pertencem ao cenário fictício da demonstração. Toque na imagem para ampliar.")}</figcaption>
               </figure>
             </div>
@@ -55,15 +54,11 @@ export default function AlvoradaPage({ locale = "pt" }: { locale?: Locale } = {}
             </div>
             <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start">
               <figure>
-                <a href={localizedHref(`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`, locale)} aria-label={t("Ampliar captura da apresentação dos apartamentos")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`} alt={t("Captura real da seção de apartamentos, com duas opções de metragem e características organizadas em cartões.")} width={1440} height={960} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${BASE_PATH}/images/portfolio/alvorada/apartamentos.webp`} alt={t("Captura real da seção de apartamentos, com duas opções de metragem e características organizadas em cartões.")} width={1440} height={960} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Apresentação de metragens, características e valores ilustrativos. Não é uma oferta imobiliária real.")}</figcaption>
               </figure>
               <figure className="max-w-[260px] mx-auto w-full">
-                <a href={localizedHref(`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`, locale)} aria-label={t("Ampliar captura da Alvorada no celular")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`} alt={t("Captura real da abertura da Alvorada no celular, com título, botões e chamada fixa para testar o formulário.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${BASE_PATH}/images/portfolio/alvorada/mobile.webp`} alt={t("Captura real da abertura da Alvorada no celular, com título, botões e chamada fixa para testar o formulário.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Versão mobile da demonstração.")}</figcaption>
               </figure>
             </div>
@@ -77,12 +72,13 @@ export default function AlvoradaPage({ locale = "pt" }: { locale?: Locale } = {}
         </section>
         <section className="py-16 md:py-24">
           <div className="container-custom grid md:grid-cols-2 gap-10 items-center">
-            <figure><Image src={`${BASE_PATH}/images/portfolio/alvorada/interior.svg`} alt={t("Ilustração de um ambiente interno utilizada na landing page Alvorada.")} width={600} height={375} sizes="(min-width: 768px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /><figcaption className="text-gray-400 text-sm mt-3">{t("Ilustração de interior extraída do projeto. Não representa um imóvel real ou um vídeo.")}</figcaption></figure>
+            <figure><ProjectImage locale={locale} src={`${BASE_PATH}/images/portfolio/alvorada/interior.svg`} alt={t("Ilustração de um ambiente interno utilizada na landing page Alvorada.")} width={600} height={375} sizes="(min-width: 768px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /><figcaption className="text-gray-400 text-sm mt-3">{t("Ilustração de interior extraída do projeto. Não representa um imóvel real ou um vídeo.")}</figcaption></figure>
             <div><span className="badge mb-4">{t("Identidade visual")}</span><h2 className="font-sora font-semibold text-3xl mb-5">{t("Arquitetura também na linguagem visual.")}</h2><p className="text-gray-300 leading-relaxed mb-5">{t("Azul profundo, dourado e tons claros compõem a identidade. Ilustrações vetoriais, linhas de referência e detalhes inspirados em desenhos técnicos aproximam a apresentação do universo da construção.")}</p><p className="text-gray-400 text-sm">{t("As imagens desta página são elementos visuais originais da landing page. O projeto demonstra uma proposta de apresentação; não representa resultados de vendas ou uma campanha de cliente.")}</p></div>
           </div>
         </section>
         <section className="pb-16 md:pb-24"><div className="container-custom"><div className="rounded-2xl bg-brand-blue/10 border border-brand-blue/30 p-6 md:p-10"><h2 className="font-sora font-bold text-2xl md:text-3xl mb-4">{t("Como apresentar a sua próxima oferta?")}</h2><p className="text-gray-300 max-w-2xl mb-6">{t("Podemos planejar uma landing page para o seu negócio, com conteúdo, identidade visual e canais de contato definidos conforme a campanha.")}</p><div className="flex flex-wrap gap-3"><Link href={localizedHref(quoteHref("Landing Page"), locale)} className="btn-primary">{t("Conversar sobre minha landing page ")}<ArrowRight size={17} aria-hidden="true" /></Link><Link href={localizedHref("/#portfolio", locale)} className="btn-outline">{t("Ver outros projetos")}</Link></div></div></div></section>
       </main>
+      </ProjectImageViewer>
       <Footer locale={locale} />
     </>
   );

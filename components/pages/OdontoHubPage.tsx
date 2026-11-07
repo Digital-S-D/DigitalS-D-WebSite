@@ -2,7 +2,7 @@
 import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
 import { pageMetadata } from "@/lib/seo";
-import Image from "next/image";
+import { ProjectImage, ProjectImageViewer } from "@/components/sections/ProjectImageViewer";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
@@ -23,6 +23,7 @@ export default function OdontoHubPage({ locale = "pt" }: { locale?: Locale } = {
   return (
     <>
       <Header locale={locale} />
+      <ProjectImageViewer locale={locale}>
       <main id="conteudo" tabIndex={-1}>
         <section className="pt-28 md:pt-36 pb-12 md:pb-16 bg-grid">
           <div className="container-custom">
@@ -35,7 +36,7 @@ export default function OdontoHubPage({ locale = "pt" }: { locale?: Locale } = {
               <div className="flex flex-wrap gap-3"><a href={localizedHref("#telas", locale)} className="btn-primary">{t("Explorar as telas ")}<ArrowRight size={17} aria-hidden="true" /></a><Link href={localizedHref(quoteHref("Sistema Web personalizado"), locale)} className="btn-outline">{t("Conversar sobre algo parecido")}</Link></div>
             </div>
             <figure className="mt-10 md:mt-12">
-              <Image src={`${BASE_PATH}${ODONTOHUB.cover}`} alt={t("Tela de visão geral do OdontoHub com agenda de pacientes fictícios, visão financeira e atalhos de navegação.")} width={1425} height={940} preload sizes="(min-width: 1280px) 1216px, 100vw" className="rounded-xl border border-white/20 w-full h-auto" />
+              <ProjectImage locale={locale} src={`${BASE_PATH}${ODONTOHUB.cover}`} alt={t("Tela de visão geral do OdontoHub com agenda de pacientes fictícios, visão financeira e atalhos de navegação.")} width={1425} height={940} preload sizes="(min-width: 1280px) 1216px, 100vw" className="rounded-xl border border-white/20 w-full h-auto" />
               <figcaption className="text-gray-400 text-sm mt-3">{t("Visão geral da demonstração. Todos os pacientes, agendamentos e valores são fictícios.")}</figcaption>
             </figure>
           </div>
@@ -55,7 +56,7 @@ export default function OdontoHubPage({ locale = "pt" }: { locale?: Locale } = {
               {ODONTOHUB.gallery.map((screen, index) => (
                 <figure key={screen.id} id={screen.id} className="scroll-mt-28">
                   <figcaption className="grid md:grid-cols-[60px_1fr_1fr] gap-3 md:gap-6 mb-5 items-start"><span className="text-blue-300 font-sora text-lg">{t("0")}{t(index + 1)}</span><h3 className="font-sora font-semibold text-2xl">{t(screen.title)}</h3><p className="text-gray-300 leading-relaxed">{t(screen.description)}</p></figcaption>
-                  <a href={localizedHref(`${BASE_PATH}/images/portfolio/odontohub/${screen.image}`, locale)} target="_blank" rel="noopener noreferrer" aria-label={t(`Abrir imagem completa: ${screen.title}`)} className="block rounded-xl hover:ring-2 hover:ring-blue-400 transition-shadow"><Image src={`${BASE_PATH}/images/portfolio/odontohub/${screen.image}`} alt={t(screen.alt)} width={1425} height={940} sizes="(min-width: 1280px) 1216px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /></a>
+                  <ProjectImage locale={locale} src={`${BASE_PATH}/images/portfolio/odontohub/${screen.image}`} alt={t(screen.alt)} width={1425} height={940} sizes="(min-width: 1280px) 1216px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 </figure>
               ))}
             </div>
@@ -64,7 +65,7 @@ export default function OdontoHubPage({ locale = "pt" }: { locale?: Locale } = {
         <section className="py-14 md:py-20 bg-brand-black">
           <div className="container-custom grid md:grid-cols-[1fr_300px] gap-10 md:gap-20 items-center max-w-5xl">
             <div><span className="badge mb-4">{t("Experiência mobile")}</span><h2 className="font-sora font-semibold text-3xl mb-5">{t("A rotina também cabe no celular.")}</h2><p className="text-gray-300 leading-relaxed mb-5">{t("A navegação se adapta a telas pequenas. A agenda oferece uma visualização em lista, enquanto áreas mais amplas mantêm sua rolagem interna.")}</p><p className="text-gray-400 text-sm">{t("A captura mostra a interface real. Não é um aplicativo publicado em loja, nem uma sincronização entre dispositivos.")}</p></div>
-            <figure className="max-w-[260px] mx-auto w-full"><Image src={`${BASE_PATH}/images/portfolio/odontohub/mobile.webp`} alt={t("Visão real da agenda em lista do OdontoHub em um celular, com horários e pacientes fictícios.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-2xl border border-white/20" /><figcaption className="text-gray-400 text-xs mt-3">{t("Agenda demonstrativa em tela de 390 px.")}</figcaption></figure>
+            <figure className="max-w-[260px] mx-auto w-full"><ProjectImage locale={locale} src={`${BASE_PATH}/images/portfolio/odontohub/mobile.webp`} alt={t("Visão real da agenda em lista do OdontoHub em um celular, com horários e pacientes fictícios.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-2xl border border-white/20" /><figcaption className="text-gray-400 text-xs mt-3">{t("Agenda demonstrativa em tela de 390 px.")}</figcaption></figure>
           </div>
         </section>
         <section className="py-16 md:py-24">
@@ -82,6 +83,7 @@ export default function OdontoHubPage({ locale = "pt" }: { locale?: Locale } = {
           </div>
         </section>
       </main>
+      </ProjectImageViewer>
       <Footer locale={locale} />
     </>
   );

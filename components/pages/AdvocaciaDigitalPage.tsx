@@ -1,7 +1,7 @@
 
 import { createTranslator, localizedHref, type Locale } from "@/lib/i18n";
 import CaseProjectDetails from "@/components/sections/CaseProjectDetails";
-import Image from "next/image";
+import { ProjectImage, ProjectImageViewer } from "@/components/sections/ProjectImageViewer";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
@@ -24,6 +24,7 @@ export default function AdvocaciaDigitalPage({ locale = "pt" }: { locale?: Local
   return (
     <>
       <Header locale={locale} />
+      <ProjectImageViewer locale={locale}>
       <main id="conteudo" tabIndex={-1}>
         <section className="pt-28 md:pt-36 pb-16 bg-grid">
           <div className="container-custom">
@@ -37,9 +38,7 @@ export default function AdvocaciaDigitalPage({ locale = "pt" }: { locale?: Local
                 <Link href={localizedHref(quoteHref("Site Institucional"), locale)} className="btn-primary">{t("Quero um site institucional ")}<ArrowRight size={17} aria-hidden="true" /></Link>
               </div>
               <figure>
-                <a href={localizedHref(`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`, locale)} aria-label={t("Ampliar captura da abertura da Advocacia Digital")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`} alt={t("Abertura real da demonstração Advocacia Digital no desktop, com tipografia editorial, chamadas de navegação e aviso de escritório fictício.")} width={1425} height={940} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${BASE_PATH}${ADVOCACIA_DIGITAL.cover}`} alt={t("Abertura real da demonstração Advocacia Digital no desktop, com tipografia editorial, chamadas de navegação e aviso de escritório fictício.")} width={1425} height={940} preload sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Captura do projeto em execução. Os números descrevem os elementos da demonstração, sem representar clientes ou resultados. Toque para ampliar.")}</figcaption>
               </figure>
             </div>
@@ -55,15 +54,11 @@ export default function AdvocaciaDigitalPage({ locale = "pt" }: { locale?: Local
             </div>
             <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start">
               <figure>
-                <a href={localizedHref(`${imageRoot}/areas.webp`, locale)} aria-label={t("Ampliar captura das áreas de atuação")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${imageRoot}/areas.webp`} alt={t("Página real de áreas de atuação da demonstração, com cartões de serviços e links para páginas específicas.")} width={1425} height={940} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${imageRoot}/areas.webp`} alt={t("Página real de áreas de atuação da demonstração, com cartões de serviços e links para páginas específicas.")} width={1425} height={940} sizes="(min-width: 768px) 70vw, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Organização dos serviços em cartões, com páginas próprias para detalhar cada área fictícia.")}</figcaption>
               </figure>
               <figure className="max-w-[260px] mx-auto w-full">
-                <a href={localizedHref(`${imageRoot}/mobile.webp`, locale)} aria-label={t("Ampliar captura da Advocacia Digital no celular")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300">
-                  <Image src={`${imageRoot}/mobile.webp`} alt={t("Abertura real do projeto no celular, com menu compacto, título, aviso demonstrativo e botão para simular o contato.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
-                </a>
+                <ProjectImage locale={locale} src={`${imageRoot}/mobile.webp`} alt={t("Abertura real do projeto no celular, com menu compacto, título, aviso demonstrativo e botão para simular o contato.")} width={375} height={812} sizes="260px" className="w-full h-auto rounded-xl border border-white/20" />
                 <figcaption className="text-gray-400 text-sm mt-3">{t("Versão mobile da demonstração.")}</figcaption>
               </figure>
             </div>
@@ -78,7 +73,7 @@ export default function AdvocaciaDigitalPage({ locale = "pt" }: { locale?: Local
         <section className="py-16 md:py-24">
           <div className="container-custom grid lg:grid-cols-2 gap-10 items-center">
             <figure>
-              <a href={localizedHref(`${imageRoot}/contato.webp`, locale)} aria-label={t("Ampliar captura do formulário demonstrativo")} className="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"><Image src={`${imageRoot}/contato.webp`} alt={t("Página de contato real da demonstração, com aviso de simulação sem envio, campos identificados e canais de atendimento não conectados.")} width={1425} height={940} sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" /></a>
+              <ProjectImage locale={locale} src={`${imageRoot}/contato.webp`} alt={t("Página de contato real da demonstração, com aviso de simulação sem envio, campos identificados e canais de atendimento não conectados.")} width={1425} height={940} sizes="(min-width: 1024px) 560px, 100vw" className="w-full h-auto rounded-xl border border-white/20" />
               <figcaption className="text-gray-400 text-sm mt-3">{t("O formulário demonstra a interação. Nenhuma consulta é recebida ou agendada.")}</figcaption>
             </figure>
             <div><span className="badge mb-4">{t("Um contato com contexto")}</span><h2 className="font-sora font-semibold text-3xl mb-5">{t("O próximo passo precisa ser compreensível.")}</h2><p className="text-gray-300 leading-relaxed mb-5">{t("Os rótulos orientam o preenchimento e a validação indica o primeiro campo que precisa de atenção. A confirmação explica que a simulação terminou, sem prometer um atendimento que não existe.")}</p><p className="text-gray-400 text-sm mb-5">{t("Uma implantação real exige conteúdo e credenciais verificados, revisão jurídica, canais autorizados e integração de envio testada. A demonstração usa conteúdo local e não tem CMS conectado.")}</p><a href={localizedHref(ADVOCACIA_DIGITAL.repository, locale)} className="inline-flex py-3 text-blue-300 underline underline-offset-4">{t("Ver o código do projeto no GitHub")}</a></div>
@@ -86,6 +81,7 @@ export default function AdvocaciaDigitalPage({ locale = "pt" }: { locale?: Local
         </section>
         <section className="pb-16 md:pb-24"><div className="container-custom"><div className="rounded-2xl bg-brand-blue/10 border border-brand-blue/30 p-6 md:p-10"><h2 className="font-sora font-bold text-2xl md:text-3xl mb-4">{t("Como apresentar os serviços do seu negócio?")}</h2><p className="text-gray-300 max-w-2xl mb-6">{t("Planejamos a estrutura, o conteúdo e a identidade do site conforme a sua atuação. Podemos conversar sobre o que seus clientes precisam encontrar e quais canais farão parte do projeto.")}</p><div className="flex flex-wrap gap-3"><Link href={localizedHref(quoteHref("Site Institucional"), locale)} className="btn-primary">{t("Conversar sobre meu site ")}<ArrowRight size={17} aria-hidden="true" /></Link><Link href={localizedHref("/#portfolio", locale)} className="btn-outline">{t("Ver outros projetos")}</Link></div></div></div></section>
       </main>
+      </ProjectImageViewer>
       <Footer locale={locale} />
     </>
   );

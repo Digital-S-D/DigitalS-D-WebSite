@@ -1,0 +1,36 @@
+.project-viewer {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  border: 0;
+  background: #050505;
+  color: #fff;
+  overflow: hidden;
+}
+.project-viewer[open] { display: flex; flex-direction: column; }
+.project-viewer::backdrop { background: #000; }
+.project-viewer-toolbar, .project-viewer-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 4px; padding: 8px 12px; flex-shrink: 0;
+}
+.project-viewer-toolbar h2 { font-size: 1rem; }
+.project-viewer button { min-width: 48px; min-height: 48px; padding: 8px; border-radius: 8px; background: #1e293b; color: #fff; }
+.project-viewer button:hover { background: #334155; }
+.project-viewer button:disabled { opacity: .45; cursor: not-allowed; }
+.project-viewer-stage {
+  min-height: 0; flex: 1; display: flex; align-items: center; justify-content: center;
+  overflow: auto; padding: 24px; overscroll-behavior: contain;
+}
+.project-viewer-image { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.project-viewer-stage[data-zoomed] { align-items: flex-start; justify-content: flex-start; }
+.project-viewer-controls { justify-content: center; flex-wrap: wrap; }
+.project-viewer-caption { margin: 0; padding: 4px 16px 12px; font-size: .875rem; max-height: 15dvh; overflow: auto; text-align: center; flex-shrink: 0; }
+@media (min-width: 768px) {
+  .project-viewer-stage { padding: 32px 64px; }
+  .project-viewer-toolbar { padding-inline: 24px; }
+}

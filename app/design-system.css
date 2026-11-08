@@ -1,7 +1,7 @@
 /* Shared semantic palette. Screenshots and the image viewer keep their original colors. */
 :root { color-scheme:light; --surface:#ffffff; --surface-alt:#f4f7fd; --ink:#0f172a; --muted:#475569; --line:#cbd5e1; --accent:#1d4ed8; --accent-soft:#dbeafe; --glow:#dbeafe; }
-:root[data-theme=dark] { color-scheme:dark; --surface:#0f172a; --surface-alt:#14213b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#3c506c; --accent:#93c5fd; --accent-soft:#1e3659; --glow:#1e3659; }
-@media(prefers-color-scheme:dark) { :root:not([data-theme]) { color-scheme:dark; --surface:#0f172a; --surface-alt:#14213b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#3c506c; --accent:#93c5fd; --accent-soft:#1e3659; --glow:#1e3659; } }
+:root[data-theme=dark] { color-scheme:dark; --surface:#0b1220; --surface-alt:#111c2e; --panel:#1b2a40; --ink:#e8eef7; --muted:#a8b6ca; --line:#2d3b50; --accent:#7ab2f5; --accent-soft:#17283e; --glow:#192638; }
+@media(prefers-color-scheme:dark) { :root:not([data-theme]) { color-scheme:dark; --surface:#0b1220; --surface-alt:#111c2e; --panel:#1b2a40; --ink:#e8eef7; --muted:#a8b6ca; --line:#2d3b50; --accent:#7ab2f5; --accent-soft:#17283e; --glow:#192638; } }
 html body { background:var(--surface); color:var(--ink); }
 html body main { background:var(--surface-alt); color:var(--ink); }
 html body main :is(.bg-brand-black,.bg-brand-navy,.card-base) { background:var(--surface); }
@@ -75,3 +75,51 @@ html body main .rounded-full.border { border-color:var(--line); }
 
 /* Fixed dark sections own their foreground; inherited main color was already resolved. */
 html body .home-page :is(.home-process,#contato) { color:var(--ink); --accent-soft:#203959; }
+
+/* Dark-only art direction: neutral surfaces, restrained accents; screenshots stay untouched. */
+
+html[data-theme=dark] body .home-page .home-hero { background:radial-gradient(ellipse at 85% 45%,#1b2a403d,transparent 65%),var(--surface); }
+html[data-theme=dark] body .home-page :is(.home-services,.home-faq) { background:var(--surface-alt); }
+html[data-theme=dark] body .home-page :is(.home-portfolio,.home-process) { background:var(--surface); }
+html[data-theme=dark] body .home-page .home-process { --ink:#e8eef7; --muted:#a8b6ca; --accent:#7ab2f5; --line:#2d3b50; --accent-soft:#17283e; }
+html[data-theme=dark] body .home-page .home-services article,html[data-theme=dark] body .work-art,html[data-theme=dark] body main .card-base { background:var(--panel); border-color:var(--line); }
+html[data-theme=dark] body .home-page .home-process ol li { background:var(--surface-alt); border-color:var(--line); }
+html[data-theme=dark] body .home-page .hero-copy h1 span,html[data-theme=dark] body .home-page h2 .text-gradient { color:var(--ink); }
+html[data-theme=dark] body .home-page .hero-copy h1 span { font-weight:400; }
+html[data-theme=dark] body .showcase-halo { background:radial-gradient(ellipse,#25354b55,transparent 70%); }
+html[data-theme=dark] body .browser-frame { border-color:#40516a; background:#1b2a40; box-shadow:0 24px 60px #0004; }
+html[data-theme=dark] body .browser-bar { background:#1b2a40; border-color:#40516a; }
+html[data-theme=dark] body .browser-bar span { color:#a8b6ca; }
+html[data-theme=dark] body .browser-bar i { background:#8293aa; }
+html[data-theme=dark] body :is(.phone-frame,.work-desktop,.work-phone) { border-color:#34445c; box-shadow:0 12px 28px #0004; }
+html[data-theme=dark] body .home-page #contato { background:linear-gradient(145deg,#111c2e,#17263a); --surface:#1b2a40; --ink:#e8eef7; --muted:#a8b6ca; --accent:#7ab2f5; --line:#34445c; }
+html[data-theme=dark] body .home-page #contato .input-field { background:#111c2e; }
+html[data-theme=dark] body main:not(.home-page)>section:nth-of-type(even) { background:var(--surface-alt); }
+html[data-theme=dark] body main .bg-grid { background-image:none; }
+html[data-theme=dark] body main .text-glow { text-shadow:none; }
+html[data-theme=dark] body footer { background:#080e19; }
+
+@media(prefers-color-scheme:dark) {
+
+html:not([data-theme]) body .home-page .home-hero { background:radial-gradient(ellipse at 85% 45%,#1b2a403d,transparent 65%),var(--surface); }
+html:not([data-theme]) body .home-page :is(.home-services,.home-faq) { background:var(--surface-alt); }
+html:not([data-theme]) body .home-page :is(.home-portfolio,.home-process) { background:var(--surface); }
+html:not([data-theme]) body .home-page .home-process { --ink:#e8eef7; --muted:#a8b6ca; --accent:#7ab2f5; --line:#2d3b50; --accent-soft:#17283e; }
+html:not([data-theme]) body .home-page .home-services article,html:not([data-theme]) body .work-art,html:not([data-theme]) body main .card-base { background:var(--panel); border-color:var(--line); }
+html:not([data-theme]) body .home-page .home-process ol li { background:var(--surface-alt); border-color:var(--line); }
+html:not([data-theme]) body .home-page .hero-copy h1 span,html:not([data-theme]) body .home-page h2 .text-gradient { color:var(--ink); }
+html:not([data-theme]) body .home-page .hero-copy h1 span { font-weight:400; }
+html:not([data-theme]) body .showcase-halo { background:radial-gradient(ellipse,#25354b55,transparent 70%); }
+html:not([data-theme]) body .browser-frame { border-color:#40516a; background:#1b2a40; box-shadow:0 24px 60px #0004; }
+html:not([data-theme]) body .browser-bar { background:#1b2a40; border-color:#40516a; }
+html:not([data-theme]) body .browser-bar span { color:#a8b6ca; }
+html:not([data-theme]) body .browser-bar i { background:#8293aa; }
+html:not([data-theme]) body :is(.phone-frame,.work-desktop,.work-phone) { border-color:#34445c; box-shadow:0 12px 28px #0004; }
+html:not([data-theme]) body .home-page #contato { background:linear-gradient(145deg,#111c2e,#17263a); --surface:#1b2a40; --ink:#e8eef7; --muted:#a8b6ca; --accent:#7ab2f5; --line:#34445c; }
+html:not([data-theme]) body .home-page #contato .input-field { background:#111c2e; }
+html:not([data-theme]) body main:not(.home-page)>section:nth-of-type(even) { background:var(--surface-alt); }
+html:not([data-theme]) body main .bg-grid { background-image:none; }
+html:not([data-theme]) body main .text-glow { text-shadow:none; }
+html:not([data-theme]) body footer { background:#080e19; }
+
+}

@@ -15,27 +15,21 @@ const projects = [
 export function PortfolioSection({ locale = "pt" }: { locale?: Locale } = {}) {
   const t = createTranslator(locale);
   return (
-    <section id="portfolio" className="py-16 md:py-24 bg-brand-navy">
+    <section id="portfolio" className="home-light home-portfolio py-16 md:py-24">
       <div className="container-custom">
         <div className="max-w-2xl mb-10">
           <span className="badge mb-4">{t("Feito pela nossa equipe")}</span>
           <h2 className="font-sora font-bold text-3xl md:text-4xl lg:text-5xl mb-4">{t("Conheça o cuidado ")}<span className="text-gradient">{t("na prática.")}</span></h2>
-          <p className="text-gray-300 text-base md:text-lg">{t("De uma landing page a um sistema web: projetos demonstrativos que mostram nosso cuidado com a apresentação, a navegação e a identidade de cada negócio.")}</p>
+          <p className="text-gray-300 text-base md:text-lg">{t("Explore projetos demonstrativos criados pela nossa equipe, no computador e no celular.")}</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="portfolio-grid">
           {projects.map((project) => (
-            <Link key={project.href} href={localizedHref(project.href, locale)} aria-label={t(`Conhecer o projeto demonstrativo ${project.title}`)} className="portfolio-card group flex flex-row md:flex-col rounded-2xl border border-white/15 bg-[#101e35] overflow-hidden hover:border-blue-400/60 transition-colors">
-              <div className="w-24 shrink-0 p-3 md:w-auto md:p-6 bg-gradient-to-br from-blue-500/10 to-transparent">
-                <Image src={`${BASE_PATH}${project.cover}`} alt={t(project.alt)} width={project.width} height={project.height} sizes="(min-width: 1280px) 360px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 96px" className="w-full aspect-[3/2] object-cover object-top rounded-lg border border-white/20" />
+            <Link key={project.href} href={localizedHref(project.href, locale)} className="work-card" aria-label={t(`Conhecer o projeto demonstrativo ${project.title}`)}>
+              <div className="work-art">
+                <div className="work-desktop"><Image src={`${BASE_PATH}${project.cover}`} alt={t(project.alt)} width={project.width} height={project.height} sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw" /></div>
+                <div className="work-phone"><Image src={`${BASE_PATH}${project.cover.replace("visao-geral.webp", "mobile.webp")}`} alt="" width={375} height={812} sizes="100px" /></div>
               </div>
-              <div className="min-w-0 p-3 pl-0 md:p-6 md:pt-2 flex flex-col flex-1">
-                <span className="text-blue-300 text-xs font-medium uppercase tracking-wider mb-1 md:mb-4">{t(project.category)}</span>
-                <h3 className="font-sora font-bold text-lg md:text-2xl mb-1 md:mb-4">{t(project.title)}</h3>
-                <p className="hidden md:block text-gray-300 leading-relaxed mb-5">{t(project.description)}</p>
-                <p className="hidden md:block text-gray-400 text-sm mb-7">{t(project.note)}</p>
-                <span className="text-sm text-gray-300 md:hidden">{t("Projeto demonstrativo")}</span>
-                <span className="hidden md:inline-flex items-center gap-2 text-blue-300 font-semibold group-hover:underline mt-auto">{t("Conhecer o projeto ")}<ArrowRight size={18} aria-hidden="true" /></span>
-              </div>
+              <div className="work-meta"><span>{t(project.category)}</span><h3>{t(project.title)}<ArrowRight size={20} aria-hidden="true" /></h3></div>
             </Link>
           ))}
         </div>

@@ -1,0 +1,77 @@
+/* Shared semantic palette. Screenshots and the image viewer keep their original colors. */
+:root { color-scheme:light; --surface:#ffffff; --surface-alt:#f4f7fd; --ink:#0f172a; --muted:#475569; --line:#cbd5e1; --accent:#1d4ed8; --accent-soft:#dbeafe; --glow:#dbeafe; }
+:root[data-theme=dark] { color-scheme:dark; --surface:#0f172a; --surface-alt:#14213b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#3c506c; --accent:#93c5fd; --accent-soft:#1e3659; --glow:#1e3659; }
+@media(prefers-color-scheme:dark) { :root:not([data-theme]) { color-scheme:dark; --surface:#0f172a; --surface-alt:#14213b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#3c506c; --accent:#93c5fd; --accent-soft:#1e3659; --glow:#1e3659; } }
+html body { background:var(--surface); color:var(--ink); }
+html body main { background:var(--surface-alt); color:var(--ink); }
+html body main :is(.bg-brand-black,.bg-brand-navy,.card-base) { background:var(--surface); }
+html body main :is(.text-white,.text-gray-100,.text-gray-200) { color:var(--ink); }
+html body main :is(.text-gray-300,.text-gray-400,.text-gray-500,.text-gray-600) { color:var(--muted); }
+html body main :is(.text-blue-300,.text-blue-400,.text-brand-blue,.text-gradient) { color:var(--accent); }
+html body main .badge { color:var(--accent); background:var(--accent-soft); border-color:var(--line); }
+html body main :is(article,.card-base,.border-y,.border-t,.border-b,.rounded-2xl.border,.rounded-xl.border) { border-color:var(--line); }
+html body main .divide-y > :not([hidden]) ~ :not([hidden]) { border-color:var(--line); }
+html body main :is(.btn-primary,.bg-brand-blue) { background:#2563eb; color:#fff; }
+html body main .btn-outline { color:var(--accent); border-color:var(--accent); }
+html body main .input-field { color:var(--ink); background:var(--surface); border-color:var(--line); }
+html body main .input-field::placeholder { color:var(--muted); }
+html body main option { color:var(--ink); background:var(--surface); }
+html body main h1 { letter-spacing:-.04em; }
+html body main h2 { letter-spacing:-.025em; }
+html body main section { scroll-margin-top:96px; }
+html body main :focus-visible { outline-color:var(--accent); }
+html body .home-page { --home-ink:var(--ink); --home-muted:var(--muted); }
+html body .home-page .home-light { background:var(--surface-alt); color:var(--ink); }
+html body .home-page .home-services,html body .home-page .home-faq { background:var(--surface); }
+html body .home-page .home-hero { background:radial-gradient(ellipse at 85% 40%,var(--glow),transparent 55%),var(--surface-alt); }
+html body .home-page .home-light :is(.text-gray-300,.text-gray-400),html body .hero-copy>p,html body .hero-benefits,html body .showcase-caption,html body .work-meta>span { color:var(--muted); }
+html body .home-page .home-light :is(.text-white,.text-blue-300,.text-gradient),html body .hero-copy h1 span,html body .eyebrow,html body .home-text-link { color:var(--accent); }
+html body .home-page .home-light .badge { background:var(--accent-soft); color:var(--accent); border-color:var(--line); }
+html body .home-page .home-services article,html body .work-art { background:var(--surface-alt); border-color:var(--line); }
+html body .work-card,html body .work-meta h3 { color:var(--ink); }
+html body .showcase-halo { background:var(--glow); }
+html body .service-art { background:var(--accent-soft); }
+html body .service-details { border-color:var(--line); }
+html body .service-details summary { color:var(--accent); }
+/* One divider belongs to the complementary services wrapper. */
+html body #solucoes-complementares > .service-details { border-top:0; }
+html body .home-page .home-process { background:radial-gradient(ellipse at 85% 15%,#20396155,transparent 65%),linear-gradient(130deg,#0f172a,#15243d); --ink:#f1f5f9; --muted:#cbd5e1; --accent:#93c5fd; --line:#384961; }
+html body .home-page #contato { background:linear-gradient(145deg,#14213b,#192c49); --surface:#1b2d46; --surface-alt:#14213b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#4a607d; --accent:#93c5fd; }
+html body footer { background:#0b1220; color:#f1f5f9; }
+html body header { background:#0b1220; color:#fff; }
+html body header :is(button,a,select),html body #mobile-menu :is(a,button) { min-height:48px; }
+.theme-control { background:#17243a; color:#fff; border:1px solid #52617a; border-radius:8px; padding:6px; min-height:48px; max-width:100px; font-size:12px; }
+html body #mobile-menu { background:#0b1220; color:white; }
+html body main:not(.home-page)>section:nth-of-type(even) { background:var(--surface); }
+html body main .bg-grid { background-image:none; background-size:auto; }
+html body main:not(.home-page) .text-glow { text-shadow:none; }
+html body main:not(.home-page) :is(.rounded-2xl,.card-base) { border-radius:22px; }
+html body main:not(.home-page) section> .container-custom { position:relative; }
+html body main:not(.home-page) .bg-brand-blue\/10 { background:var(--accent-soft); }
+.floating-contact { position:fixed; bottom:calc(20px + env(safe-area-inset-bottom)); right:20px; z-index:40; }
+.floating-contact>button { display:flex; align-items:center; gap:8px; border-radius:30px; min-height:56px; padding:14px 20px; background:#2563eb; color:white; box-shadow:0 8px 24px #0003; font-weight:600; }
+.contact-popover { width:min(300px,calc(100vw - 40px)); padding:20px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:20px; box-shadow:0 16px 48px #0003; margin-bottom:12px; }
+.contact-popover p { font-weight:600; margin-bottom:12px; }
+.contact-popover a { display:flex; align-items:center; min-height:48px; color:var(--accent); text-decoration:underline; text-underline-offset:4px; }
+body:has(input:focus,textarea:focus,select:focus) .floating-contact { visibility:hidden; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+ .hero-showcase:hover .browser-frame,.hero-showcase:focus-visible .browser-frame { transform:translateY(-5px) rotate(-1deg); }
+ .hero-showcase:hover .phone-frame,.hero-showcase:focus-visible .phone-frame { transform:translateY(-8px) rotate(-3deg); }
+ .work-card:hover .work-desktop,.work-card:focus-visible .work-desktop { transform:translateY(-4px) rotate(-2deg); }
+ .work-card:hover .work-phone,.work-card:focus-visible .work-phone { transform:translateY(-7px) rotate(3deg); }
+}
+.phone-frame,.work-desktop,.work-phone { transition:transform .22s ease; }
+@media(prefers-reduced-motion:reduce) { .browser-frame,.phone-frame,.work-desktop,.work-phone { transform:none!important; transition:none!important; } }
+@media(max-width:639px) { header .container-custom { padding-inline:12px; } .theme-control { max-width:84px; } .floating-contact { right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); } }
+
+html body .home-page a.work-card { color:var(--ink); }
+html body .home-page .home-text-link { color:var(--accent); }
+
+html body #solucoes-complementares { padding-top:16px; margin-top:24px; }
+html body main :is(button,summary,input,select,.btn-primary,.btn-outline) { min-height:48px; }
+
+html body .home-page .hero-benefits svg,html body .home-page .work-meta svg { color:var(--accent); }
+html body main .rounded-full.border { border-color:var(--line); }
+
+/* Fixed dark sections own their foreground; inherited main color was already resolved. */
+html body .home-page :is(.home-process,#contato) { color:var(--ink); --accent-soft:#203959; }

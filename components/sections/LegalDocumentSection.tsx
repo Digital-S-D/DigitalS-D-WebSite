@@ -10,7 +10,7 @@ import { LEGAL, type LegalDocumentData } from "@/lib/legal";
 // mexa em lib/legal.ts, não aqui.
 
 const linkClass =
-  "text-brand-blue underline underline-offset-2 hover:text-white transition-colors";
+  "text-brand-blue underline underline-offset-2 hover:decoration-2 transition-colors";
 
 // Detecta, dentro de um texto: [rótulo](link), URLs https://... e e-mails.
 const TOKEN =

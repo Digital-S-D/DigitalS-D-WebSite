@@ -4,6 +4,7 @@ import { type Locale } from "@/lib/i18n";
 // Graças aos barrel exports (index.ts), todos os componentes
 // podem ser importados de uma única linha por pasta.
 
+import "./home-design.css";
 import { Header, Footer }         from "@/components/layout";
 import { ORGANIZATION, pageMetadata } from "@/lib/seo";
 import {

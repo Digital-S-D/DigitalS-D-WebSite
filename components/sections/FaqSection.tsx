@@ -8,7 +8,7 @@ import { FaqList } from "./FaqList";
 export function FaqSection({ locale = "pt" }: { locale?: Locale } = {}) {
   const t = createTranslator(locale);
   return (
-    <section id="duvidas" className="py-16 md:py-24 bg-brand-navy">
+    <section id="duvidas" className="home-light home-faq py-16 md:py-24">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto">
           <span className="badge mb-4">{t("Antes de contratar")}</span>

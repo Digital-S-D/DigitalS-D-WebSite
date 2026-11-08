@@ -49,7 +49,7 @@ export const NAV_LINKS = [
   { label: "Portfólio", href: "/#portfolio" },
   { label: "Dúvidas", href: "/perguntas-frequentes" },
   { label: "Como funciona", href: "/atendimento" },
-  { label: "Contato",   href: "/#contato" },
+  { label: "Quem somos", href: "/sobre" },
 ];
 
 // ─── FORMULÁRIO DE CONTATO ────────────────────────────────────────────

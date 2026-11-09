@@ -1,39 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Sun, Moon, Monitor } from "lucide-react";
+import { MessageCircle, X, Sun, Moon } from "lucide-react";
 import { BASE_PATH, COMPANY, LINKS } from "@/lib/constants";
 import { localizedHref, type Locale } from "@/lib/i18n";
 
-export const themeBootstrap = `(function(){try{var m=localStorage.getItem('sd-theme')||'system';if(!['light','dark','system'].includes(m))m='system';document.documentElement.dataset.themeMode=m;document.documentElement.dataset.theme=m==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):m}catch(e){}})()`;
+export const themeBootstrap = `(function(){try{var m=sessionStorage.getItem('sd-theme')||'system';if(!['light','dark','system'].includes(m))m='system';document.documentElement.dataset.themeMode=m;document.documentElement.dataset.theme=m==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):m}catch(e){}})()`;
 
 export function ThemeControl({ locale }: { locale: Locale }) {
-  const [mode, setMode] = useState("system");
   const [dark, setDark] = useState(false);
   useEffect(() => {
     const media = matchMedia("(prefers-color-scheme: dark)");
     const update = () => {
       let saved = document.documentElement.dataset.themeMode || "system";
-      try { saved = localStorage.getItem("sd-theme") || "system"; } catch { /* System fallback works without storage. */ }
+      try { saved = sessionStorage.getItem("sd-theme") || "system"; } catch { /* System fallback works without storage. */ }
       if (!["light", "dark", "system"].includes(saved)) saved = "system";
-      setMode(saved);
       setDark(saved === "system" ? media.matches : saved === "dark");
       document.documentElement.dataset.themeMode = saved;
       document.documentElement.dataset.theme = saved === "system" ? (media.matches ? "dark" : "light") : saved;
     };
     update();
     media.addEventListener("change", update);
-    window.addEventListener("storage", update);
     window.addEventListener("sd-theme-change", update);
-    return () => { media.removeEventListener("change", update); window.removeEventListener("storage", update); window.removeEventListener("sd-theme-change", update); };
+    return () => { media.removeEventListener("change", update); window.removeEventListener("sd-theme-change", update); };
   }, []);
   function choose(next: string) {
     const resolved = next === "system" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : next;
     document.documentElement.dataset.themeMode = next;
     document.documentElement.dataset.theme = resolved;
-    setMode(next);
     setDark(resolved === "dark");
-    try { localStorage.setItem("sd-theme", next); } catch { /* The choice still applies on this page. */ }
+    try { sessionStorage.setItem("sd-theme", next); } catch { /* The choice still applies on this page. */ }
     window.dispatchEvent(new Event("sd-theme-change"));
   }
   const en = locale === "en";
@@ -43,9 +39,6 @@ export function ThemeControl({ locale }: { locale: Locale }) {
       className="theme-switch" onClick={() => choose(dark ? "light" : "dark")}>
       <span className="theme-switch-track" aria-hidden="true"><Sun size={12} /><Moon size={12} /><span className="theme-switch-thumb" /></span>
     </button>
-    <button type="button" className="theme-system-button" aria-pressed={mode === "system"}
-      aria-label={en ? "Use system theme" : "Usar tema do sistema"} title={en ? "Use system theme" : "Usar tema do sistema"}
-      onClick={() => choose("system")}><Monitor size={17} aria-hidden="true" /></button>
   </div>;
 }
 

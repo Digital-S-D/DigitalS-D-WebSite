@@ -117,7 +117,7 @@ export const PRIVACY_POLICY: LegalDocumentData = {
           items: [
             "Formspree (Formspree, Inc., Estados Unidos): recebe os envios do formulário de contato e os encaminha para o nosso e-mail. Os envios também ficam armazenados nos servidores do Formspree, pelo período definido no plano de uso e na política desse serviço.",
             "Google (Gmail e Google Fonts): o e-mail que recebe suas mensagens é um endereço Gmail. Além disso, as fontes de texto do site são carregadas dos servidores do Google Fonts, o que faz o seu navegador enviar ao Google dados técnicos, como o endereço IP.",
-            "Netlify (Netlify, Inc., Estados Unidos): hospeda o site e, como qualquer hospedagem, pode registrar dados técnicos de acesso, como o endereço IP.",
+            "Cloudflare: hospeda o site e pode registrar dados técnicos de acesso, como endereço IP, para entregar as páginas e proteger o serviço.",
             "WhatsApp (Meta): se você clicar nos botões de WhatsApp para falar conosco, a conversa passa a ser regida também pelos termos e pela política de privacidade do WhatsApp.",
           ],
         },
@@ -132,7 +132,7 @@ export const PRIVACY_POLICY: LegalDocumentData = {
       blocks: [
         {
           type: "p",
-          text: "Os prestadores citados acima (Formspree, Google e Netlify) são empresas sediadas ou que armazenam dados nos Estados Unidos. Por isso, seus dados podem ser transferidos para fora do Brasil. Essa transferência ocorre quando necessária para atender ao seu pedido de contato e orçamento, nas hipóteses previstas no art. 33 da LGPD (em especial o inciso IX, combinado com o art. 7º, V e VI) e na regulamentação da ANPD.",
+          text: "Os prestadores citados acima (Formspree, Google e Cloudflare) são empresas sediadas ou que armazenam dados nos Estados Unidos. Por isso, seus dados podem ser transferidos para fora do Brasil. Essa transferência ocorre quando necessária para atender ao seu pedido de contato e orçamento, nas hipóteses previstas no art. 33 da LGPD (em especial o inciso IX, combinado com o art. 7º, V e VI) e na regulamentação da ANPD.",
         },
       ],
     },

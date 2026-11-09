@@ -123,3 +123,14 @@ html:not([data-theme]) body main .text-glow { text-shadow:none; }
 html:not([data-theme]) body footer { background:#080e19; }
 
 }
+
+/* Compact binary switch; the monitor restores automatic system preference. */
+.theme-switch-group { display:flex; align-items:center; gap:2px; }
+.theme-switch,.theme-system-button { display:flex; align-items:center; justify-content:center; min-width:48px; min-height:48px; border-radius:9px; color:#cbd5e1; }
+.theme-switch-track { display:flex; align-items:center; justify-content:space-between; position:relative; width:44px; height:26px; border:1px solid #64748b; border-radius:20px; padding:4px; background:#25334a; }
+.theme-switch-thumb { position:absolute; width:18px; height:18px; border-radius:50%; background:#fff; left:3px; top:3px; box-shadow:0 1px 4px #0004; transition:transform .18s; }
+html[data-theme=dark] .theme-switch-track { background:#2563eb; border-color:#60a5fa; }
+html[data-theme=dark] .theme-switch-thumb { transform:translateX(18px); }
+.theme-system-button[aria-pressed=true] { color:#bfdbfe; background:#1e3659; }
+.theme-switch:hover,.theme-system-button:hover { background:#ffffff12; }
+@media(max-width:639px) { header .container-custom { padding-inline:8px; } header .flex.gap-1 { gap:0; } }

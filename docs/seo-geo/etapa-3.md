@@ -44,4 +44,8 @@ Confirmar plano e franquias da conta antes de criar recursos. Não foi contratad
 
 ## Condições antes de publicar/ativar
 
+### Correções da revisão integrada
+
+As três reproduções foram corrigidas: o relógio nasce na captura de entrada e acompanha a permissão antes do primeiro evento; falha ao gravar o registro completo muda a atribuição para unknown/unavailable antes de montar o payload; a função de medição contém exceções síncronas e usa AbortController com timeout portátil, sem depender de AbortSignal.timeout. Cinco testes adicionais cobrem expiração com e sem callback, quota, API ausente e transporte síncrono com falha. `npm run check` aprovado com 28 testes, mantendo a entrega desligada. A referência origin/main foi atualizada do GitHub, confirmando 4f0413c; a integração deve acontecer em branch própria a partir dessa referência, preservando o redesign.
+
 Revisão independente, conferência da conta Cloudflare correta e branch/commit de produção, configuração de D1/segredos/limpeza, verificação de privacidade e rede no preview real, dados de indexação, política consciente de robôs e reversão. Preservar caminhos e queries se futuramente consolidar www/pages.dev; nenhuma regra de host foi aplicada agora. Permanecem pendências externas: perfis oficiais, provas reais de clientes e decisões comerciais internacionais.

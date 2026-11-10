@@ -38,10 +38,8 @@ export type LegalDocumentData = {
 // ─── DADOS DA EMPRESA USADOS NOS TEXTOS ─────────────────────────────────
 export const LEGAL = {
   // Atualize sempre que alterar qualquer texto legal.
-  updatedAt: "1 de novembro de 2026",
+  updatedAt: "10 de novembro de 2026",
 
-  // Cidade/UF usada na identificação de quem controla os dados.
-  city: "Belo Horizonte/MG",
 };
 
 const NAME = COMPANY.name;
@@ -61,7 +59,7 @@ export const PRIVACY_POLICY: LegalDocumentData = {
       blocks: [
         {
           type: "p",
-          text: `O controlador, ou seja, quem toma as decisões sobre o tratamento dos seus dados pessoais, é a ${NAME}, com atuação em ${LEGAL.city}.`,
+          text: `O controlador, ou seja, quem toma as decisões sobre o tratamento dos seus dados pessoais, é a ${NAME}.`,
         },
         {
           type: "p",
@@ -154,7 +152,7 @@ export const PRIVACY_POLICY: LegalDocumentData = {
       blocks: [
         {
           type: "p",
-          text: "Este site não utiliza cookies próprios nem ferramentas de análise de audiência ou de publicidade. Por isso, não exibimos aviso de cookies.",
+          text: process.env.NEXT_PUBLIC_MEASUREMENT_ENABLED === "true" ? "A medição opcional de contatos só funciona após sua escolha na página. Registramos contagens por origem categorizada, página, idioma e ação, sem conteúdo do formulário, URL completa ou identificação de pessoa. A escolha não é mantida após recarregar ou sair da página; dados categóricos da visita usam armazenamento de sessão, com expiração após 30 minutos de inatividade. As contagens são retidas por 90 dias. Para reduzir abuso, o servidor usa identificadores derivados de IP por intervalo de tempo, removidos pela limpeza periódica após duas horas. A hospedagem pode manter seus próprios registros técnicos. Desativar impede novos eventos, mas não desfaz contagens agregadas anteriores." : "Este site não utiliza cookies próprios nem ferramentas de análise de audiência ou de publicidade. Por isso, não exibimos aviso de cookies.",
         },
         {
           type: "p",
@@ -263,7 +261,7 @@ export const TERMS_OF_USE: LegalDocumentData = {
       blocks: [
         {
           type: "p",
-          text: `Este site apresenta a ${NAME}, agência de desenvolvimento web com atuação em ${LEGAL.city}, e os seus serviços (como sites institucionais, landing pages e lojas virtuais), voltados a empresas e profissionais autônomos.`,
+          text: `Este site apresenta a ${NAME}, agência de desenvolvimento web com atendimento exclusivamente online, e os seus serviços (como sites institucionais, landing pages e lojas virtuais), voltados a empresas e profissionais autônomos.`,
         },
         { type: "p", text: `Contato: ${EMAIL}.` },
       ],

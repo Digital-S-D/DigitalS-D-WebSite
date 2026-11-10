@@ -26,7 +26,7 @@ export const COMPANY = {
   email:       "digitalsd.contato@gmail.com",
   phone:       "+55 (31) 9 9299-8761",             // SUBSTITUA
   whatsapp:    "5531992998761",                     // SUBSTITUA (só números)
-  city:        "Belo Horizonte, MG — Brasil",
+  serviceMode: "Atendimento exclusivamente online",
   year:        new Date().getFullYear(),
 };
 
@@ -90,7 +90,7 @@ export const PILLARS = [
   {
     icon:        "Target",
     title:       "Foco em Conversão",
-    description: "Cada botão, cada cor e cada palavra existe para gerar um resultado: mais leads e mais vendas para o seu negócio.",
+    description: "Organizamos conteúdo e chamadas para facilitar o próximo passo do visitante, como conhecer um serviço ou solicitar um orçamento.",
   },
   {
     icon:        "Sparkles",

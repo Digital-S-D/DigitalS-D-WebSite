@@ -118,8 +118,8 @@ export const FAQ_ITEMS = [
   },
   {
     id: "atendimento-remoto", category: "Recursos e atendimento", home: false,
-    question: "Vocês atendem fora de Belo Horizonte?",
-    answer: "Sim. A Digital S&D está em Belo Horizonte e oferece atendimento remoto para outras cidades. Reuniões, materiais e aprovações podem ser organizados a distância, com canais e horários combinados para o projeto.",
+    question: "Como funciona o atendimento online?",
+    answer: "O atendimento da Digital S&D é exclusivamente online. Reuniões, materiais e aprovações são organizados a distância, pelos canais combinados para o projeto.",
   },
   {
     id: "odontohub", category: "Recursos e atendimento", home: false,

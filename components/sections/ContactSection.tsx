@@ -9,6 +9,7 @@ import { formatPhone, isFormEndpointConfigured, validateContact, type ContactDat
 import { CUSTOMER_CARE } from "@/lib/customer-care";
 import { MobileDetails } from "./MobileDetails";
 import { ContactServiceIntent } from "./ContactServiceIntent";
+import { measure } from '@/lib/measurement-browser';
 
 const contactInfo = [
   { icon: MessageCircle, title: "WhatsApp", value: COMPANY.phone, href: LINKS.whatsappOrcamento, label: "Converse sobre seu projeto" },
@@ -31,6 +32,8 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
+  const started = useRef(false);
+  const submitting = useRef(false);
   const selectService = useCallback((service: string) => {
     setFormData((current) => ({ ...current, service }));
   }, []);
@@ -44,6 +47,7 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
   useEffect(() => { if (submitError) errorRef.current?.focus(); }, [submitError]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    if (!started.current) started.current = measure('contact_start');
     const field = event.target.name as keyof ContactData;
     const value = field === "phone" ? formatPhone(event.target.value) : event.target.value;
     const next = { ...formData, [field]: value };
@@ -58,19 +62,23 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (isSubmitting) return;
+    if (submitting.current) return;
+    if (!started.current) started.current = measure('contact_start');
     setSubmitError(null);
     const nextErrors = validateContact(formData);
     setErrors(nextErrors);
     const firstInvalid = Object.keys(nextErrors)[0];
     if (firstInvalid) {
+      measure('contact_error', 'form', 'validation');
       (formRef.current?.elements.namedItem(firstInvalid) as HTMLInputElement | null)?.focus();
       return;
     }
     if (!isFormEndpointConfigured(endpoint)) {
+      measure('contact_error', 'form', 'unavailable');
       setSubmitError("O envio pelo formulário está indisponível no momento. Fale conosco pelo WhatsApp ou e-mail abaixo.");
       return;
     }
+    submitting.current = true;
     setIsSubmitting(true);
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), 15000);
@@ -82,12 +90,16 @@ export function ContactSection({ locale = "pt" }: { locale?: Locale } = {}) {
         signal: controller.signal,
       });
       if (!response.ok) throw new Error("Envio não confirmado");
+      measure('contact_registered');
+      started.current = false;
       setIsSubmitted(true);
       setFormData(initialForm);
       setErrors({});
     } catch {
+      measure('contact_error', 'form', 'delivery');
       setSubmitError("Não foi possível confirmar o envio. Seus dados foram mantidos para tentar novamente. Você também pode falar conosco pelo WhatsApp ou e-mail abaixo.");
     } finally {
+      submitting.current = false;
       window.clearTimeout(timeout);
       setIsSubmitting(false);
     }

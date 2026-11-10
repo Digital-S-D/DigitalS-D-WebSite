@@ -30,6 +30,7 @@ export default function FaqPage({ locale = "pt" }: { locale?: Locale } = {}) {
             <p className="text-gray-300 mt-4"><Link href={localizedHref("/atendimento", locale)} className="text-blue-300 underline underline-offset-4">{t("Veja como funciona o acompanhamento")}</Link>{t(", da coleta de materiais às solicitações depois da entrega.")}</p>
             <p className="text-gray-400 text-sm mt-4">{t("Valores, prazos e condições de cada projeto são formalizados em proposta escrita, conforme nossos ")}<Link href={localizedHref("/termos", locale)} className="text-blue-300 underline">{t("termos de uso")}</Link>{t(".")}</p>
           </div>
+          <p className="text-gray-300 mb-8"><Link href={localizedHref("/criacao-de-sites/", locale)} className="text-blue-300 underline py-3 inline-block">{locale === "en" ? "Business websites" : "Criação de sites"}</Link>{" · "}<Link href={localizedHref("/landing-pages/", locale)} className="text-blue-300 underline py-3 inline-block">Landing pages</Link></p>
           <nav aria-label={t("Assuntos das perguntas frequentes")} className="flex flex-wrap gap-2 mb-12">
             {categories.map((category, index) => <a key={category} href={localizedHref(`#assunto-${index + 1}`, locale)} className="px-4 py-3 rounded-full border border-white/20 text-sm text-gray-200 hover:bg-white/10">{t(category)}</a>)}
           </nav>

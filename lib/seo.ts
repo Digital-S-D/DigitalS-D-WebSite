@@ -5,7 +5,7 @@ import { COMPANY, TEAM_MEMBERS } from "./constants";
 // The public domain remains canonical for previews and subdirectory builds.
 export const SITE_URL = "https://digitalsd.com.br";
 
-export const PORTUGUESE_PATHS = ["/", "/atendimento/", "/perguntas-frequentes/", "/sobre/", "/portfolio/odontohub/", "/portfolio/alvorada/", "/portfolio/advocacia-digital/", "/privacidade/", "/termos/"] as const;
+export const PORTUGUESE_PATHS = ["/", "/criacao-de-sites/", "/landing-pages/", "/atendimento/", "/perguntas-frequentes/", "/sobre/", "/portfolio/odontohub/", "/portfolio/alvorada/", "/portfolio/advocacia-digital/", "/privacidade/", "/termos/"] as const;
 export const PUBLIC_PATHS = [...PORTUGUESE_PATHS, ...PORTUGUESE_PATHS.map((path) => localePath(path, "en"))];
 
 export function siteUrl(path: string): string {

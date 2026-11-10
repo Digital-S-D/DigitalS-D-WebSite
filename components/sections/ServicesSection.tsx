@@ -35,6 +35,7 @@ export function ServicesSection({ locale = "pt" }: { locale?: Locale } = {}) {
                   <p className="text-gray-300 text-sm leading-relaxed">{t(service.materials)} {t(" Produção de conteúdo e recursos adicionais são combinados na proposta.")}</p>
                 </div>
                 </MobileDetails>
+                <Link href={localizedHref(index === 0 ? "/criacao-de-sites/" : "/landing-pages/", locale)} className="text-blue-300 underline py-3 mb-4">{locale === "en" ? "Explore scope and examples" : "Conhecer escopo e exemplos"}</Link>
                 <Link href={localizedHref(quoteHref(service.interest), locale)} className="btn-primary justify-center mt-auto" aria-label={t(`Pedir orçamento de ${service.title.toLowerCase()}`)}>{t("Pedir orçamento ")}<ArrowRight size={17} aria-hidden="true" /></Link>
               </article>
             );

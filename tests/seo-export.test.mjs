@@ -151,10 +151,10 @@ test("os três casos têm idiomas pareados, contato e evidências sem expor o c�
   }
 });
 
-test("as nove páginas têm tradução completa e a mesma estrutura visual nos dois idiomas", () => {
+test("as páginas têm tradução completa e a mesma estrutura visual nos dois idiomas", () => {
   const portuguese = pages.filter((page) => !page.path.startsWith("/en/"));
-  assert.equal(portuguese.length, 9);
-  assert.equal(pages.length, 18);
+  assert.equal(portuguese.length, 11);
+  assert.equal(pages.length, 22);
   for (const pt of portuguese) {
     const en = pages.find((page) => page.path === `/en${pt.path}`);
     assert.ok(en, pt.path);
@@ -202,6 +202,33 @@ test("a base factual permanece coerente nos dois idiomas", () => {
     const html = pages.find(page => page.path === path).html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
     assert.match(html, /Cloudflare/);
     assert.doesNotMatch(html, /Netlify/);
+  }
+});
+
+test("serviços têm trilha, schema, exemplos e contato no idioma correto; links internos resolvem", () => {
+  for (const prefix of ["", "/en"]) {
+    for (const slug of ["criacao-de-sites", "landing-pages"]) {
+      const page = pages.find(p => p.path === `${prefix}/${slug}/`);
+      const graphs = [...page.html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].flatMap(([, raw]) => JSON.parse(raw)["@graph"] || []);
+      const service = graphs.find(node => node["@type"] === "Service");
+      const trail = graphs.find(node => node["@type"] === "BreadcrumbList");
+      assert.equal(service.url, page.url);
+      assert.equal(trail.itemListElement[1].item, page.url);
+      assert.match(page.html, prefix ? /demonstration project/ : /projeto demonstrativo/);
+      assert.ok(decode(page.html).includes(`${prefix}/?servico=`));
+      assert.ok(decode(page.html).includes(`${prefix}/atendimento/`));
+      assert.ok(decode(page.html).includes(`${prefix}/perguntas-frequentes/`));
+    }
+  }
+  for (const page of pages) {
+    for (const [, raw] of page.html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
+      const url = new URL(decode(raw), page.url);
+      if (url.origin !== origin || /\.[a-z0-9]+$/i.test(url.pathname)) continue;
+      const path = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+      const target = pages.find(p => p.path === path);
+      assert.ok(target, `${page.path}: ${raw}`);
+      if (url.hash) assert.ok(target.html.includes(`id="${decodeURIComponent(url.hash.slice(1))}"`), raw);
+    }
   }
 });
 

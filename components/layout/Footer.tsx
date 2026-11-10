@@ -9,7 +9,7 @@ import { BASE_PATH, COMPANY, LINKS } from "@/lib/constants";
 // ─── LINKS ESTÁTICOS DO FOOTER (não fazem parte dos dados centrais) ────
 const footerLinks = {
   servicos: [
-    ...PRIMARY_SERVICES.map((service) => ({ label: service.title, href: `/#${service.id}` })),
+    ...PRIMARY_SERVICES.map((service) => ({ label: service.title, href: service.id === "site-institucional" ? "/criacao-de-sites/" : "/landing-pages/" })),
     { label: "Soluções complementares", href: "/#solucoes-complementares" },
   ],
   empresa: [

@@ -1,0 +1,19 @@
+{
+  "note": "Export comparison only. Gzip is an offline estimate, not browser transfer, execution cost or Core Web Vitals.",
+  "results": [
+    {
+      "artifact": "../seo-geo-etapa-2/out",
+      "generated": "2026-11-10T14:32:00.568Z",
+      "scripts": 8,
+      "decodedJsBytes": 725067,
+      "estimatedGzipJsBytes": 228100
+    },
+    {
+      "artifact": "out",
+      "generated": "2026-11-10T15:16:33.216Z",
+      "scripts": 9,
+      "decodedJsBytes": 729538,
+      "estimatedGzipJsBytes": 230093
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { createTranslator, type Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/seo";
 import { BASE_PATH, COMPANY } from "@/lib/constants";
+import { Measurement } from './Measurement';
 
 // Page titles, canonical URLs and share previews are defined per route.
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ export default function DocumentLayout({
       <body className="font-outfit bg-brand-navy text-white antialiased">
         <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-white focus:text-brand-navy focus:p-3">{createTranslator(locale)("Pular para o conteúdo")}</a>
         {children}
+        <Measurement locale={locale} />
       </body>
     </html>
   );

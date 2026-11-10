@@ -152,7 +152,7 @@ export const PRIVACY_POLICY: LegalDocumentData = {
       blocks: [
         {
           type: "p",
-          text: "Este site não utiliza cookies próprios nem ferramentas de análise de audiência ou de publicidade. Por isso, não exibimos aviso de cookies.",
+          text: process.env.NEXT_PUBLIC_MEASUREMENT_ENABLED === "true" ? "A medição opcional de contatos só funciona após sua escolha na página. Registramos contagens por origem categorizada, página, idioma e ação, sem conteúdo do formulário, URL completa ou identificação de pessoa. A escolha não é mantida após recarregar ou sair da página; dados categóricos da visita usam armazenamento de sessão, com expiração após 30 minutos de inatividade. As contagens são retidas por 90 dias. Para reduzir abuso, o servidor usa identificadores derivados de IP por intervalo de tempo, removidos pela limpeza periódica após duas horas. A hospedagem pode manter seus próprios registros técnicos. Desativar impede novos eventos, mas não desfaz contagens agregadas anteriores." : "Este site não utiliza cookies próprios nem ferramentas de análise de audiência ou de publicidade. Por isso, não exibimos aviso de cookies.",
         },
         {
           type: "p",

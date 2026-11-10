@@ -24,7 +24,7 @@ export function TeamSection({ locale = "pt" }: { locale?: Locale } = {}) {
           </h2>
           {/* SUBSTITUA: Subtítulo */}
           <p className="font-outfit text-gray-400 text-base md:text-lg">
-            {t("Sem call center, sem terceirização. Você fala direto com quem constrói o seu site.")}</p>
+            {t("A equipe acompanha seu pedido e explica as etapas do projeto pelos canais combinados.")}</p>
         </div>
 
         {/* ─── CARDS DE EQUIPE ──────────────────────────────────────────

@@ -83,7 +83,12 @@ test("robots permite rastrear páginas e recursos e anuncia o sitemap canônico"
   const robots = read(join(out, "robots.txt"));
   assert.match(robots, /User-Agent: \*/i);
   assert.match(robots, /^Allow: \/\s*$/m);
-  assert.doesNotMatch(robots, /^Disallow: .+/m);
+  for (const agent of ["*", "Googlebot", "Bingbot", "OAI-SearchBot"]) {
+    const group = robots.split(/\n\s*\n/).find((block) => block.split("\n").includes(`User-Agent: ${agent}`));
+    assert.ok(group, agent);
+    assert.match(group, /^Allow: \/\s*$/m);
+    assert.doesNotMatch(group, /^Disallow: .+/m, agent);
+  }
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
 });
 
@@ -180,6 +185,23 @@ test("o HTML inglês não deixa textos portugueses com tradução cadastrada", (
     for (const value of texts) {
       assert.ok(!translations[value] || translations[value] === value, `${page.path}: texto sem tradução: ${value}`);
     }
+  }
+});
+
+test("a base factual permanece coerente nos dois idiomas", () => {
+  for (const page of pages) {
+    const text = decode(page.html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ""));
+    assert.doesNotMatch(text, /Belo Horizonte|Remote service across Brazil|Atendimento remoto nacional|same technical standard as large agencies|no mesmo padrão técnico das grandes agências/);
+    assert.match(text, page.path.startsWith("/en/") ? /Online-only service/ : /Atendimento exclusivamente online/);
+  }
+  const robots = read(join(out, "robots.txt"));
+  assert.match(robots, /OAI-SearchBot/);
+  assert.match(robots, /User-Agent: GPTBot\s+Disallow: \//);
+  assert.match(robots, /User-Agent: Google-Extended\s+Disallow: \//);
+  for (const path of ["/privacidade/", "/en/privacidade/"]) {
+    const html = pages.find(page => page.path === path).html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+    assert.match(html, /Cloudflare/);
+    assert.doesNotMatch(html, /Netlify/);
   }
 });
 

@@ -14,17 +14,17 @@ export function MissionSection({ locale = "pt" }: { locale?: Locale } = {}) {
 
           {/* SUBSTITUA: Título da missão */}
           <h2 className="font-sora font-bold text-3xl md:text-4xl text-white mb-6 leading-tight">
-            {t("Democratizar tecnologia de ponta")}{t(" ")}
+            {t("Organizar sua presença digital")}{t(" ")}
             <span className="text-gradient">{t("para PMEs e autônomos")}</span>
           </h2>
 
           {/* SUBSTITUA: Parágrafo sobre a origem/história da agência */}
           <p className="font-outfit text-gray-400 text-base md:text-lg leading-relaxed mb-4">
-            {t("A Digital S&D nasceu de uma constatação simples: pequenas e médias empresas e profissionais autônomos raramente têm acesso ao mesmo nível de qualidade digital que as grandes marcas — não por falta de talento disponível, mas por preço, prazo e complexidade.")}</p>
+            {t("A equipe ajuda pequenas empresas e profissionais autônomos a apresentar seus serviços na internet. Você explica seu negócio e recebe orientação sobre conteúdo, estrutura e próximos passos.")}</p>
 
           {/* SUBSTITUA: Parágrafo sobre a visão de futuro */}
           <p className="font-outfit text-gray-400 text-base md:text-lg leading-relaxed">
-            {t("Por isso existimos: para entregar sites rápidos, bonitos e focados em resultado, no mesmo padrão técnico das grandes agências, mas com a agilidade e o preço que uma PME ou um profissional autônomo real consegue pagar.")}</p>
+            {t("Planejamos a apresentação do negócio, desenvolvemos o site e orientamos as revisões. Entregáveis, prazos e investimento são definidos na proposta de cada projeto.")}</p>
         </div>
       </div>
     </section>

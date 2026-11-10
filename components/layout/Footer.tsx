@@ -9,7 +9,7 @@ import { BASE_PATH, COMPANY, LINKS } from "@/lib/constants";
 // ─── LINKS ESTÁTICOS DO FOOTER (não fazem parte dos dados centrais) ────
 const footerLinks = {
   servicos: [
-    ...PRIMARY_SERVICES.map((service) => ({ label: service.title, href: `/#${service.id}` })),
+    ...PRIMARY_SERVICES.map((service) => ({ label: service.title, href: service.id === "site-institucional" ? "/criacao-de-sites/" : "/landing-pages/" })),
     { label: "Soluções complementares", href: "/#solucoes-complementares" },
   ],
   empresa: [
@@ -103,8 +103,7 @@ export function Footer({ locale = "pt" }: { locale?: Locale } = {}) {
               <li className="flex items-start gap-3">
                 <MapPin size={15} className="text-brand-blue mt-0.5 shrink-0" />
                 <span className="font-outfit text-sm text-gray-400">
-                  {t(COMPANY.city)}<br />
-                  <span className="text-gray-400 text-xs">{t("Atendimento remoto nacional")}</span>
+                  {t(COMPANY.serviceMode)}
                 </span>
               </li>
             </ul>

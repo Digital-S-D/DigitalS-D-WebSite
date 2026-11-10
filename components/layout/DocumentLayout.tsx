@@ -5,6 +5,7 @@ import { AnchorNavigation, FloatingContact, themeBootstrap } from "./SiteControl
 import { createTranslator, type Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/seo";
 import { BASE_PATH, COMPANY } from "@/lib/constants";
+import { Measurement } from './Measurement';
 
 // Page titles, canonical URLs and share previews are defined per route.
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function DocumentLayout({
         {children}
         <AnchorNavigation />
         <FloatingContact locale={locale} />
+        <Measurement locale={locale} />
       </body>
     </html>
   );

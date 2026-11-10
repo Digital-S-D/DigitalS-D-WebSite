@@ -52,7 +52,7 @@ export function AboutHeroSection({ locale = "pt" }: { locale?: Locale } = {}) {
                        animate-fadeInUp opacity-0 animation-delay-200"
             style={{ animationFillMode: "both" }}
           >
-            {t("Acreditamos que pequenas empresas e profissionais autônomos merecem uma presença digital tão boa quanto a de qualquer grande marca — sem precisar de um orçamento de grande marca para isso.")}</p>
+            {t("A Digital S&D cria sites e landing pages para pequenas empresas e profissionais autônomos, com atendimento exclusivamente online e orientação do planejamento à entrega.")}</p>
         </div>
       </div>
 
